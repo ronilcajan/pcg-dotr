@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 02, 2023 at 01:28 PM
+-- Host: 127.0.0.1
+-- Generation Time: Sep 19, 2023 at 03:39 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -80,13 +80,15 @@ CREATE TABLE `affected_area` (
 --
 
 INSERT INTO `affected_area` (`id`, `affected_area`) VALUES
-(1, 'MANGROVES'),
-(2, 'SEA GRASS'),
-(3, 'MPA'),
-(4, 'PSSA'),
-(5, 'TOURISM AREA'),
-(6, 'RESIDENTIAL'),
-(7, 'DIVE SITES');
+(1, 'INDUSTRIAL AREA'),
+(2, 'MANGROVES'),
+(3, 'SEA GRASS'),
+(4, 'MPA'),
+(5, 'PSSA'),
+(6, 'TOURISM AREA'),
+(7, 'RESIDENTIAL'),
+(8, 'DIVE SITES'),
+(9, 'INDUSTRIAL AREA');
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,8 @@ INSERT INTO `affected_biodiversity` (`id`, `affected_biodiversity`) VALUES
 (1, 'BIRDS'),
 (2, 'CRUSTACEANS'),
 (3, 'RESIDENTIAL AREAS'),
-(4, 'MARINE MAMMALS');
+(4, 'MARINE MAMMALS'),
+(5, 'MARICULTURE AREAS ');
 
 -- --------------------------------------------------------
 
@@ -129,7 +132,8 @@ INSERT INTO `application_type` (`id`, `application_type`) VALUES
 (2, 'SALVOR CERTIFICATE OF REGISTRATION'),
 (3, 'RENEWAL OF SALVOR CERTIFICATE OF REGISTRATION'),
 (4, 'INSPECTION PERMIT AND SALVAGE PERMIT'),
-(5, 'SALVAGE CERTIFICATE OF INSPECTION');
+(5, 'SALVAGE CERTIFICATE OF INSPECTION'),
+(6, 'SALVAGE PERMIT FOR CARGO ');
 
 -- --------------------------------------------------------
 
@@ -240,7 +244,8 @@ INSERT INTO `bouy_type` (`id`, `bouy_type`) VALUES
 (2, 'LATERAL STARBOARD HAND MARK'),
 (3, 'NORTH CARDINAL MARK'),
 (4, 'SOUTH CARDINAL MARK'),
-(5, 'WEST CARDINAL MARK');
+(5, 'WEST CARDINAL MARK'),
+(6, 'EAST CARDINAL MARK ');
 
 -- --------------------------------------------------------
 
@@ -283,7 +288,8 @@ CREATE TABLE `cadaver_location` (
 
 INSERT INTO `cadaver_location` (`id`, `cadaver_location`) VALUES
 (1, 'LAND'),
-(2, 'COASTLINE');
+(2, 'COASTLINE'),
+(3, 'WATER ');
 
 -- --------------------------------------------------------
 
@@ -329,9 +335,9 @@ CREATE TABLE `conduct_of_activity` (
 --
 
 INSERT INTO `conduct_of_activity` (`conduct_of_activity_id`, `conduct_of_activity`) VALUES
+(1, 'PCG INITIATED'),
 (2, 'JOINT'),
-(3, 'PARTICIPATED FROM OTHER AGENCY'),
-(1, 'PCG INITIATED');
+(3, 'PARTICIPATED FROM OTHER AGENCY');
 
 -- --------------------------------------------------------
 
@@ -596,7 +602,8 @@ CREATE TABLE `fire_cause` (
 INSERT INTO `fire_cause` (`id`, `fire_cause`) VALUES
 (1, 'Unattended Cooking Equipment'),
 (2, 'Petroleum and Oil'),
-(3, 'Electrical Failure');
+(3, 'Electrical Failure'),
+(4, 'ENGINE ROOM EXPLOSION ');
 
 -- --------------------------------------------------------
 
@@ -658,7 +665,11 @@ INSERT INTO `incident_cause` (`id`, `incident_cause`) VALUES
 (1, 'MACHINERY FAILURE'),
 (2, 'NAVIGATIONAL EQUIPMENT FAILURE'),
 (3, 'HUMAN ERROR'),
-(4, 'SEA AND WEATHER CONDITION');
+(4, 'SEA AND WEATHER CONDITION'),
+(5, 'GEOGRAPHICAL FACTOR '),
+(6, 'WEATHER AND SEA CONDITION '),
+(7, 'BROKEN PROPELLER AND RUDDER (WOODEN HULLED VESSELS) '),
+(8, 'WEATHER AND SEA CONDITION ');
 
 -- --------------------------------------------------------
 
@@ -907,13 +918,13 @@ CREATE TABLE `man_overboard_incident_cause` (
 --
 
 INSERT INTO `man_overboard_incident_cause` (`id`, `man_overboard_incident_cause`) VALUES
-(1, 'Failure to wear PPE'),
-(2, 'Failure to wear PPE'),
 (3, 'Failure to wear PPE'),
 (4, 'Murder'),
 (5, 'Suicide'),
 (6, 'Weather and Sea Condition'),
-(7, 'Working Over The Sides');
+(7, 'Working Over The Sides'),
+(8, 'PERSONAL ACCIDENT '),
+(9, 'MISSING FOR UNKNOWN REASON ');
 
 -- --------------------------------------------------------
 
@@ -964,9 +975,9 @@ CREATE TABLE `marep` (
 --
 
 INSERT INTO `marep` (`id`, `station`, `sub_station`, `report_type`, `date_created`, `location`, `activity_conduct`, `participating_agency`, `participant_number`, `area_coverage`, `garbage_type_collected`, `garbage_collected_volume`, `seedlings_planted_number`, `planted_trees_kind`, `incident_cause`, `vessel_type`, `vessel_name`, `inspection_type`, `marpol_violation`, `facility_type`, `facility_name`, `oil_spill_date_incident`, `oil_spill_location`, `oil_spill_map_location`, `spiller`, `oil_spill_vessel_name`, `oil_spill_companyl_name`, `tier_level`, `oil_type`, `responding_unit`, `oil_retrieved_volume`, `affected_area`, `affected_biodiversity`, `training_type`, `training_center_name`) VALUES
+(1, 1, 1, 2, '0000-00-00 00:00:00', NULL, NULL, '', '', '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, '', '', 0, NULL),
 (2, 3, 7, 4, '2023-01-11 15:13:00', 'this is location2', NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, '2', 'vessel name3213213', '1', 'marpol violation', NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
 (3, 3, 7, 1, '2023-01-26 14:12:00', 'oroqueita', '2', '1,2,7', '13', 'fasdf', '1,2,4', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
-(8, 1, 1, 2, '2023-01-06 18:19:00', NULL, '1', '6,7,8', '200', '500', '', NULL, '200', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
 (9, 1, 2, 3, '2023-01-05 03:04:00', NULL, '2', '3,4,5', '200', 'whole mis occ', '', NULL, '200', 'lubi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
 (10, 3, 7, 5, '2023-01-13 03:03:00', 'Mobod', NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 'Moelce', NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
 (11, 5, 18, 6, '2023-01-12 03:04:00', 'Mobod', NULL, '', '324', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 2, 'fsfsdfsdf'),
@@ -993,7 +1004,8 @@ INSERT INTO `maritime_acitivity` (`id`, `maritime_acitivity`) VALUES
 (1, 'FLUVIAL PARADE'),
 (2, 'MARINE PARADE'),
 (3, 'TRIATHLON'),
-(4, 'REGATTA');
+(4, 'REGATTA'),
+(5, 'DRAGON BOAT ');
 
 -- --------------------------------------------------------
 
@@ -1066,7 +1078,8 @@ INSERT INTO `maritime_incident_type` (`id`, `maritime_incident_type`) VALUES
 (5, 'ENGINE TROUBLE'),
 (6, 'FIRE'),
 (7, 'MAN OVERBOARD'),
-(8, 'STEERING CASUALTY');
+(8, 'STEERING CASUALTY'),
+(9, 'SUBMERGED ');
 
 -- --------------------------------------------------------
 
@@ -1107,7 +1120,8 @@ CREATE TABLE `marpol_violation` (
 INSERT INTO `marpol_violation` (`id`, `marpol_violation`) VALUES
 (1, 'DISPOSAL OF GARBAGE (HPCG MC 07-14 DATED 19 DEC 14)'),
 (2, 'DISCHARGE OF SEWAGE FROM SHIPS (HPCG MC 10-2014)'),
-(3, 'DISPOSAL OF USED OIL (HPCG MC 01-2005)');
+(3, 'DISPOSAL OF USED OIL (HPCG MC 01-2005)'),
+(4, 'DISPOSAL OF NOXIOUS SUBSTANCES (HPCG MC 11-2014) ');
 
 -- --------------------------------------------------------
 
@@ -1137,7 +1151,6 @@ INSERT INTO `marsaf` (`id`, `station`, `sub_station`, `date_created`, `psc_cente
 (26, 5, 18, '2023-03-30 11:11:00', 2, 6),
 (27, 3, 9, '2023-04-05 04:05:00', 1, 7),
 (28, 3, 9, '2023-04-11 04:06:00', 3, 8),
-(32, 1, 2, '2023-04-06 03:03:00', 1, 10),
 (34, 2, 4, '2023-03-30 15:14:00', 3, 9);
 
 -- --------------------------------------------------------
@@ -1296,7 +1309,8 @@ CREATE TABLE `marsaf_incident_cause` (
 
 INSERT INTO `marsaf_incident_cause` (`id`, `incident_cause`) VALUES
 (1, 'HUMAN FACTOR'),
-(2, 'OPERATIONAL FACTOR');
+(2, 'OPERATIONAL FACTOR'),
+(3, 'MANAGEMENT/ORGANIZATIONAL FACTOR ');
 
 -- --------------------------------------------------------
 
@@ -1401,13 +1415,6 @@ CREATE TABLE `marsaf_mpramra` (
   `mpramra_involved_vessel_total` varchar(100) DEFAULT NULL,
   `mpramra_maritime_related_violation` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `marsaf_mpramra`
---
-
-INSERT INTO `marsaf_mpramra` (`id`, `marsaf_report_type`, `location`, `application_date`, `event_organizer`, `maritime_acitivity`, `departure_date_from_origin_port`, `departure_hour_from_origin_port`, `departure_minutefrom_origin_port`, `origin_point`, `destination_point`, `involved_vessel`, `mpramra_involved_vessel_total`, `mpramra_maritime_related_violation`) VALUES
-(4, 32, 'LOCATION', '2023-04-06', '321', '1,4', '2023-04-14', '04', '18', '321', '231', '231', '231', '1,2,3,4');
 
 -- --------------------------------------------------------
 
@@ -1721,15 +1728,6 @@ CREATE TABLE `marsar` (
   `photograph` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `marsar`
---
-
-INSERT INTO `marsar` (`id`, `station`, `sub_station`, `maritime_incident_type`, `date_created`, `google_map_location`, `incident_cause`, `fire_cause`, `man_overboard_incident_cause`, `location_incident_location`, `survivor_number`, `casualty_number`, `missing_number`, `material_report`, `description_extend_vessel_damage`, `asset_deployment`, `information_acquired_thru`, `time_assets_deployment`, `vessel_type_involved`, `vessel_age_1`, `vessel_size_1`, `registry_port_1`, `departure_port_1`, `call_next_port_1`, `vessel_age_2`, `vessel_size_2`, `registry_port_2`, `departure_port_2`, `call_next_port_2`, `radio_message_spot_report`, `photograph`) VALUES
-(3, 2, 4, 4, '2023-03-15 04:00:00', NULL, '3,4', '', '', '3243242423342', '7', '768', '87', '2,3', '786786786', '2,5,6,9', '2,3,7', '1', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL),
-(4, 2, 3, 7, '2023-03-09 02:30:00', NULL, '', '', '3,6', '1tyutgutyu', '324', '324', '342', '2,3', '324342342', '4,7,9', '1,3,5', '1', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL),
-(6, 2, 5, 1, '2023-03-10 03:30:00', NULL, '2,4,5', '', '', '675675', '675', '675', '675', '3', '675675675', '4,6,8,10', '2,3,7,8', '1', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -1820,7 +1818,8 @@ INSERT INTO `material_report` (`id`, `material_report`) VALUES
 (1, 'VESSEL SUNK'),
 (2, 'FULLY DAMAGE BUT AFLOAT'),
 (3, 'PARTIALLY DAMAGE BUT CAN BE PROPELLED ON HER OWN'),
-(4, 'HALF SUBMERGE');
+(4, 'HALF SUBMERGE'),
+(5, 'VESSEL OPERATIONAL ');
 
 -- --------------------------------------------------------
 
@@ -1884,7 +1883,8 @@ INSERT INTO `oil_type` (`id`, `oil_type`) VALUES
 (2, 'CRUDE OIL'),
 (3, 'BUNKER FUEL'),
 (4, 'DIESEL'),
-(5, 'GASOLINE');
+(5, 'GASOLINE'),
+(6, 'HAZARDOUS AND NOXIOUS SUBSTANCES (HNS) ');
 
 -- --------------------------------------------------------
 
@@ -1969,7 +1969,8 @@ CREATE TABLE `pd_no_532` (
 
 INSERT INTO `pd_no_532` (`id`, `section`) VALUES
 (1, 'SECTION 3 (PARAGRAPH A) PIRACY'),
-(2, 'SECTION 3 (PARAGRAPH B) HIGHWAY ROBBERY/BRIGANDAGE');
+(2, 'SECTION 3 (PARAGRAPH B) HIGHWAY ROBBERY/BRIGANDAGE'),
+(3, 'SECTION 4. AIDING PIRATES OR HIGHWAY ROBBERS/BRIGANDS OR ABETTING PIRACY OR HIGHWAY ROBBERY/BRIGANDAGE ');
 
 -- --------------------------------------------------------
 
@@ -1997,7 +1998,8 @@ INSERT INTO `pd_no_705` (`id`, `section`) VALUES
 (8, 'SECTION 75. TAX DECLARATION ON REAL PROPERTY.'),
 (9, 'SECTION 76. COERCION AND INFLUENCE'),
 (10, 'SECTION 77. UNLAWFUL POSSESSION OF IMPLEMENTS AND DEVICES USED BY FOREST OFFICERS'),
-(11, 'SECTION 78. PAYMENT, COLLECTION AND REMITTANCE OF FOREST CHARGES');
+(11, 'SECTION 78. PAYMENT, COLLECTION AND REMITTANCE OF FOREST CHARGES'),
+(12, 'SECTION 79. SALE OF WOOD PRODUCTS ');
 
 -- --------------------------------------------------------
 
@@ -2129,7 +2131,8 @@ CREATE TABLE `ra_6539` (
 --
 
 INSERT INTO `ra_6539` (`id`, `section`) VALUES
-(1, 'SECTION 12. DEFACING OR TAMPERING WITH SERIAL NUMBERS OF MOTOR VEHICLE ENGINES, ENGINE BLOCKS AND CHASSIS.');
+(1, 'SECTION 12. DEFACING OR TAMPERING WITH SERIAL NUMBERS OF MOTOR VEHICLE ENGINES, ENGINE BLOCKS AND CHASSIS.'),
+(2, 'SECTION 13. PENAL PROVISIONS ');
 
 -- --------------------------------------------------------
 
@@ -2217,7 +2220,8 @@ CREATE TABLE `ra_9208` (
 INSERT INTO `ra_9208` (`id`, `section`) VALUES
 (1, 'SECTION 4. ACTS OF TRAFFICKING IN PERSONS'),
 (2, 'SECTION 5. ACTS THAT PROMOTE TRAFFICKING IN PERSONS'),
-(3, 'SECTION 6. QUALIFIED TRAFFICKING IN PERSONS');
+(3, 'SECTION 6. QUALIFIED TRAFFICKING IN PERSONS'),
+(4, 'SECTION 11. USE OF TRAFFICKED PERSONS ');
 
 -- --------------------------------------------------------
 
@@ -2240,7 +2244,8 @@ INSERT INTO `ra_10066` (`id`, `section`) VALUES
 (3, 'SECTION 48. (PARAGRAPH C) EXPLORES, EXCAVATES OR UNDERTAKES DIGGINGS FOR THE PURPOSE OF OBTAINING MATERIALS OF CULTURAL HISTORICAL VALUE WITHOUT PRIOR WRITTEN AUTHORITY FROM THE NATIONAL MUSEUM. NO EXCAVATION OR DIGGINGS SHALL BE PERMITTED WITHOUT THE SUPERVISION OF A CERTIFIED ARCHAEOLOGIST;'),
 (4, 'SECTION 48. (PARAGRAPH D) APPROPRIATES EXCAVATION FINDS CONTRARY TO THE PROVISIONS OF THE NEW CIVIL CODE AND OTHER PERTINENT LAWS;'),
 (5, 'SECTION 48. (PARAGRAPH E) IMPORTS, SELLS, DISTRIBUTES, PROCURES, ACQUIRES, OR EXPORTS CULTURAL PROPERTY STOLEN, OR OTHERWISE LOST AGAINST THE WILL OF THE LAWFUL OWNER;'),
-(6, 'SECTION 48. (PARAGRAPH F) ILLICITLY EXPORTS CULTURAL PROPERTY LISTED IN THE PHILIPPINE REGISTRY OF CULTURAL PROPERTY OR THOSE THAT MAY BE CATEGORIZED AS SUCH UPON VISITATION OR INCORRECTLY DECLARES THE SAME DURING TRANSIT; AND');
+(6, 'SECTION 48. (PARAGRAPH F) ILLICITLY EXPORTS CULTURAL PROPERTY LISTED IN THE PHILIPPINE REGISTRY OF CULTURAL PROPERTY OR THOSE THAT MAY BE CATEGORIZED AS SUCH UPON VISITATION OR INCORRECTLY DECLARES THE SAME DURING TRANSIT; AND'),
+(7, 'SECTION 48. (PARAGRAPH G) DEALS IN CULTURAL PROPERTY WITHOUT PROPER REGISTRATION AND LICENSE ISSUED BY THE CULTURAL AGENCY CONCERNED ');
 
 -- --------------------------------------------------------
 
@@ -2268,7 +2273,8 @@ INSERT INTO `ra_10591` (`id`, `section`) VALUES
 (8, 'SECTION 34. TAMPERING, OBLITERATION OR ALTERATION OF FIREARMS IDENTIFICATION'),
 (9, 'SECTION 35. USE OF AN IMITATION FIREARM'),
 (10, 'SECTION 40. FAILURE TO NOTIFY LOST OR STOLEN FIREARM OR LIGHT WEAPON'),
-(11, 'SECTION 41. ILLEGAL TRANSFER/REGISTRATION OF FIREARMS ');
+(11, 'SECTION 41. ILLEGAL TRANSFER/REGISTRATION OF FIREARMS '),
+(12, 'SECTION 38. LIABILITY FOR PLANTING EVIDENCE');
 
 -- --------------------------------------------------------
 
@@ -2352,7 +2358,8 @@ INSERT INTO `ra_10845` (`id`, `section`) VALUES
 (4, 'SECTION 3. (PARAGRAPH D) SELLING, LENDING, LEASING, ASSIGNING, CONSENTING OR ALLOWING THE USE OF IMPORT PERMITS OF CORPORATIONS, NONGOVERNMENT ORGANIZATIONS, ASSOCIATIONS, COOPERATIVES, OR SINGLE PROPRIETORSHIPS BY OTHER PERSONS;'),
 (5, 'SECTION 3. (PARAGRAPH E) MISCLASSIFICATION, UNDERVALUATION OR MISDECLARATION UPON THE FILING OF IMPORT ENTRY AND REVENUE DECLARATION WITH THE BOC IN ORDER TO EVADE THE PAYMENT OF RIGHTFUL TAXES AND DUTIES DUE TO THE GOVERNMENT;'),
 (6, 'SECTION 3. (PARAGRAPH F) ORGANIZING OR USING DUMMY CORPORATIONS, NONGOVERNMENT ORGANIZATIONS, ASSOCIATIONS, COOPERATIVES, OR SINGLE PROPRIETORSHIPS FOR THE PURPOSE OF ACQUIRING IMPORT PERMITS;'),
-(7, 'SECTION 3. (PARAGRAPH G)  TRANSPORTING OR STORING THE AGRICULTURAL PRODUCT SUBJECT TO ECONOMIC SABOTAGE REGARDLESS OF QUANTITY; OR');
+(7, 'SECTION 3. (PARAGRAPH G)  TRANSPORTING OR STORING THE AGRICULTURAL PRODUCT SUBJECT TO ECONOMIC SABOTAGE REGARDLESS OF QUANTITY; OR'),
+(8, 'SECTION 3. (PARAGRAPH H) ACTING AS BROKER OF THE VIOLATING IMPORTER ');
 
 -- --------------------------------------------------------
 
@@ -2443,12 +2450,12 @@ CREATE TABLE `report_selection` (
 
 INSERT INTO `report_selection` (`report_selection_id`, `report_selection`) VALUES
 (1, 'COASTAL CLEAN-UP'),
-(5, 'LAND BASE INSPECTION'),
 (2, 'MANGROVE PLANTING'),
-(7, 'MARITIME INCIDENT'),
-(6, 'TRAININGS CONDUCTED'),
 (3, 'TREE PLANTING'),
-(4, 'VESSEL INSPECTION');
+(4, 'VESSEL INSPECTION'),
+(5, 'LAND BASE INSPECTION'),
+(6, 'TRAININGS CONDUCTED'),
+(7, 'MARITIME INCIDENT');
 
 -- --------------------------------------------------------
 
@@ -2495,7 +2502,8 @@ CREATE TABLE `responding_unit` (
 INSERT INTO `responding_unit` (`id`, `responding_unit`) VALUES
 (1, 'SPILLER'),
 (2, 'MEP FORCE'),
-(3, 'PCG UNITS');
+(3, 'PCG UNITS'),
+(4, 'CREDITED SALVOR');
 
 -- --------------------------------------------------------
 
@@ -2685,7 +2693,8 @@ INSERT INTO `time_assets_deployment` (`id`, `time_assets_deployment`) VALUES
 (1, '15 MINUTES'),
 (2, '30 MINUTES'),
 (3, '1 HOUR'),
-(4, '2 HOURS');
+(4, '2 HOURS'),
+(5, 'MORE THAN 3 HOURS ');
 
 -- --------------------------------------------------------
 
@@ -2783,6 +2792,13 @@ CREATE TABLE `urban_marsar` (
   `photographs` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `urban_marsar`
+--
+
+INSERT INTO `urban_marsar` (`id`, `station`, `sub_station`, `urban_rescue_type`, `date_created`, `incident_details`, `incident_barangay_name`, `incident_map_location`, `information_acquired_thru`, `time_assets_deployment`, `asset_mobility_deployed_type`, `number_rescued_person`, `number_injured_person`, `number_casualties`, `number_missing_person`, `number_rescuers_deployed`, `drowning_victim_name`, `drowning_victim_gender`, `first_responder`, `drowning_victim_age`, `drowning_victim_number`, `response_barangay_name`, `drowning_cause`, `drowning_incident_location`, `drowning_action_taken`, `retrieval_victim_name`, `retrieval_victim_gender`, `body_built`, `adistinct_feature`, `cadaver_location`, `cadaver_approximate_age`, `exact_cadaver_location`, `retrieval_barangay_name`, `cadaver_discovered_number`, `retrieval_operation_length`, `time_person_reported_missing`, `retrieval_last_location`, `retrieval_action_taken`, `storm_surge_victim_name`, `weather_forecast`, `storm_surge_injured_person_number`, `storm_surge_casualty_number`, `storm_surge_rescue_number`, `storm_surge_action_taken`, `earthquake_barangay_name`, `earthquake_location`, `earthquake_cause`, `earthquake_magnitude_level`, `earthquake_action_taken`, `lanslide_casualty_number`, `lanslide_affected_area`, `landslide_rescued_adult_male_number`, `landslide_rescued_children_number`, `landslide_rescued_adult_female_number`, `landslide_rescued_18y_below_female_number`, `lanslide_location`, `fire_incident_barangay_name`, `fire_incident_location`, `fire_incident_cause`, `fire_incident_cost`, `fire_incident_acton_taken`, `pre_emptive_evacuation_activity`, `pre_emptive_evacuation_date`, `evacuation_center_location`, `pre_emptive_evacuation_coordination_with`, `spot_report`, `photographs`) VALUES
+(1, 1, 1, '3', '2023-08-11 17:14:00', '21321321', '231', NULL, '2', '2', '1', 3213, 321, 3, 321, 321, 'dasdasd', 'MALE', 'dfsdfsfd', '2,5', '3', '231', '5,7', '4,6', 'dasdas', 'dasdsa', 'FEMALE', 1, 'fdsdfsfds', 1, '2', 'asd', 'sad', '1', 'MORE THAN O', '12 HOURS', 'das', 'dasd', 'dasd', 5, '3', '4', '3', 'dasdasd', '', 2, 1, '1,5', 'dasd', 'MORE THAN 20', '', NULL, NULL, NULL, NULL, 'dasd', 'dasd', '1', 'dasd', 'MORE THAN 300K', 'dasdas', '2', '2023-08-09 02:02:00', NULL, '1', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -2805,7 +2821,8 @@ INSERT INTO `urban_rescue_type` (`id`, `urban_rescue_type`) VALUES
 (4, 'EARTHQUAKE'),
 (5, 'LANDSLIDE'),
 (6, 'FIRE'),
-(7, 'PRE-EMPTIVE EVACUATION');
+(7, 'PRE-EMPTIVE EVACUATION'),
+(8, 'DROWNING ');
 
 -- --------------------------------------------------------
 
@@ -2898,9 +2915,10 @@ CREATE TABLE `vessel_age` (
 --
 
 INSERT INTO `vessel_age` (`id`, `vessel_age`) VALUES
-(1, 'LESS THAN 500GT'),
-(2, '500 GT TO 1000 GT'),
-(3, '1000 GT TO 2000 GT');
+(1, '5 -10 YEARS'),
+(2, '10-15 YEARS'),
+(3, '15-20 YEARS '),
+(4, 'MORE THAN 20 YEARS');
 
 -- --------------------------------------------------------
 
@@ -2920,7 +2938,8 @@ CREATE TABLE `vessel_size` (
 INSERT INTO `vessel_size` (`id`, `vessel_size`) VALUES
 (1, 'LESS THAN 500GT'),
 (2, '500 GT TO 1000 GT'),
-(3, '1000 GT TO 2000 GT');
+(3, '1000 GT TO 2000 GT'),
+(4, 'MORE THAN 2000 GT');
 
 -- --------------------------------------------------------
 
@@ -3139,15 +3158,249 @@ ALTER TABLE `asset_mobility_deployed_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `beach_coast_line_length`
+--
+ALTER TABLE `beach_coast_line_length`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `body_built`
+--
+ALTER TABLE `body_built`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bouy_type`
+--
+ALTER TABLE `bouy_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cadaver_approximate_age`
+--
+ALTER TABLE `cadaver_approximate_age`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cadaver_location`
+--
+ALTER TABLE `cadaver_location`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `coastal_and_beach_violation`
+--
+ALTER TABLE `coastal_and_beach_violation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `conduct_of_activity`
+--
+ALTER TABLE `conduct_of_activity`
+  ADD PRIMARY KEY (`conduct_of_activity_id`);
+
+--
+-- Indexes for table `damage_estimated_cost`
+--
+ALTER TABLE `damage_estimated_cost`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `district`
 --
 ALTER TABLE `district`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `drill_conducted`
+--
+ALTER TABLE `drill_conducted`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `drowning_cause`
+--
+ALTER TABLE `drowning_cause`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `drowning_incident_location`
+--
+ALTER TABLE `drowning_incident_location`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `earthquake_cause`
+--
+ALTER TABLE `earthquake_cause`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `earthquake_location`
+--
+ALTER TABLE `earthquake_location`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `earthquake_magnitude_level`
+--
+ALTER TABLE `earthquake_magnitude_level`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `eod_deployment`
+--
+ALTER TABLE `eod_deployment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ere_result`
+--
+ALTER TABLE `ere_result`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `facility_type`
+--
+ALTER TABLE `facility_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fire_cause`
+--
+ALTER TABLE `fire_cause`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fire_incident_location`
+--
+ALTER TABLE `fire_incident_location`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `garbage_type_collected`
+--
+ALTER TABLE `garbage_type_collected`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `incident_cause`
+--
+ALTER TABLE `incident_cause`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `incident_consequences`
+--
+ALTER TABLE `incident_consequences`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `information_acquired_thru`
+--
+ALTER TABLE `information_acquired_thru`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inspection_type`
+--
+ALTER TABLE `inspection_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `k9_deployed_type`
+--
+ALTER TABLE `k9_deployed_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lighthouse_cause_if_not_operating`
+--
+ALTER TABLE `lighthouse_cause_if_not_operating`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lighthouse_inspection_purpose`
+--
+ALTER TABLE `lighthouse_inspection_purpose`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lighthouse_status`
+--
+ALTER TABLE `lighthouse_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lighthouse_type`
+--
+ALTER TABLE `lighthouse_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `light_bouy_inspection_purpose`
+--
+ALTER TABLE `light_bouy_inspection_purpose`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `light_buoy_status`
+--
+ALTER TABLE `light_buoy_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `light_buoy__cause_if_not_operating`
+--
+ALTER TABLE `light_buoy__cause_if_not_operating`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `man_overboard_incident_cause`
+--
+ALTER TABLE `man_overboard_incident_cause`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `marep`
 --
 ALTER TABLE `marep`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `maritime_acitivity`
+--
+ALTER TABLE `maritime_acitivity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `maritime_casualty_nature`
+--
+ALTER TABLE `maritime_casualty_nature`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `maritime_incident_severity`
+--
+ALTER TABLE `maritime_incident_severity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `maritime_incident_type`
+--
+ALTER TABLE `maritime_incident_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `maritime_related_violation`
+--
+ALTER TABLE `maritime_related_violation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `marpol_violation`
+--
+ALTER TABLE `marpol_violation`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3190,6 +3443,18 @@ ALTER TABLE `marsaf_ere`
 ALTER TABLE `marsaf_ere_data`
   ADD PRIMARY KEY (`id`),
   ADD KEY `marsaf_ere` (`marsaf_ere`);
+
+--
+-- Indexes for table `marsaf_incident_cause`
+--
+ALTER TABLE `marsaf_incident_cause`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `marsaf_inspection_type`
+--
+ALTER TABLE `marsaf_inspection_type`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `marsaf_mci`
@@ -3281,8 +3546,608 @@ ALTER TABLE `marsar`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `marsar_incident_cause`
+--
+ALTER TABLE `marsar_incident_cause`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `marslec`
+--
+ALTER TABLE `marslec`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `material_report`
+--
+ALTER TABLE `material_report`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `noted_deficiency`
+--
+ALTER TABLE `noted_deficiency`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `oil_type`
+--
+ALTER TABLE `oil_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `panelling_conducted_facilities`
+--
+ALTER TABLE `panelling_conducted_facilities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `participating_agency`
+--
+ALTER TABLE `participating_agency`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pdi_result`
+--
+ALTER TABLE `pdi_result`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pd_no_532`
+--
+ALTER TABLE `pd_no_532`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pd_no_705`
+--
+ALTER TABLE `pd_no_705`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pre_emptive_evacuation_activity`
+--
+ALTER TABLE `pre_emptive_evacuation_activity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pre_emptive_evacuation_coordination_with`
+--
+ALTER TABLE `pre_emptive_evacuation_coordination_with`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `psc_action_code`
+--
+ALTER TABLE `psc_action_code`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `psc_center`
+--
+ALTER TABLE `psc_center`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_1937`
+--
+ALTER TABLE `ra_1937`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_6539`
+--
+ALTER TABLE `ra_6539`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_9147`
+--
+ALTER TABLE `ra_9147`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_9165`
+--
+ALTER TABLE `ra_9165`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_9208`
+--
+ALTER TABLE `ra_9208`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_10066`
+--
+ALTER TABLE `ra_10066`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_10591`
+--
+ALTER TABLE `ra_10591`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_10654`
+--
+ALTER TABLE `ra_10654`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ra_10845`
+--
+ALTER TABLE `ra_10845`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `recration_watercraft`
+--
+ALTER TABLE `recration_watercraft`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `recreational_violation`
+--
+ALTER TABLE `recreational_violation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `related_international_conventions_noted_deficiency`
+--
+ALTER TABLE `related_international_conventions_noted_deficiency`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `report_selection`
+--
+ALTER TABLE `report_selection`
+  ADD PRIMARY KEY (`report_selection_id`);
+
+--
+-- Indexes for table `report_type`
+--
+ALTER TABLE `report_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `responding_unit`
+--
+ALTER TABLE `responding_unit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `salvage_operation_purpose`
+--
+ALTER TABLE `salvage_operation_purpose`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `seaborne_patrol_activity_conduct`
+--
+ALTER TABLE `seaborne_patrol_activity_conduct`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `spiller`
+--
+ALTER TABLE `spiller`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `station`
+--
+ALTER TABLE `station`
+  ADD PRIMARY KEY (`station_id`);
+
+--
+-- Indexes for table `sub_station`
+--
+ALTER TABLE `sub_station`
+  ADD PRIMARY KEY (`sub_station_id`);
+
+--
+-- Indexes for table `system`
+--
+ALTER TABLE `system`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tier_level`
+--
+ALTER TABLE `tier_level`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `time_assets_deployment`
+--
+ALTER TABLE `time_assets_deployment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `training_type`
+--
+ALTER TABLE `training_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `urban_marsar`
+--
+ALTER TABLE `urban_marsar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `urban_rescue_type`
+--
+ALTER TABLE `urban_rescue_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `user_role`
+--
+ALTER TABLE `user_role`
+  ADD PRIMARY KEY (`user_role_id`);
+
+--
+-- Indexes for table `very_serious_mc_category`
+--
+ALTER TABLE `very_serious_mc_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vessel_age`
+--
+ALTER TABLE `vessel_age`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vessel_size`
+--
+ALTER TABLE `vessel_size`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vessel_type`
+--
+ALTER TABLE `vessel_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vessel_type_involved`
+--
+ALTER TABLE `vessel_type_involved`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `victim_age`
+--
+ALTER TABLE `victim_age`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `victim_number`
+--
+ALTER TABLE `victim_number`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vsei_deficiency_code`
+--
+ALTER TABLE `vsei_deficiency_code`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vsei_result`
+--
+ALTER TABLE `vsei_result`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `weather_forecast`
+--
+ALTER TABLE `weather_forecast`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `action_code`
+--
+ALTER TABLE `action_code`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `activity_conduct`
+--
+ALTER TABLE `activity_conduct`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `affected_area`
+--
+ALTER TABLE `affected_area`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `affected_biodiversity`
+--
+ALTER TABLE `affected_biodiversity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `application_type`
+--
+ALTER TABLE `application_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `asset_deployment`
+--
+ALTER TABLE `asset_deployment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `asset_mobility_deployed_type`
+--
+ALTER TABLE `asset_mobility_deployed_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `beach_coast_line_length`
+--
+ALTER TABLE `beach_coast_line_length`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `body_built`
+--
+ALTER TABLE `body_built`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `bouy_type`
+--
+ALTER TABLE `bouy_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `cadaver_approximate_age`
+--
+ALTER TABLE `cadaver_approximate_age`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `cadaver_location`
+--
+ALTER TABLE `cadaver_location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `coastal_and_beach_violation`
+--
+ALTER TABLE `coastal_and_beach_violation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `conduct_of_activity`
+--
+ALTER TABLE `conduct_of_activity`
+  MODIFY `conduct_of_activity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `damage_estimated_cost`
+--
+ALTER TABLE `damage_estimated_cost`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `district`
+--
+ALTER TABLE `district`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `drill_conducted`
+--
+ALTER TABLE `drill_conducted`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `drowning_cause`
+--
+ALTER TABLE `drowning_cause`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `drowning_incident_location`
+--
+ALTER TABLE `drowning_incident_location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `earthquake_cause`
+--
+ALTER TABLE `earthquake_cause`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `earthquake_location`
+--
+ALTER TABLE `earthquake_location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `earthquake_magnitude_level`
+--
+ALTER TABLE `earthquake_magnitude_level`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `eod_deployment`
+--
+ALTER TABLE `eod_deployment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ere_result`
+--
+ALTER TABLE `ere_result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `facility_type`
+--
+ALTER TABLE `facility_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `fire_cause`
+--
+ALTER TABLE `fire_cause`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `fire_incident_location`
+--
+ALTER TABLE `fire_incident_location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `garbage_type_collected`
+--
+ALTER TABLE `garbage_type_collected`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `incident_cause`
+--
+ALTER TABLE `incident_cause`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `incident_consequences`
+--
+ALTER TABLE `incident_consequences`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `information_acquired_thru`
+--
+ALTER TABLE `information_acquired_thru`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `inspection_type`
+--
+ALTER TABLE `inspection_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `k9_deployed_type`
+--
+ALTER TABLE `k9_deployed_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `lighthouse_cause_if_not_operating`
+--
+ALTER TABLE `lighthouse_cause_if_not_operating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `lighthouse_inspection_purpose`
+--
+ALTER TABLE `lighthouse_inspection_purpose`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `lighthouse_status`
+--
+ALTER TABLE `lighthouse_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `lighthouse_type`
+--
+ALTER TABLE `lighthouse_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `light_bouy_inspection_purpose`
+--
+ALTER TABLE `light_bouy_inspection_purpose`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `light_buoy_status`
+--
+ALTER TABLE `light_buoy_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `light_buoy__cause_if_not_operating`
+--
+ALTER TABLE `light_buoy__cause_if_not_operating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `man_overboard_incident_cause`
+--
+ALTER TABLE `man_overboard_incident_cause`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `marep`
+--
+ALTER TABLE `marep`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `maritime_acitivity`
+--
+ALTER TABLE `maritime_acitivity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `maritime_casualty_nature`
+--
+ALTER TABLE `maritime_casualty_nature`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `maritime_incident_severity`
+--
+ALTER TABLE `maritime_incident_severity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `maritime_incident_type`
+--
+ALTER TABLE `maritime_incident_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `maritime_related_violation`
+--
+ALTER TABLE `maritime_related_violation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `marpol_violation`
+--
+ALTER TABLE `marpol_violation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `marsaf`
@@ -3319,6 +4184,18 @@ ALTER TABLE `marsaf_ere`
 --
 ALTER TABLE `marsaf_ere_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `marsaf_incident_cause`
+--
+ALTER TABLE `marsaf_incident_cause`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `marsaf_inspection_type`
+--
+ALTER TABLE `marsaf_inspection_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `marsaf_mci`
@@ -3375,6 +4252,12 @@ ALTER TABLE `marsaf_so`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `marsaf_vessel_type`
+--
+ALTER TABLE `marsaf_vessel_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `marsaf_vsei`
 --
 ALTER TABLE `marsaf_vsei`
@@ -3385,6 +4268,324 @@ ALTER TABLE `marsaf_vsei`
 --
 ALTER TABLE `marsaf_vsei_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `marsar`
+--
+ALTER TABLE `marsar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `marsar_incident_cause`
+--
+ALTER TABLE `marsar_incident_cause`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `marslec`
+--
+ALTER TABLE `marslec`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `material_report`
+--
+ALTER TABLE `material_report`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `noted_deficiency`
+--
+ALTER TABLE `noted_deficiency`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `oil_type`
+--
+ALTER TABLE `oil_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `panelling_conducted_facilities`
+--
+ALTER TABLE `panelling_conducted_facilities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `participating_agency`
+--
+ALTER TABLE `participating_agency`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `pdi_result`
+--
+ALTER TABLE `pdi_result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `pd_no_532`
+--
+ALTER TABLE `pd_no_532`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `pd_no_705`
+--
+ALTER TABLE `pd_no_705`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `pre_emptive_evacuation_activity`
+--
+ALTER TABLE `pre_emptive_evacuation_activity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `pre_emptive_evacuation_coordination_with`
+--
+ALTER TABLE `pre_emptive_evacuation_coordination_with`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `psc_action_code`
+--
+ALTER TABLE `psc_action_code`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `psc_center`
+--
+ALTER TABLE `psc_center`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ra_1937`
+--
+ALTER TABLE `ra_1937`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `ra_6539`
+--
+ALTER TABLE `ra_6539`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ra_9147`
+--
+ALTER TABLE `ra_9147`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `ra_9165`
+--
+ALTER TABLE `ra_9165`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `ra_9208`
+--
+ALTER TABLE `ra_9208`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ra_10066`
+--
+ALTER TABLE `ra_10066`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `ra_10591`
+--
+ALTER TABLE `ra_10591`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `ra_10654`
+--
+ALTER TABLE `ra_10654`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `ra_10845`
+--
+ALTER TABLE `ra_10845`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `recration_watercraft`
+--
+ALTER TABLE `recration_watercraft`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `recreational_violation`
+--
+ALTER TABLE `recreational_violation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `related_international_conventions_noted_deficiency`
+--
+ALTER TABLE `related_international_conventions_noted_deficiency`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `report_selection`
+--
+ALTER TABLE `report_selection`
+  MODIFY `report_selection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `report_type`
+--
+ALTER TABLE `report_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `responding_unit`
+--
+ALTER TABLE `responding_unit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `salvage_operation_purpose`
+--
+ALTER TABLE `salvage_operation_purpose`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `seaborne_patrol_activity_conduct`
+--
+ALTER TABLE `seaborne_patrol_activity_conduct`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `spiller`
+--
+ALTER TABLE `spiller`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `station`
+--
+ALTER TABLE `station`
+  MODIFY `station_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `sub_station`
+--
+ALTER TABLE `sub_station`
+  MODIFY `sub_station_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `system`
+--
+ALTER TABLE `system`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tier_level`
+--
+ALTER TABLE `tier_level`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `time_assets_deployment`
+--
+ALTER TABLE `time_assets_deployment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `training_type`
+--
+ALTER TABLE `training_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `urban_marsar`
+--
+ALTER TABLE `urban_marsar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `urban_rescue_type`
+--
+ALTER TABLE `urban_rescue_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `user_role`
+--
+ALTER TABLE `user_role`
+  MODIFY `user_role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `very_serious_mc_category`
+--
+ALTER TABLE `very_serious_mc_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `vessel_age`
+--
+ALTER TABLE `vessel_age`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `vessel_size`
+--
+ALTER TABLE `vessel_size`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `vessel_type`
+--
+ALTER TABLE `vessel_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `vessel_type_involved`
+--
+ALTER TABLE `vessel_type_involved`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `victim_age`
+--
+ALTER TABLE `victim_age`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `victim_number`
+--
+ALTER TABLE `victim_number`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `vsei_deficiency_code`
+--
+ALTER TABLE `vsei_deficiency_code`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `vsei_result`
+--
+ALTER TABLE `vsei_result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `weather_forecast`
+--
+ALTER TABLE `weather_forecast`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

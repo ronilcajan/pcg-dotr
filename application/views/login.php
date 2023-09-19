@@ -115,15 +115,15 @@ $ss = $sql->row();
                             <span toggle="#password" class="fa fa-fw field-icon toggle-password fa-eye"></span>
                         </div>
                     </div>
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <div class="col-md-12">
                             <div class="checkbox checkbox-primary pull-left p-t-0">
                                 <input id="checkbox-signup" type="checkbox">
                                 <label for="checkbox-signup"> Remember me </label>
                             </div>
                         </div>
-                    </div> -->
-                    <!-- <div class="g-recaptcha" data-sitekey="6Lf0b8MkAAAAAM_vKBGbTjO3_nGUZ5Nf-t31HZaq"></div> -->
+                    </div>
+                    <div class="g-recaptcha" data-sitekey="<?= $site_key ?>"></div>
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
                             <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light"

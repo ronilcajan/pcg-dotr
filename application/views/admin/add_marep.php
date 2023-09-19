@@ -37,7 +37,7 @@
                             <div id="toggle-hidden" class="col-md-6 hidden">
                                 <div class="form-group">
                                     <label> <span id="station-text"></span> SUB-STATIONS</label>
-                                    <select id="sub-station" class="form-control">
+                                    <select id="sub-station" class="form-control" required>
                                         <option value="">Select</option>
                                     </select>
                                 </div>

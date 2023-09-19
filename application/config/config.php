@@ -7,6 +7,9 @@ $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ?
 $config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
 $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
+$config['site_key'] = '6Lc13TQoAAAAAIGZm-eGWo1i4B-TJsamp3rjqK7i';
+$config['secret_key'] = '6Lc13TQoAAAAABF_r2LAGuTPD0a5L2oG6Y28ENOm';
+
 $config['index_page']              = '';
 $config['uri_protocol']            = 'REQUEST_URI';
 $config['language']                = 'english';

@@ -14,12 +14,17 @@ class Login extends CI_Controller {
 
     public function index()
 	{ 
+        $this->load->config('config');
+
+        $data['site_key'] = $this->config->item('site_key');
         $data['page_title'] = "Login"; 
         $this->load->view('login', $data); 
 	}
 
     public function login()
     {
+        $this->load->config('config');
+        
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         // $this->form_validation->set_rules('g-recaptcha-response', 'reCAPTCHA', 'required');
@@ -30,14 +35,15 @@ class Login extends CI_Controller {
         }
         else
         {
-            $secretKey = "6Lf0b8MkAAAAAFrxFqVC1C372c58Pkq6YtzBH2Mv";
+            $secretKey = $this->config->item('secret_key');
+            
             $captcha= $this->input->post('g-recaptcha-response');
             // post request to server
             $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey ?? null) .  '&response=' . urlencode($captcha);
             $response = file_get_contents($url);
             $responseKeys = json_decode($response,true);
 
-            // if($responseKeys["success"]){
+            if($responseKeys["success"]){
                 $login_data = array(
                     'username' => $this->input->post('username', TRUE),
                     'password' => $this->input->post('password', TRUE),
@@ -80,10 +86,10 @@ class Login extends CI_Controller {
                     $this->session->set_flashdata('error_flashData', 'Username/Password is incorrect!');
     				redirect('login');
                 }
-            // }else{
-            //      $this->session->set_flashdata('error_flashData', 'Error verifying reCAPTCHA, it seems your a robot!');
-    		// 		redirect('login');
-            // }
+            }else{
+                 $this->session->set_flashdata('error_flashData', 'Error verifying reCAPTCHA, it seems your a robot!');
+    				redirect('login');
+            }
             
         }
 		 
