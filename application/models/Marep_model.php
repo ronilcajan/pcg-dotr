@@ -3,12 +3,13 @@
 class Marep_model extends CI_Model {
 
     protected $table_name = "marep"; 
+    
     public function insert($data)
     {
         $this->db->insert($this->table_name,$data);
         return $this->db->affected_rows();
     } 
-
+ 
     public function update($data,$id)
     {
         $update = $this->db->update($this->table_name, $data, "id=".$id);
@@ -23,25 +24,26 @@ class Marep_model extends CI_Model {
 
     public function getMarep(){
 
-        $this->db->select('*, marep.id as id');
-        $this->db->join('station','station.station_id=marep.station','left');
-        $this->db->join('sub_station','sub_station.sub_station_id=marep.sub_station','left');
-        $this->db->join('report_selection','report_selection.report_selection_id=marep.report_type','left');
+        $query =  $this->db->select('*, marep.id as id')
+                ->join('station','station.station_id=marep.station','left')
+                ->join('sub_station','sub_station.sub_station_id=marep.sub_station','left')
+                ->join('report_selection','report_selection.report_selection_id=marep.report_type','left');
+        
         if($this->session->userdata('role') == 'admin'){
-            $this->db->where('station.station_id', $this->session->userdata('station_id'));
+            $query->where('station.station_id', $this->session->userdata('station_id'));
         }
         if($this->session->userdata('role') == 'manager'){
-            $this->db->where('station.station_id', $this->session->userdata('station_id'));
-            $this->db->where('sub_station.sub_station_id', $this->session->userdata('sub_station_id'));
+            $query->where('station.station_id', $this->session->userdata('station_id'))
+                ->where('sub_station.sub_station_id', $this->session->userdata('sub_station_id'));
         }
         if($this->session->userdata('role') == 'staff'){
-            $this->db->where('station.station_id', $this->session->userdata('station_id'));
-            $this->db->where('sub_station.sub_station_id', $this->session->userdata('sub_station_id'));
+            $query->where('station.station_id', $this->session->userdata('station_id'))
+                ->where('sub_station.sub_station_id', $this->session->userdata('sub_station_id'));
         }
-        $query = $this->db 
-            ->get($this->table_name);
+        
+        return $query->get($this->table_name)->result();
 
-            return $query->result();
+            
     }
 
     public function viewMarep($id){
@@ -51,7 +53,7 @@ class Marep_model extends CI_Model {
             ->join('sub_station','sub_station.sub_station_id=marep.sub_station','left')
             ->join('report_selection','report_selection.report_selection_id=marep.report_type','left')
             ->order_by('date_created','DESC')
-            ->get('marep');
+            ->get($this->table_name);
 
             return $query->result();
     }
@@ -72,23 +74,22 @@ class Marep_model extends CI_Model {
 
     public function tot_entry()
     {
-        $this->db->join('station','station.station_id=marep.station');
-        $this->db->join('sub_station','sub_station.sub_station_id=marep.sub_station');
+        $query =  $this->db->join('station','station.station_id=marep.station')
+                ->join('sub_station','sub_station.sub_station_id=marep.sub_station');
+
         if($this->session->userdata('role') != 'super-admin'){ 
-            $this->db->where('station.station_id', $this->session->userdata('station_id'));
+            $query->where('station.station_id', $this->session->userdata('station_id'));
         }
         if($this->session->userdata('role') == 'manager'){
-            $this->db->where('station.station_id', $this->session->userdata('station_id'));
-            $this->db->where('sub_station.sub_station_id', $this->session->userdata('sub_station_id'));
+            $query->where('station.station_id', $this->session->userdata('station_id'))
+            ->where('sub_station.sub_station_id', $this->session->userdata('sub_station_id'));
         }
         if($this->session->userdata('role') == 'staff'){
-            $this->db->where('station.station_id', $this->session->userdata('station_id'));
-            $this->db->where('sub_station.sub_station_id', $this->session->userdata('sub_station_id'));
+            $query->where('station.station_id', $this->session->userdata('station_id'))
+            ->where('sub_station.sub_station_id', $this->session->userdata('sub_station_id'));
         }
-        $query = $this->db 
-            ->get($this->table_name);
-
-        return $query->num_rows();
+        
+        return $query->get($this->table_name)->num_rows();
     }
 
     public function delete($id){

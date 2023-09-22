@@ -28,6 +28,7 @@ class Marep extends CI_Controller {
     }
  
     public function add(){    
+        
         $data['page_title'] = "ADD MAREP"; 
         $data['station'] = $this->station_model->get_all(); 
         $data['report'] = $this->report_selection_model->get_all();  
@@ -45,7 +46,9 @@ class Marep extends CI_Controller {
         $data['responding_unit'] = $this->responding_unit_model->get_all();
         $data['affected_area'] = $this->affected_area_model->get_all();
         $data['affected_biodiversity'] = $this->affected_biodiversity_model->get_all(); 
+
         $data['marep'] = $this->marep_model->getMarep();  
+
         $this->base->load('admin', 'admin/add_marep', $data); 
  
 	} 
@@ -57,11 +60,24 @@ class Marep extends CI_Controller {
         $config['encrypt_name'] = TRUE;
 
         $this->load->library('upload', $config);
+        
+
+        $this->form_validation->set_rules('station', 'Station', 'required');
+        $this->form_validation->set_rules('sub_station', 'Sub-station', 'required');
+        $this->form_validation->set_rules('report_selection', 'Report Type', 'required');
+
+        if ($this->form_validation->run() === FALSE)
+        {
+            $this->session->set_flashdata('errors', validation_errors());
+            redirect("add_marep",'refresh');
+        }
+
+
         $data = array(
             'station' => $this->input->post('station'),
             'sub_station' => $this->input->post('sub_station'),
             'report_type' => $this->input->post('report_selection'),
-            'date_created' => $this->input->post('date') . " " .$this->input->post('hour') . ":" .$this->input->post('minute') . ":00",  //2022-12-30 11:55:46
+            'date_created' => $this->input->post('date') . " " .$this->input->post('time'),  //2022-12-30 11:55:46
             'location' => $this->input->post('location'),
             'activity_conduct' => $this->input->post('activity_conduct'),
             'participating_agency' => implode(',',(array) $this->input->post('participating_agency')),
@@ -78,7 +94,7 @@ class Marep extends CI_Controller {
             'marpol_violation' => $this->input->post('marpol_violation'),
             'facility_type' => $this->input->post('facility_type'),
             'facility_name' => $this->input->post('facility_name'),
-            'oil_spill_date_incident' =>$this->input->post('oil_spill_date_incident') . " " .$this->input->post('oil_spill_hour_incident') . ":" .$this->input->post('oil_spill_minute_incident') . ":00",  //2022-12-30 11:55:46
+            'oil_spill_date_incident' => $this->input->post('oil_spill_date_incident') . " " .$this->input->post('oil_spill_time_incident'),  //2022-12-30 11:55:46
             'oil_spill_location' => $this->input->post('oil_spill_location'),
             'spiller' => $this->input->post('spiller'),
             'oil_spill_vessel_name' => $this->input->post('oil_spill_vessel_name'),
@@ -91,11 +107,17 @@ class Marep extends CI_Controller {
             'affected_biodiversity' => implode(',',(array) $this->input->post('affected_biodiversity')),
             'training_type' => implode(',',(array) $this->input->post('training_type')),
             'training_center_name' => $this->input->post('training_center_name'),
+            'land_base_comments' => $this->input->post('land_base_comments'),
         ); 
 
         if ($this->upload->do_upload('oil_spill_map_location')){
             $map = $this->upload->data();
             $data['oil_spill_map_location'] = $map['file_name'];
+        }
+
+        if ($this->upload->do_upload('spot_report')){
+            $spot_report = $this->upload->data();
+            $data['spot_report'] = $spot_report['file_name'];
         }
         
         $insert = $this->marep_model->insert($data);
@@ -113,7 +135,7 @@ class Marep extends CI_Controller {
         $data['page_title'] = "EDIT MAREP"; 
         $data['marep_list'] = $this->marep_model->getMarep();  
         $data['marep'] = $this->marep_model->get($id);  
-        $data['stationg'] = $this->station_model->get_all(); 
+        $data['station'] = $this->station_model->get_all(); 
         $data['report'] = $this->report_selection_model->get_all();  
         $data['activity_conduct'] = $this->activity_conduct_model->get_all(); 
         $data['participating_agency'] =  $this->participating_agency_model->get_all();
@@ -129,7 +151,9 @@ class Marep extends CI_Controller {
         $data['responding_unit'] = $this->responding_unit_model->get_all();
         $data['affected_area'] = $this->affected_area_model->get_all();
         $data['affected_biodiversity'] = $this->affected_biodiversity_model->get_all(); 
+        
         $data['allMarep'] = $this->marep_model->getMarep();  
+
         $this->base->load('admin', 'marep/edit_marep', $data); 
     }
 
@@ -141,12 +165,23 @@ class Marep extends CI_Controller {
 
         $this->load->library('upload', $config);
 
+        $this->form_validation->set_rules('station', 'Station', 'required');
+        $this->form_validation->set_rules('sub_station', 'Sub-station', 'required');
+        $this->form_validation->set_rules('report_selection', 'Report Type', 'required');
+
+        if ($this->form_validation->run() === FALSE)
+        {
+            $this->session->set_flashdata('errors', validation_errors());
+            
+            redirect($_SERVER['HTTP_REFERER'],'refresh');
+        }
+
         $id =  $this->input->post('marep_id');
         $data = array(
             'station' => $this->input->post('station'),
             'sub_station' => $this->input->post('sub_station'),
             'report_type' => $this->input->post('report_selection'),
-            'date_created' => $this->input->post('date') . " " .$this->input->post('hour') . ":" .$this->input->post('minute') . ":00",  //2022-12-30 11:55:46
+            'date_created' => $this->input->post('date') . " " .$this->input->post('time'),  //2022-12-30 11:55:46
             'location' => $this->input->post('location'),
             'activity_conduct' => $this->input->post('activity_conduct'),
             'participating_agency' => implode(',',(array) $this->input->post('participating_agency')),
@@ -163,7 +198,7 @@ class Marep extends CI_Controller {
             'marpol_violation' => $this->input->post('marpol_violation'),
             'facility_type' => $this->input->post('facility_type'),
             'facility_name' => $this->input->post('facility_name'),
-            'oil_spill_date_incident' =>$this->input->post('oil_spill_date_incident') . " " .$this->input->post('oil_spill_hour_incident') . ":" .$this->input->post('oil_spill_minute_incident') . ":00",  //2022-12-30 11:55:46
+            'oil_spill_date_incident' =>$this->input->post('oil_spill_date_incident') . " " .$this->input->post('oil_spill_time_incident'),  //2022-12-30 11:55:46
             'oil_spill_location' => $this->input->post('oil_spill_location'),
             'spiller' => $this->input->post('spiller'),
             'oil_spill_vessel_name' => $this->input->post('oil_spill_vessel_name'),
@@ -176,11 +211,17 @@ class Marep extends CI_Controller {
             'affected_biodiversity' => implode(',',(array) $this->input->post('affected_biodiversity')),
             'training_type' => implode(',',(array) $this->input->post('training_type')),
             'training_center_name' => $this->input->post('training_center_name'),
+            'land_base_comments' => $this->input->post('land_base_comments'),
         ); 
 
         if ($this->upload->do_upload('oil_spill_map_location')){
             $map = $this->upload->data();
             $data['oil_spill_map_location'] = $map['file_name'];
+        }
+
+        if ($this->upload->do_upload('spot_report')){
+            $spot_report = $this->upload->data();
+            $data['spot_report'] = $spot_report['file_name'];
         }
         
         $update = $this->marep_model->update($data, $id);

@@ -73,47 +73,29 @@
                         <div data-id="<?php echo $row['report_selection_id']; ?>" class="toggle-show"
                             style="display: none">
                             <h2><?php echo $row['report_selection']; ?></h2>
-
-                            <?php if( $report_selection_id   == 1): // Coastal Clean Up ?>
                             <form method="post" action="<?= site_url() ?>insert_marep" role="form"
                                 enctype="multipart/form-data">
+
                                 <!-- hidden -->
                                 <input type="hidden" title="Station" name="station">
                                 <input type="hidden" title="Sub Station" name="sub_station">
                                 <input type="hidden" title="Report Selection" name="report_selection">
 
-                                <div class="row" style="margin-top: 50px;">
+                                <?php if( $report_selection_id   == 1): // Coastal Clean Up ?>
+
+                                <div class="row  m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">DTG</label>
-                                            <input type="date" name="date" required class="form-control">
+                                            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Time</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="hour" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="minute" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00'),intval('59')) as $minute): 
-																$minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-														?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time" class="form-control" name="time"
+                                                value="<?= date('H:i') ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +111,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">CONDUCT OF ACTIVITY</label>
                                         <div class="col-sm-12">
@@ -148,7 +130,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">PARTICIPATING AGENCIES</label>
                                         <div class="col-sm-12">
@@ -165,7 +147,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-12">NUMBER OF PARTICIPANTS</label>
@@ -178,14 +160,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">AREA COVERAGE</label>
                                             <input type="text" name="area_coverage" class="form-control">
-                                            <span class="help-block"><small>(Please provide estimated area of
-                                                    coverage)</small></span>
+                                            <span class="help-block"><small>(Please provide estimated area of coverage
+                                                    i.e, 1 SQM, 5 SQM, 10 SQM)</small></span>
                                         </div>
                                     </div>
                                 </div>
 
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPES OF GARBAGE COLLECTED</label>
                                         <div class="col-sm-12">
@@ -201,7 +183,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">VOLUME OF GARBAGE COLLECTED</label>
                                         <div class="col-sm-12">
@@ -210,57 +192,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-danger pull-right  mt-4"
-                                    type="button">Finish!</button>
-                            </form>
-                            <?php elseif($row['report_selection_id'] == 2): //Mangroup Plating ?>
-                            <form method="post" action="<?= site_url() ?>insert_marep" role="form"
-                                enctype="multipart/form-data">
 
-                                <p>Mangroves provide a range ecosystem services. Planting mangroves helps in regulating
-                                    erosion, floods and salt water intrusion. Likewise, it protect coastal communities
+
+
+                                <?php elseif($row['report_selection_id'] == 2): //Mangrove Plating ?>
+                                <p>Mangroves provide a range ecosystem services. Planting mangroves helps in
+                                    regulating
+                                    erosion, floods and salt water intrusion. Likewise, it protect coastal
+                                    communities
                                     against coastal flooding, high winds and waves, and tsunamis.</p>
                                 <!-- hidden -->
-                                <input type="hidden" title="Station" name="station">
-                                <input type="hidden" title="Sub Station" name="sub_station">
-                                <input type="hidden" title="Report Selection" name="report_selection">
 
-                                <div class="row" style="margin-top: 50px;">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">DTG</label>
-                                            <input type="date" name="date" required class="form-control">
+                                            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Time</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="hour" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="minute" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00'),intval('59')) as $minute): 
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time" class="form-control" name="time"
+                                                value="<?= date('H:i') ?>">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">CONDUCT OF ACTIVITY</label>
                                         <div class="col-sm-12">
@@ -279,7 +238,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">PARTICIPATING AGENCIES</label>
                                         <div class="col-sm-12">
@@ -296,7 +255,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-12">NUMBER OF PARTICIPANTS</label>
@@ -314,7 +273,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">NUMBER OF PROPAGULES/SEEDLINGS PLANTED</label>
                                         <div class="col-sm-12">
@@ -324,53 +283,25 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-danger pull-right mt-4"
-                                    type="button">Finish!</button>
-                            </form>
-                            <?php elseif(  $row['report_selection_id'] == 3): //Tree Planting ?>
-                            <form method="post" action="<?= site_url() ?>insert_marep" role="form"
-                                enctype="multipart/form-data">
-                                <!-- hidden -->
-                                <input type="hidden" title="Station" name="station">
-                                <input type="hidden" title="Sub Station" name="sub_station">
-                                <input type="hidden" title="Report Selection" name="report_selection">
+                                <?php elseif(  $row['report_selection_id'] == 3): //Tree Planting ?>
 
-                                <div class="row" style="margin-top: 50px;">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">DTG</label>
-                                            <input type="date" name="date" required class="form-control">
+                                            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Time</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="hour" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="minute" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00'),intval('59')) as $minute) :
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time" class="form-control" name="time"
+                                                value="<?= date('H:i') ?>">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">CONDUCT OF ACTIVITY</label>
                                         <div class="col-sm-12">
@@ -389,7 +320,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">PARTICIPATING AGENCIES</label>
                                         <div class="col-sm-12">
@@ -406,7 +337,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-12">NUMBER OF PARTICIPANTS</label>
@@ -422,7 +353,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-12">AREA COVERAGE</label>
@@ -438,53 +369,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-danger pull-right  mt-4">Finish!</button>
-                            </form>
 
-                            <?php elseif(  $row['report_selection_id'] == 4): //VESSEL INSPECTION?>
-                            <form method="post" action="<?= site_url() ?>insert_marep" role="form"
-                                enctype="multipart/form-data">
-                                <!-- hidden -->
-                                <input type="hidden" title="Station" name="station">
-                                <input type="hidden" title="Sub Station" name="sub_station">
-                                <input type="hidden" title="Report Selection" name="report_selection">
+                                <?php elseif(  $row['report_selection_id'] == 4): //VESSEL INSPECTION?>
 
-                                <div class="row" style="margin-top: 50px;">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">DTG</label>
-                                            <input type="date" name="date" required class="form-control">
+                                            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Time</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="hour" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="minute" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00'),intval('59')) as $minute):
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time" class="form-control" name="time"
+                                                value="<?= date('H:i') ?>">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">LOCATION</label>
                                         <div class="col-sm-12">
@@ -492,7 +396,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPE OF VESSEL</label>
                                         <div class="col-sm-12">
@@ -511,7 +415,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">NAME OF VESSEL</label>
                                         <div class="col-sm-12">
@@ -521,7 +425,7 @@
                                 </div>
 
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPE OF INSPECTION</label>
                                         <div class="col-sm-12">
@@ -539,7 +443,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">MARPOL VIOLATION</label>
                                         <div class="col-sm-12">
@@ -548,55 +452,26 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-danger pull-right  mt-4"
-                                    type="button">Finish!</button>
-                            </form>
 
+                                <?php elseif(  $row['report_selection_id'] == 5): // LAND BASE INSPECTION ?>
 
-                            <?php elseif(  $row['report_selection_id'] == 5): // LAND BASE INSPECTION ?>
-                            <form method="post" action="<?= site_url() ?>insert_marep" role="form"
-                                enctype="multipart/form-data">
-                                <!-- hidden -->
-                                <input type="hidden" title="Station" name="station">
-                                <input type="hidden" title="Sub Station" name="sub_station">
-                                <input type="hidden" title="Report Selection" name="report_selection">
-
-                                <div class="row" style="margin-top: 50px;">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">DTG</label>
-                                            <input type="date" name="date" required class="form-control">
+                                            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Time</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="hour" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="minute" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00'),intval('59')) as $minute):
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time" class="form-control" name="time"
+                                                value="<?= date('H:i') ?>">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">LOCATION</label>
                                         <div class="col-sm-12">
@@ -604,7 +479,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPE OF FACILITY</label>
                                         <div class="col-sm-12">
@@ -623,7 +498,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">NAME OF FACILITY</label>
                                         <div class="col-sm-12">
@@ -631,54 +506,35 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-danger pull-right  mt-4"
-                                    type="button">Finish!</button>
-                            </form>
 
-                            <?php elseif(  $row['report_selection_id'] == 6): // TRAININGS CONDUCTED ?>
-                            <form method="post" action="<?= site_url() ?>insert_marep" role="form"
-                                enctype="multipart/form-data">
-                                <!-- hidden -->
-                                <input type="hidden" title="Station" name="station">
-                                <input type="hidden" title="Sub Station" name="sub_station">
-                                <input type="hidden" title="Report Selection" name="report_selection">
+                                <div class="row m-t-15">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Findings/Comment </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control" name="land_base_comments"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <div class="row" style="margin-top: 50px;">
+                                <?php elseif(  $row['report_selection_id'] == 6): // TRAININGS CONDUCTED ?>
+
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">DTG</label>
-                                            <input type="date" name="date" required class="form-control">
+                                            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Time</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="hour" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="minute" class="form-control" required>
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00'),intval('59')) as $minute):
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php  endforeach	?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time" class="form-control" name="time"
+                                                value="<?= date('H:i') ?>">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">LOCATION</label>
                                         <div class="col-sm-12">
@@ -686,7 +542,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPE OF TRAINING</label>
                                         <div class="col-sm-12">
@@ -702,7 +558,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-12">NAME OF FACILITY/TRAINING CENTER</label>
@@ -716,22 +572,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-danger pull-right  mt-4"
-                                    type="button">Finish!</button>
-                            </form>
 
 
-                            <?php elseif(  $row['report_selection_id'] == 7): // MARITIME INCIDENT?>
-
-                            <form method="post" action="<?= site_url() ?>insert_marep" role="form"
-                                enctype="multipart/form-data">
+                                <?php elseif(  $row['report_selection_id'] == 7): // MARITIME INCIDENT?>
                                 <h4>AGROUNDING</h4>
-                                <!-- hidden -->
-                                <input type="hidden" title="Station" name="station">
-                                <input type="hidden" title="Sub Station" name="sub_station">
-                                <input type="hidden" title="Report Selection" name="report_selection">
 
-                                <div class="row" style="margin-top: 50px;">
+                                <div class="row m-t-15">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">DATE OF INCIDENT</label>
+                                            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Time</label>
+                                            <input type="time" class="form-control" name="time"
+                                                value="<?= date('H:i') ?>">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">CAUSE OF INCIDENT</label>
                                         <div class="col-sm-12">
@@ -749,45 +612,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">DATE OF INCIDENT</label>
-                                            <input type="date" name="date" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Time</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="hour" class="form-control">
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="minute" class="form-control">
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00'),intval('59')) as $minute) :
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php  endforeach	?>
-                                                    </select>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">LOCATION</label>
                                         <div class="col-sm-12">
@@ -795,7 +622,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPE OF VESSEL</label>
                                         <div class="col-sm-12">
@@ -814,7 +641,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">NAME OF VESSEL</label>
                                         <div class="col-sm-12">
@@ -825,44 +652,24 @@
 
                                 <h4>OIL SPILL</h4>
 
-
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">DATE OF INCIDENT</label>
-                                            <input type="date" name="oil_spill_date_incident" class="form-control">
+                                            <input type="date" name="oil_spill_date_incident"
+                                                value="<?= date('Y-m-d') ?>" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Time</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="oil_spill_hour_incident" class="form-control">
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time) :?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php  endforeach ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="oil_spill_minute_incident" class="form-control">
-                                                        <option value=""> </option>
-                                                        <?php foreach(range(intval('00'),intval('59')) as $minute):
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time" name="oil_spill_time_incident" value="<?= date('H:i') ?>"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">LOCATION</label>
                                         <div class="col-sm-12">
@@ -870,18 +677,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">LOCATION MAP</label>
                                         <div class="col-sm-12">
                                             <input type="file" accept="image/*,pdf" name="oil_spill_map_location"
                                                 class="form-control">
+                                            <span class="help-block"><small>(Please provide picture file not exceeding
+                                                    100MB)</small></span>
                                         </div>
                                     </div>
                                 </div>
 
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">SPILLER</label>
                                         <div class="col-sm-12">
@@ -899,7 +708,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">NAME OF VESSEL/FACILITY</label>
                                         <div class="col-sm-12">
@@ -916,7 +725,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>TIER LEVEL</label>
@@ -970,7 +779,7 @@
 
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="form-group">
                                         <label class="col-sm-12">VOLUME OF OIL RETRIEVED</label>
                                         <div class="col-sm-12">
@@ -979,7 +788,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row m-t-15">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class=" ">AFFECTED AREAS </label>
@@ -1012,11 +821,22 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
-                                <button type="submit" class="btn btn-danger pull-right  mt-4"
+                                <div class="row m-t-15">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">SPOT REPORT</label>
+                                        <div class="col-sm-12">
+                                            <input type="file" name="spot_report" class="form-control">
+                                            <span class="help-block"><small>(Please upload file with maximum size of
+                                                    500kb)</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php endif ?>
+                                <button type="submit" class="btn btn-danger pull-right m-t-15"
                                     type="button">Finish!</button>
                             </form>
-                            <?php endif ?>
                         </div>
                         <?php endforeach ?>
                     </div>
@@ -1039,7 +859,7 @@
                         <?php foreach($marep as $row):?>
                         <tr>
                             <td scope="row"><?php echo $row->report_selection ?></td>
-                            <td><?php echo date('F d, Y \a\t\ H:i', strtotime($row->date_created )) ?></td>
+                            <td><?php echo date('F d, Y \a\t\ h:i A', strtotime($row->date_created)) ?></td>
                             <td> <a title="View" class="text-info"
                                     href="<?= site_url('marep/view_marep/').$row->id ?>"><i class="fa fa-eye"></i></a>
                                 <a title="Edit" class="text-success"

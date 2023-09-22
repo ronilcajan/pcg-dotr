@@ -29,20 +29,24 @@ var BASE_URL = "<?php echo base_url() ?>";
 <script src="<?= site_url() ?>assets/plugins/components/datatables/Buttons-1.6.1/js/buttons.html5.min.js"></script>
 <script src="<?= site_url() ?>assets/plugins/components/datatables/Buttons-1.6.1/js/buttons.print.min.js"></script>
 <!-- end - This is for export functionality only -->
+<?php if($current_page == 'dashboard' || $current_page == 'marep' || $current_page == 'marsaf' || $current_page == 'marsar' || $current_page == 'marslec' || $current_page == 'urban_marsar'): ?>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <!-- ===== Style Switcher JS ===== -->
 <script src="<?php echo base_url(); ?>assets/plugins/components/raphael/raphael-min.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/styleswitcher/jQuery.style.switcher.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/components/chartist-js/dist/chartist.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/components/morrisjs/morris.js"></script>
 <script src='<?php echo base_url(); ?>assets/plugins/components/moment/moment.js'></script>
+<?php endif ?>
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/owl.carousel/owl.carousel.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/owl.carousel/owl.custom.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/js/jquery.PrintArea.js" type="text/JavaScript"></script>
 <script src="<?php echo base_url(); ?>assets/js/datatables.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/edit.js"></script>
+
 
 <?php if($current_page == 'dashboard' || $current_page == 'marep' || $current_page == 'marsaf' || $current_page == 'marsar' || $current_page == 'marslec' || $current_page == 'urban_marsar'): ?>
 <script src="<?php echo base_url(); ?>assets/js/chart.js"></script>
