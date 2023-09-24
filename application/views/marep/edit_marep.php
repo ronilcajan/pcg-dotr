@@ -517,6 +517,62 @@
                                     </div>
                                 </div>
 
+                                <div class="row m-t-15">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">MEP VIOLATION (ACCREDITATION OF CERTIFICATE)</label>
+                                        <div class="col-sm-12">
+                                            <?php $mep_vio = explode(",",$marep->mep_violation); $j=0;   ?>
+                                            <?php for($i=0; $i <count($mep_violation); $i++): ?>
+                                            <?php if(isset($mep_vio[$j]) && $mep_vio[$j] == $mep_violation[$i]->id):?>
+                                            <div class="checkbox checkbox-custom">
+                                                <input type="checkbox" name="mep_violation[]"
+                                                    id="mep_violation_<?= $report_selection_id . "_" . $mep_violation[$i]->id  ?>"
+                                                    value="<?= $mep_violation[$i]->id  ?>" checked>
+                                                <label
+                                                    for="mep_violation_<?= $report_selection_id . "_" . $mep_violation[$i]->id  ?>"><?= $mep_violation[$i]->mep_violation ?></label>
+                                            </div>
+                                            <?php $j++; else: ?>
+                                            <div class="checkbox checkbox-custom">
+                                                <input type="checkbox" name="mep_violation[]"
+                                                    id="mep_violation_<?= $report_selection_id . "_" . $mep_violation[$i]->id  ?>"
+                                                    value="<?= $mep_violation[$i]->id  ?>">
+                                                <label
+                                                    for="mep_violation_<?= $report_selection_id . "_" . $mep_violation[$i]->id  ?>"><?= $mep_violation[$i]->mep_violation ?></label>
+                                            </div>
+                                            <?php endif ?>
+                                            <?php endfor ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row m-t-15">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">MEP VIOLATION (MARPOL EQUIPMENT)</label>
+                                        <div class="col-sm-12">
+                                            <?php $mep_violation_marpol = explode(",",$marep->mep_violation_marpol_equipment); $j=0;   ?>
+                                            <?php for($i=0; $i <count($participating_agency); $i++): ?>
+                                            <?php if(isset($mep_violation_marpol[$j]) && $mep_violation_marpol[$j] == $mep_violation_marpol_equipment[$i]->id):?>
+                                            <div class="checkbox checkbox-custom">
+                                                <input type="checkbox" name="mep_violation_marpol_equipment[]"
+                                                    id="mep_violation_marpol_equipment_<?= $report_selection_id . "_" . $mep_violation_marpol_equipment[$i]->id  ?>"
+                                                    value="<?= $mep_violation_marpol_equipment[$i]->id  ?>" checked>
+                                                <label
+                                                    for="mep_violation_marpol_equipment_<?= $report_selection_id . "_" . $mep_violation_marpol_equipment[$i]->id  ?>"><?= $mep_violation_marpol_equipment[$i]->mep_violation_marpol_equipment ?></label>
+                                            </div>
+                                            <?php $j++; else: ?>
+                                            <div class="checkbox checkbox-custom">
+                                                <input type="checkbox" name="mep_violation_marpol_equipment[]"
+                                                    id="mep_violation_marpol_equipment_<?= $report_selection_id . "_" . $mep_violation_marpol_equipment[$i]->id  ?>"
+                                                    value="<?= $mep_violation_marpol_equipment[$i]->id  ?>">
+                                                <label
+                                                    for="mep_violation_marpol_equipment_<?= $report_selection_id . "_" . $mep_violation_marpol_equipment[$i]->id  ?>"><?= $mep_violation_marpol_equipment[$i]->mep_violation_marpol_equipment ?></label>
+                                            </div>
+                                            <?php endif ?>
+                                            <?php endfor ?>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <?php elseif(  $row['report_selection_id'] == 5): // LAND BASE INSPECTION ?>
 
@@ -621,27 +677,30 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPE OF TRAINING</label>
                                         <div class="col-sm-12">
-                                            <?php $training = explode(",",$marep->training_type); $j=0; ?>
-                                            <?= count($training_type) ?>
-                                            <?php for($i=0; $i <count($training_type); $i++): ?>
-                                            <?php if(isset($training[$j]) && $training[$j] == $training_type[$i]->id):?>
+                                            <?php 
+                                                $training = explode(",", $marep->training_type);
+                                            ?>
+                                            <?php foreach ($training_type as $keys => $type): ?>
+                                            <?php 
+                                                $inputId = "training_type_{$report_selection_id}_{$type->id}";
+                                                $inputClass = $type->training_type == 'OTHERS' ? 'show-input-checkbox' : '';
+                                                $checked = (isset($training[$keys]) && $training[$keys] == $type->id) || ($type->training_type == 'OTHERS');
+                                            ?>
                                             <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="training_type[]"
-                                                    id="training_type_<?= $report_selection_id . "_" .$training_type[$i]->id  ?>"
-                                                    value="<?=$training_type[$i]->id  ?>" checked>
-                                                <label
-                                                    for="training_type_<?= $report_selection_id . "_" .$training_type[$i]->id  ?>"><?=$training_type[$i]->training_type ?></label>
+                                                <input type="checkbox" name="training_type[]" id="<?= $inputId ?>"
+                                                    class="<?= $inputClass ?>"
+                                                    value="<?= $type->training_type == 'OTHERS' ? 'OTHER' : $type->id ?>"
+                                                    <?= $checked ? 'checked' : '' ?> <?= $checked ? 'checked' : '' ?>>
+                                                <label for="<?= $inputId ?>"><?= $type->training_type ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="training_type[]"
-                                                    id="training_type_<?= $report_selection_id . "_" .$training_type[$i]->id  ?>"
-                                                    value="<?=$training_type[$i]->id  ?>">
-                                                <label
-                                                    for="training_type_<?= $report_selection_id . "_" .$training_type[$i]->id  ?>"><?=$training_type[$i]->training_type ?></label>
+                                            <?php endforeach ?>
+                                            <div class="input-container"
+                                                style="display: <?= $marep->training_type_others ? 'block' : 'none' ?>;">
+                                                <input type="text" name="training_type_others"
+                                                    placeholder="Enter others training type"
+                                                    value="<?= $marep->training_type_others ?>" id="others_input"
+                                                    class="form-control">
                                             </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
                                         </div>
                                     </div>
                                 </div>

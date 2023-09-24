@@ -452,6 +452,39 @@
                                     </div>
                                 </div>
 
+                                <div class="row m-t-15">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">MEP VIOLATION (ACCREDITATION OF CERTIFICATE)</label>
+                                        <div class="col-sm-12">
+                                            <?php foreach($mep_violation as $row): ?>
+                                            <div class="checkbox checkbox-custom">
+                                                <input type="checkbox" name="mep_violation[]"
+                                                    id="mep_violation_<?php echo $report_selection_id . "_" . $row->id  ?>"
+                                                    value="<?php echo $row->id  ?>">
+                                                <label
+                                                    for="mep_violation_<?php echo $report_selection_id . "_" . $row->id  ?>"><?php echo $row->mep_violation ?></label>
+                                            </div>
+                                            <?php endforeach ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-t-15">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">MEP VIOLATION (MARPOL EQUIPMENT)</label>
+                                        <div class="col-sm-12">
+                                            <?php foreach($mep_violation_marpol_equipment as $row): ?>
+                                            <div class="checkbox checkbox-custom">
+                                                <input type="checkbox" name="mep_violation_marpol_equipment[]"
+                                                    id="mep_violation_marpol_equipment_<?php echo $report_selection_id . "_" . $row->id  ?>"
+                                                    value="<?php echo $row->id  ?>">
+                                                <label
+                                                    for="mep_violation_marpol_equipment_<?php echo $report_selection_id . "_" . $row->id  ?>"><?php echo $row->mep_violation_marpol_equipment ?></label>
+                                            </div>
+                                            <?php endforeach ?>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <?php elseif(  $row['report_selection_id'] == 5): // LAND BASE INSPECTION ?>
 
@@ -547,14 +580,24 @@
                                         <label class="col-sm-12">TYPE OF TRAINING</label>
                                         <div class="col-sm-12">
                                             <?php foreach($training_type as $row): ?>
+                                            <?php
+                                                $inputId = "training_type_{$report_selection_id}_{$row->id}";
+                                                $inputClass = $row->training_type == 'OTHERS' ? 'show-input-checkbox' : '';
+                                                $inputValue = $row->training_type == 'OTHERS' ? 'OTHERS' : $row->id;
+                                            ?>
+
                                             <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="training_type[]"
-                                                    id="training_type_<?php echo $report_selection_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label
-                                                    for="training_type_<?php echo $report_selection_id . "_" . $row->id  ?>"><?php echo $row->training_type ?></label>
+                                                <input class="<?= $inputClass ?>" type="checkbox" name="training_type[]"
+                                                    id="<?= $inputId ?>" value="<?= $inputValue ?>">
+                                                <label for="<?= $inputId ?>"><?php echo $row->training_type ?></label>
                                             </div>
+
                                             <?php endforeach ?>
+                                            <div class="input-container" style="display: none;">
+                                                <input type="text" name="training_type_others"
+                                                    placeholder="Enter others training type" id="others_input"
+                                                    class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -764,15 +807,28 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">RESPONDING UNITS</label>
                                             <div class="col-sm-12">
-                                                <?php  foreach($responding_unit as $row): ?>
+
+                                                <?php foreach($responding_unit as $row): ?>
+                                                <?php
+                                                    $inputId = "responding_unit_{$report_selection_id}_{$row->id}";
+                                                    $inputClass = $row->responding_unit == 'OTHERS' ? 'show-input-checkbox' : '';
+                                                    $inputValue = $row->responding_unit == 'OTHERS' ? 'OTHERS' : $row->id;
+                                                ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="responding_unit[]"
-                                                        id="responding_unit_<?php echo $report_selection_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
+                                                    <input class="<?= $inputClass ?>" type="checkbox"
+                                                        name="responding_unit[]" id="<?= $inputId ?>"
+                                                        value="<?= $inputValue ?>">
                                                     <label
-                                                        for="responding_unit_<?php echo $report_selection_id . "_" . $row->id  ?>"><?php echo $row->responding_unit ?></label>
+                                                        for="<?= $inputId ?>"><?php echo $row->responding_unit ?></label>
                                                 </div>
+
                                                 <?php endforeach ?>
+                                                <div class="input-container" style="display: none;">
+                                                    <input type="text" name="responding_unit_other"
+                                                        placeholder="Enter other responding unit type" id="others_input"
+                                                        class="form-control others_input">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

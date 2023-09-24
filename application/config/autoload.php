@@ -63,6 +63,8 @@ $autoload['model']     	= array(
     'maritime_incident_type_model',
     'marsar_incident_cause_model', 
     'material_report_model',
+    'mep_violation_model',
+    'mep_violation_marpol_equipment_model',
     'asset_deployment_model', 
     'information_acquired_thru_model', 
     'time_assets_deployment_model',

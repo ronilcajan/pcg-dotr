@@ -46,6 +46,8 @@ class Marep extends CI_Controller {
         $data['responding_unit'] = $this->responding_unit_model->get_all();
         $data['affected_area'] = $this->affected_area_model->get_all();
         $data['affected_biodiversity'] = $this->affected_biodiversity_model->get_all(); 
+        $data['mep_violation'] = $this->mep_violation_model->get_all(); 
+        $data['mep_violation_marpol_equipment'] = $this->mep_violation_marpol_equipment_model->get_all(); 
 
         $data['marep'] = $this->marep_model->getMarep();  
 
@@ -102,12 +104,16 @@ class Marep extends CI_Controller {
             'tier_level' => $this->input->post('tier_level'),
             'oil_type' => implode(',',(array) $this->input->post('oil_type')), 
             'responding_unit' => implode(',',(array) $this->input->post('responding_unit')),
+            'responding_unit_other' => $this->input->post('responding_unit_other'),
             'oil_retrieved_volume' => $this->input->post('oil_retrieved_volume'), 
             'affected_area' => implode(',',(array) $this->input->post('affected_area')),
             'affected_biodiversity' => implode(',',(array) $this->input->post('affected_biodiversity')),
             'training_type' => implode(',',(array) $this->input->post('training_type')),
+            'training_type_others' => $this->input->post('training_type_others'),
             'training_center_name' => $this->input->post('training_center_name'),
             'land_base_comments' => $this->input->post('land_base_comments'),
+            'mep_violation' => implode(',',(array) $this->input->post('mep_violation')),
+            'mep_violation_marpol_equipment' => implode(',',(array) $this->input->post('mep_violation_marpol_equipment')),
         ); 
 
         if ($this->upload->do_upload('oil_spill_map_location')){
@@ -151,6 +157,8 @@ class Marep extends CI_Controller {
         $data['responding_unit'] = $this->responding_unit_model->get_all();
         $data['affected_area'] = $this->affected_area_model->get_all();
         $data['affected_biodiversity'] = $this->affected_biodiversity_model->get_all(); 
+        $data['mep_violation'] = $this->mep_violation_model->get_all(); 
+        $data['mep_violation_marpol_equipment'] = $this->mep_violation_marpol_equipment_model->get_all(); 
         
         $data['allMarep'] = $this->marep_model->getMarep();  
 
@@ -206,12 +214,16 @@ class Marep extends CI_Controller {
             'tier_level' => $this->input->post('tier_level'),
             'oil_type' => $this->input->post('oil_type'), 
             'responding_unit' => implode(',',(array) $this->input->post('responding_unit')),
+            'responding_unit_other' => $this->input->post('responding_unit_other'),
             'oil_retrieved_volume' => $this->input->post('oil_retrieved_volume'), 
             'affected_area' => implode(',',(array) $this->input->post('affected_area')),
             'affected_biodiversity' => implode(',',(array) $this->input->post('affected_biodiversity')),
             'training_type' => implode(',',(array) $this->input->post('training_type')),
+            'training_type_others' => $this->input->post('training_type_others'),
             'training_center_name' => $this->input->post('training_center_name'),
             'land_base_comments' => $this->input->post('land_base_comments'),
+            'mep_violation' => implode(',',(array) $this->input->post('mep_violation')),
+            'mep_violation_marpol_equipment' => implode(',',(array) $this->input->post('mep_violation_marpol_equipment')),
         ); 
 
         if ($this->upload->do_upload('oil_spill_map_location')){
