@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2023 at 10:02 AM
+-- Generation Time: Sep 19, 2023 at 03:39 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -188,6 +188,22 @@ INSERT INTO `asset_mobility_deployed_type` (`id`, `asset_mobility_deployed_type`
 
 --
 -- Table structure for table `beach_coast_line_length`
+--
+
+CREATE TABLE `beach_coast_line_length` (
+  `id` int(11) NOT NULL,
+  `beach_coast_line_length` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `beach_coast_line_length`
+--
+
+INSERT INTO `beach_coast_line_length` (`id`, `beach_coast_line_length`) VALUES
+(1, '20 METER'),
+(2, '40 METER'),
+(3, '60 METER');
+
 -- --------------------------------------------------------
 
 --
@@ -947,36 +963,27 @@ CREATE TABLE `marep` (
   `tier_level` varchar(100) DEFAULT NULL,
   `oil_type` varchar(100) DEFAULT NULL,
   `responding_unit` varchar(100) DEFAULT NULL,
-  `responding_unit_other` varchar(100) DEFAULT NULL,
   `oil_retrieved_volume` varchar(100) DEFAULT NULL,
   `affected_area` varchar(100) DEFAULT NULL,
   `affected_biodiversity` varchar(100) DEFAULT NULL,
-  `training_type` varchar(100) DEFAULT NULL,
-  `training_type_others` varchar(100) DEFAULT NULL,
-  `training_center_name` varchar(100) DEFAULT NULL,
-  `land_base_comments` text DEFAULT NULL,
-  `spot_report` text DEFAULT NULL,
-  `mep_violation` varchar(100) DEFAULT NULL,
-  `mep_violation_marpol_equipment` varchar(100) DEFAULT NULL
+  `training_type` int(11) DEFAULT NULL,
+  `training_center_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `marep`
 --
 
-INSERT INTO `marep` (`id`, `station`, `sub_station`, `report_type`, `date_created`, `location`, `activity_conduct`, `participating_agency`, `participant_number`, `area_coverage`, `garbage_type_collected`, `garbage_collected_volume`, `seedlings_planted_number`, `planted_trees_kind`, `incident_cause`, `vessel_type`, `vessel_name`, `inspection_type`, `marpol_violation`, `facility_type`, `facility_name`, `oil_spill_date_incident`, `oil_spill_location`, `oil_spill_map_location`, `spiller`, `oil_spill_vessel_name`, `oil_spill_companyl_name`, `tier_level`, `oil_type`, `responding_unit`, `responding_unit_other`, `oil_retrieved_volume`, `affected_area`, `affected_biodiversity`, `training_type`, `training_type_others`, `training_center_name`, `land_base_comments`, `spot_report`, `mep_violation`, `mep_violation_marpol_equipment`) VALUES
-(19, 1, 1, 2, '2023-09-22 10:33:00', NULL, '2', '2,5,8', '342', '7', '', NULL, '324324', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, '', ''),
-(20, 3, 8, 3, '2023-09-22 10:36:00', NULL, '1', '2,6,7', '342', '432', '', NULL, '432', '423', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, '', '', '0', NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 1, 1, 5, '2023-09-22 00:00:00', 'dsadsad', NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '4', 'Moelce', '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '0', NULL, NULL, '534534543543543', NULL, NULL, NULL),
-(23, 1, 1, 7, '2023-09-22 11:16:00', '342432', NULL, '', NULL, NULL, '', NULL, NULL, NULL, 2, '3', '4324324', NULL, NULL, NULL, NULL, '2023-09-22 11:16:00', '324324324', NULL, '1', '4324324', '4234fdsdfsd', '2', '3,5', '3', NULL, '4324', '4,5', '3,4', '0', NULL, NULL, NULL, NULL, NULL, NULL),
-(24, 1, 1, 7, '2023-09-22 11:48:00', 'dsad', NULL, '', NULL, NULL, '', NULL, NULL, NULL, 2, '2', 'dasdas', NULL, NULL, NULL, NULL, '2023-09-22 11:48:00', 'dasdasd', 'a04f78bda2c50e1523ee97ea1f7e3e97.png', '2', 'dasd', 'dasdasd', '2', '3,5', '3', NULL, 'dasdsad', '3,6', '3,5', '0', NULL, NULL, NULL, 'e68d008954048a770dae6af19aa1542f.png', NULL, NULL),
-(25, 1, 2, 4, '2023-09-24 19:29:00', 'public_html/demoapp.ronilcajan.com', NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, '3', '432432', NULL, '4324234324', NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '0', NULL, NULL, NULL, NULL, '3', '3'),
-(27, 3, 8, 6, '2023-09-24 19:52:00', 'Mobod', NULL, '', '4343', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '1,2,3,5', 'dasdsad', '45343', NULL, NULL, '', ''),
-(28, 2, 5, 6, '2023-09-24 20:16:00', '213213', NULL, '', '3213213', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '1,2,3,5', '45345', '321321', NULL, NULL, '', ''),
-(29, 1, 2, 7, '2023-09-24 20:43:00', 'rewrewr', NULL, '', NULL, NULL, '', NULL, NULL, NULL, 3, '4', 'ewrewrew', NULL, NULL, NULL, NULL, '2023-09-24 20:43:00', 'rwerwer', NULL, '2', 'rewrewr', 'ewr', '2', '1,3,6', '1,2,4', 'sdadsad', 'rewrwer', '5,7', '2,3', '', NULL, NULL, NULL, NULL, '', ''),
-(30, 1, 1, 6, '2023-09-25 09:41:00', '', NULL, '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, '', '', '', '', '', NULL, NULL, '', ''),
-(31, 2, 3, 6, '2023-09-25 09:41:00', '21212121', NULL, '', '212121', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, '', '', '1,5', '1212121', '2121', NULL, NULL, '', ''),
-(32, 2, 3, 7, '2023-09-25 10:00:00', '', NULL, '', NULL, NULL, '', NULL, NULL, NULL, 3, '5', '', NULL, NULL, NULL, NULL, '2023-09-25 10:00:00', 'dsa', NULL, '1', 'dsa', 'dsa', '1', '3,5', '1,3,5', '543543', 'dasdas', '2,4', '2,5', '', NULL, NULL, NULL, NULL, '', '');
+INSERT INTO `marep` (`id`, `station`, `sub_station`, `report_type`, `date_created`, `location`, `activity_conduct`, `participating_agency`, `participant_number`, `area_coverage`, `garbage_type_collected`, `garbage_collected_volume`, `seedlings_planted_number`, `planted_trees_kind`, `incident_cause`, `vessel_type`, `vessel_name`, `inspection_type`, `marpol_violation`, `facility_type`, `facility_name`, `oil_spill_date_incident`, `oil_spill_location`, `oil_spill_map_location`, `spiller`, `oil_spill_vessel_name`, `oil_spill_companyl_name`, `tier_level`, `oil_type`, `responding_unit`, `oil_retrieved_volume`, `affected_area`, `affected_biodiversity`, `training_type`, `training_center_name`) VALUES
+(1, 1, 1, 2, '0000-00-00 00:00:00', NULL, NULL, '', '', '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, '', '', 0, NULL),
+(2, 3, 7, 4, '2023-01-11 15:13:00', 'this is location2', NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, '2', 'vessel name3213213', '1', 'marpol violation', NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
+(3, 3, 7, 1, '2023-01-26 14:12:00', 'oroqueita', '2', '1,2,7', '13', 'fasdf', '1,2,4', '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
+(9, 1, 2, 3, '2023-01-05 03:04:00', NULL, '2', '3,4,5', '200', 'whole mis occ', '', NULL, '200', 'lubi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
+(10, 3, 7, 5, '2023-01-13 03:03:00', 'Mobod', NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2', 'Moelce', NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 0, NULL),
+(11, 5, 18, 6, '2023-01-12 03:04:00', 'Mobod', NULL, '', '324', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' ::00', NULL, NULL, NULL, NULL, NULL, '', NULL, '', '', 2, 'fsfsdfsdf'),
+(13, 3, 8, 7, '2023-02-08 13:13:00', 'Mobod', NULL, '', NULL, NULL, '', NULL, NULL, NULL, 3, '4', 'Don Ron', NULL, NULL, NULL, NULL, '2023-02-15 00:00:00', '3213213213', '2023-02-15 05:07:00', '2', 'RONIL MANGOMPIT CAJAN', 'Ronil Cajan', '2', '2', '1,2,3', 'wqewqewqe', '2,5,6', '1,2,4', 0, NULL),
+(14, 1, 2, 7, '2023-02-01 00:00:00', 'Mobod', NULL, '', NULL, NULL, '', NULL, NULL, NULL, 2, '2', 'RONIL MANGOMPIT CAJAN', NULL, NULL, NULL, NULL, '2023-02-12 00:00:00', '3213213213', '2023-02-12 15:12:00', '2', 'RONIL MANGOMPIT CAJAN', 'Ronil Cajan', '1', '2', '2', 'wqewqewqe', '2', '3', 0, NULL),
+(15, 1, 1, 7, '2023-02-23 15:14:00', 'Mobod', NULL, '', NULL, NULL, '', NULL, NULL, NULL, 4, '6', 'RONIL MANGOMPIT CAJAN', NULL, NULL, NULL, NULL, '2023-02-16 14:10:00', '3213213213', NULL, '2', 'RONIL MANGOMPIT CAJAN', 'Ronil Cajan', '3', '3', '2', 'wqewqewqe', '2', '3', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1817,59 +1824,6 @@ INSERT INTO `material_report` (`id`, `material_report`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mep_violation`
---
-
-CREATE TABLE `mep_violation` (
-  `id` int(11) NOT NULL,
-  `mep_violation` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `mep_violation`
---
-
-INSERT INTO `mep_violation` (`id`, `mep_violation`) VALUES
-(1, 'OWS SEPARATOR FOR VESSELS 400GT AND ABOVE (HPCG MC 01/05-2005NDATD 017/17 OCT 2005)\r\n'),
-(2, 'OIL RECORD BOOK, PAR 1 & 2 FOR OIL TANKERS OF 150GT AND ABOVE AND PART 1 FOR VESSEL 400 GT AND ABOVE\r\n'),
-(3, 'GARBAGE MANAGEMENT PLAN AND GARBAGE RECORD BOOK TO ALL PHILIPPINE REGISTERED VESSELS ENGAGED IN INTERNATIIONAL TARDE AND TO ALL SMALL CRAFTS (HPCG MC 07-14 DATED 19 DEC 2014)'),
-(4, 'ISPPC FOR REGISTERED VESSELS OF 200 GT AND ABOVE, VESSEL LESS THAN 200 (HPCG MC 09-14 DTD 19 DEC 2014)'),
-(5, 'SOPEP FOR PHILIPPINE REGISTERED VESSELS IN INTERNATIONAL OR DOMESTIC TRADE (HPCG MC 09-14 DATED 19 DEC 2014)'),
-(6, 'IOPPC FOR PHILIPPINE REGISTERED VESSELS IN INTERNATIONAL OR DOMESTIC TRADE (HPCG MC 06-2005 DATED 28 OCT 2005)'),
-(7, 'SEWAGE TREATMENT PLANT/HOLDING TANK ACCREDITATION FOR COLLECTION AND STORAGE OF SEWAGE (HPCG MC 07-2005 DATED 03 NOV 2005)'),
-(8, 'OIL DISPERSANT ACCREDITATION CERTIFCATE'),
-(9, 'OIL SPILL BOOM ACCREDITATION CERTIFICATE'),
-(10, 'ANNUAL HYDRAULIC HOSE TEST CERTIFICATE');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mep_violation_marpol_equipment`
---
-
-CREATE TABLE `mep_violation_marpol_equipment` (
-  `id` int(11) NOT NULL,
-  `mep_violation_marpol_equipment` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `mep_violation_marpol_equipment`
---
-
-INSERT INTO `mep_violation_marpol_equipment` (`id`, `mep_violation_marpol_equipment`) VALUES
-(1, 'WOODEN SCUPPER PLUGS AND VARIOUS SIZES OF WOODEN PLUGS (HPCG MC 01-2005 DATED 07 OCT 2005)\r\n'),
-(2, 'ADEQUATE QUANTITY OF RAGS (3KLS MINIMUM) AND SORBENT MATERIALS (HPCG MC 01-2005 DATED 07 OCT 2005)\r\n'),
-(3, 'OWS FOR VESSELS 400GT AND ABOVE (HPCG MC 01/05-2005 DATED 07/17 OCT 2005)\r\n'),
-(4, 'OPEN-ENDED DRUMS WITH ADEQUATE COVERS (MINIMUM OF FIVE (5) DRUMS)\r\n'),
-(5, 'MINIMUM OF ONE (1) DRUM (210 LTRS) OF DISPERSANT AND SPRAYER DULY ACCREDITED BY PCG FOR SELF PROPELLED BARGE/TANKERS AND VESSELS TOWING DUMB BARGE CONTAINING OIL OPERATING IN SEA WATER (HPCG MC 01-2005 DATED 07 OCT 2005)\r\n'),
-(6, 'COMPLETE SET OF OIL CONTAINMENT AND RECOVERY EQUIPMENT FOR VESSELS ENGAGED IN BLACK PRODUCT AND PERSISTENT OIL (HPCG MC 01-2005 DATED 07 OCT 2005)\r\n'),
-(7, 'SEWAGE TREATMENT PLANT/HOLDING TANK FOR THE COLLECTION AND STORAGE OF SEWAGE (HPCG MC 07-2005 DATED 03 NOV 2005)\r\n'),
-(8, 'ADEQUATE COLOR CODED GARBAGE RECEPTACLE ON BOARD (HPCG MC 07-15 DATED 19 DEC 2014)\r\n'),
-(9, 'GARBAGE DISPOSAL REGULATIOM PLACARD SHALL BE PERMANENTLY POSTED ON BOARD IN A CONSPICOUS PLACE (HPCG MC 07-15 DATED 19 DEC 2014\r\n');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `noted_deficiency`
 --
 
@@ -2549,8 +2503,7 @@ INSERT INTO `responding_unit` (`id`, `responding_unit`) VALUES
 (1, 'SPILLER'),
 (2, 'MEP FORCE'),
 (3, 'PCG UNITS'),
-(4, 'CREDITED SALVOR'),
-(5, 'OTHERS');
+(4, 'CREDITED SALVOR');
 
 -- --------------------------------------------------------
 
@@ -2761,8 +2714,7 @@ CREATE TABLE `training_type` (
 INSERT INTO `training_type` (`id`, `training_type`) VALUES
 (1, 'OIL SPILL RESPONSE AWARENESS AND EMERGENCY TRAINING'),
 (2, 'BASIC MAREP'),
-(3, 'GUEST INSTRUCTOR'),
-(5, 'OTHERS');
+(3, 'GUEST INSTRUCTOR');
 
 -- --------------------------------------------------------
 
@@ -3206,6 +3158,12 @@ ALTER TABLE `asset_mobility_deployed_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `beach_coast_line_length`
+--
+ALTER TABLE `beach_coast_line_length`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `body_built`
 --
 ALTER TABLE `body_built`
@@ -3606,18 +3564,6 @@ ALTER TABLE `material_report`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `mep_violation`
---
-ALTER TABLE `mep_violation`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `mep_violation_marpol_equipment`
---
-ALTER TABLE `mep_violation_marpol_equipment`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `noted_deficiency`
 --
 ALTER TABLE `noted_deficiency`
@@ -3958,6 +3904,12 @@ ALTER TABLE `asset_mobility_deployed_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `beach_coast_line_length`
+--
+ALTER TABLE `beach_coast_line_length`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `body_built`
 --
 ALTER TABLE `body_built`
@@ -4159,7 +4111,7 @@ ALTER TABLE `man_overboard_incident_cause`
 -- AUTO_INCREMENT for table `marep`
 --
 ALTER TABLE `marep`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `maritime_acitivity`
@@ -4342,18 +4294,6 @@ ALTER TABLE `material_report`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `mep_violation`
---
-ALTER TABLE `mep_violation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `mep_violation_marpol_equipment`
---
-ALTER TABLE `mep_violation_marpol_equipment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- AUTO_INCREMENT for table `noted_deficiency`
 --
 ALTER TABLE `noted_deficiency`
@@ -4507,7 +4447,7 @@ ALTER TABLE `report_type`
 -- AUTO_INCREMENT for table `responding_unit`
 --
 ALTER TABLE `responding_unit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `salvage_operation_purpose`
@@ -4561,7 +4501,7 @@ ALTER TABLE `time_assets_deployment`
 -- AUTO_INCREMENT for table `training_type`
 --
 ALTER TABLE `training_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `urban_marsar`

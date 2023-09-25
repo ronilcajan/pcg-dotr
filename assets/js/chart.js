@@ -127,7 +127,12 @@ function marsaf_chart(arr = new Array()){
         }
     }); 
 }
-
+$('#marsaf-filter-form').on('submit', function(e){
+    e.preventDefault();
+    var filter_val = $(this).serializeArray()
+    chart_marsaf.destroy();
+    marsaf_chart(filter_val);
+})
 
 marsar_chart()
 var chart_marsar;

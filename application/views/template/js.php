@@ -30,7 +30,7 @@ var BASE_URL = "<?php echo base_url() ?>";
 <script src="<?= site_url() ?>assets/plugins/components/datatables/Buttons-1.6.1/js/buttons.html5.min.js"></script>
 <script src="<?= site_url() ?>assets/plugins/components/datatables/Buttons-1.6.1/js/buttons.print.min.js"></script>
 <!-- end - This is for export functionality only -->
-<?php if($current_page == 'dashboard' || $current_page1 == 'marep_list' || $current_page1 == 'marsaf' || $current_page1 == 'marsar' || $current_page1 == 'marslec' || $current_page1 == 'urban_marsar'): ?>
+<?php if($current_page == 'dashboard' || $current_page1 == 'marep_list' || $current_page1 == 'marsaf_list' || $current_page1 == 'marsar' || $current_page1 == 'marslec' || $current_page1 == 'urban_marsar'): ?>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <!-- ===== Style Switcher JS ===== -->
 <script src="<?php echo base_url(); ?>assets/plugins/components/raphael/raphael-min.js"></script>
@@ -49,7 +49,7 @@ var BASE_URL = "<?php echo base_url() ?>";
 <script src="<?php echo base_url(); ?>assets/js/edit.js"></script>
 
 
-<?php if($current_page == 'dashboard' || $current_page1 == 'marep_list' || $current_page1 == 'marsaf' || $current_page1 == 'marsar' || $current_page1 == 'marslec' || $current_page1 == 'urban_marsar'): ?>
+<?php if($current_page == 'dashboard' || $current_page1 == 'marep_list' || $current_page1 == 'marsaf_list' || $current_page1 == 'marsar' || $current_page1 == 'marslec' || $current_page1 == 'urban_marsar'): ?>
 <script src="<?php echo base_url(); ?>assets/js/chart.js"></script>
 <?php endif ?>
 

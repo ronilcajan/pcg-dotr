@@ -26,35 +26,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">DTG</label>
-                                        <input type="date" name="date_created" required class="form-control">
+                                        <input type="date" name="date_created" value="<?= date('Y-m-d') ?>" required
+                                            class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Time</label>
-                                        <div class="input-group ">
-                                            <span class="input-group-btn">
-                                                <select name="hour_created" class="form-control" required>
-                                                    <option value=""> </option>
-                                                    <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                    <option value="<?php echo date("H", mktime($time)) ?>">
-                                                        <?php echo date("H", mktime($time)) ?></option>
-                                                    <?php endforeach ?>
-                                                </select>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <select name="minute_created" class="form-control" required>
-                                                    <option value=""> </option>
-                                                    <?php foreach(range(intval('00'),intval('59')) as $minute) :
-                                                            $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                    ?>
-                                                    <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                    </option>
-                                                    <?php endforeach ?>
-                                                </select>
-                                            </span>
-                                        </div>
+                                        <input type="time" class="form-control" name="time" value="<?= date('H:i') ?>"
+                                            required>
                                     </div>
                                 </div>
                             </div>
