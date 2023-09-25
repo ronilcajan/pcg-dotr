@@ -22,10 +22,10 @@
                             Headquarters Coast Guard District Northern Mindanao<br>
                             <?php $wordsToRemove = array("CGS", "CGSS"); ?>
                             <strong>COAST GUARD STATION
-                                <?= strtoupper(str_replace($wordsToRemove, '',$marep->station)) ?></strong><br>
+                                <?= strtoupper(str_replace($wordsToRemove, '',$marep->s_station)) ?></strong><br>
                             <?= $marep->station_address ?><br>
                             <strong>
-                                <?= strtoupper($marep->sub_station) ?></strong><br>
+                                <?= strtoupper($marep->ss_station) ?></strong><br>
                         </p>
                     </div>
                 </div>
@@ -36,10 +36,10 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-borderless table-border-bottom">
+                    <table style="width: 100%;">
                         <tr>
-                            <th colspan="2">
-                                <h3><strong><?php echo $marep->report_selection; ?></strong></h3>
+                            <th colspan="2" class="text-center">
+                                <h3><strong><?= $marep->report_selection; ?></strong></h3>
                             </th>
                         </tr>
                         <tr>
@@ -47,69 +47,112 @@
                             <th>TIME</th>
                         </tr>
                         <tr>
-                            <td><?php echo date('F d, Y', strtotime($marep->date_created)) ?></td>
-                            <td><?php echo date('H:i', strtotime($marep->date_created)) ?></td>
-                        </tr>
-                        <tr>
-                            <th colspan="2">Location</th>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><?php echo $marep->location; ?></td>
-                        </tr>
-                        <tr>
-                            <th>CONDUCT OF ACTIVITY</th>
-                            <th>PARTICIPATING AGENCIES</th>
-                        </tr>
-
-
-                        <tr>
-
-                            <td>
-                                <?php if($marep->activity_conduct): ?>
-                                <?php echo $this->activity_conduct_model->get($marep->activity_conduct)->activity_conduct; ?>
-                                <?php endif ?>
-                            </td>
-
-                            <td>
-                                <?php if($marep->participating_agency): ?>
-                                <?php 
-                                $agency = explode(",",$marep->participating_agency);  
-                                foreach($agency as $id){
-                                    $participating_agency[] =  $this->participating_agency_model->get($id)->participating_agency; 
-                                } 
-                                echo implode(', ', $participating_agency);
-                            ?>
-                                <?php endif ?>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>NUMBER OF PARTICIPANTS</th>
-                            <th>AREA COVERAGE</th>
-                        </tr>
-                        <tr>
-                            <td><?php echo $marep->participant_number; ?></td>
-                            <td><?php echo $marep->area_coverage; ?></td>
-                        </tr>
-                        <tr>
-                            <th>TYPES OF GARBAGE COLLECTED</th>
-                            <th>VOLUME OF GARBAGE COLLECTED</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <?php 
-                            if($marep->garbage_type_collected){
-                                $volume = explode(",",$marep->garbage_type_collected);  
-                                foreach($volume as $id){
-                                    $garbage_type_collected[] =  $this->garbage_type_collected_model->get($id)->garbage_type_collected; 
-                                } 
-                                echo implode(', ', $garbage_type_collected);
-                            }
-                            ?>
-                            </td>
-                            <td><?php echo $marep->garbage_collected_volume; ?> sacks</td>
+                            <td><?= date('F d, Y', strtotime($marep->date_created)) ?></td>
+                            <td><?= date('h:i A', strtotime($marep->date_created)) ?></td>
                         </tr>
                     </table>
+                    <?php if($marep->report_type == 1): ?>
+
+                    <?php elseif($marep->report_type == 2): ?>
+                    <table class="m-t-20" style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                <th>CONDUCT OF ACTIVITY</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php foreach($activity_conduct as $row): ?>
+                                    <?php if($marep->activity_conduct === $row->id): ?>
+                                    <?= $row->activity_conduct ?>
+                                    <?php endif ?>
+                                    <?php endforeach ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>PARTICIPATING AGENCIES</th>
+                                <th>NUMBER OF PARTICIPANTS</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php $agency = explode(',',$marep->participating_agency); ?>
+
+                                    <?php foreach($participating_agency as $row): ?>
+                                    <?php if(in_array($row->id, $agency)): ?>
+                                    <?= $row->participating_agency ?> <br>
+                                    <?php endif ?>
+                                    <?php endforeach ?>
+                                </td>
+                                <td><?= $marep->participant_number ?></td>
+                            </tr>
+                            <tr>
+                                <th>AREA COVERAGE</th>
+                                <th>NUMBER OF PROPAGULES/SEEDLINGS PLANTED</th>
+                            </tr>
+                            <tr>
+                                <td><?= $marep->area_coverage ?></td>
+                                <td><?= $marep->seedlings_planted_number ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <?php elseif($marep->report_type == 5): ?>
+                    <table class="m-t-20" style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                <th>LOCATION</th>
+                                <th>TYPE OF FACILITY</th>
+                            </tr>
+                            <tr>
+                                <td><?= $marep->location ?></td>
+                                <td>
+                                    <?php foreach($facility_type as $row): ?>
+                                    <?php if($marep->facility_type === $row->id): ?>
+                                    <?= $row->facility_type ?>
+                                    <?php endif ?>
+                                    <?php endforeach ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>NAME OF FACILITY</th>
+                                <th>FINDINGS/COMMENT</th>
+                            </tr>
+                            <tr>
+                                <td><?= $marep->facility_name ?></td>
+                                <td><?= $marep->land_base_comments ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <?php elseif($marep->report_type == 6): ?>
+                    <table class="m-t-20" style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                <th>LOCATION</th>
+                                <th>TYPE OF TRAINING</th>
+                            </tr>
+                            <tr>
+                                <td><?= $marep->location ?></td>
+                                <td>
+                                    <?php $type = explode(',',$marep->training_type); ?>
+                                    <?php foreach($training_type as $row): ?>
+                                    <?php if(in_array($row->id, $type)): ?>
+                                    <?= $row->training_type ?><br>
+                                    <?php endif ?>
+                                    <?php endforeach ?>
+                                    <?= $marep->training_type_others ?><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>NAME OF FACILITY/TRAINING CENTER</th>
+                                <th>NR OF PARTICIPANTS/STUDENTS</th>
+                            </tr>
+                            <tr>
+                                <td><?= $marep->training_center_name ?></td>
+                                <td><?= $marep->participant_number ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <?php endif ?>
                 </div>
             </div>
 

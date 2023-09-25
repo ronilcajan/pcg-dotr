@@ -62,6 +62,7 @@ class Marep_model extends CI_Model {
     public function get($id)
     { 
         $query = $this->db
+            ->select('*, marep.id as id, marep.station as station, marep.sub_station as sub_station, station.station as s_station, sub_station.sub_station as ss_station')
             ->where('id', $id)
             ->where('marep.report_type = report_selection.report_selection_id')
             ->where('marep.station = station.station_id')

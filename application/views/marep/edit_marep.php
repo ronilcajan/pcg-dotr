@@ -29,7 +29,7 @@
                                         <option value="">Select</option>
                                         <?php foreach($station as $row): ?>
                                         <option value="<?= $row->station_id ?>"
-                                            <?= $marep->station==$row->station_id ? 'selected' : null ?>>
+                                            <?= $marep->station == $row->station_id ? 'selected' : null ?>>
                                             <?= $row->station ?>
                                         </option>
                                         <?php endforeach ?>
@@ -311,7 +311,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-12">AREA COVERAGE</label>
-                                            <input type="text" name="area_coverage" name="<?= $marep->area_coverage ?>"
+                                            <input type="text" name="area_coverage" value="<?= $marep->area_coverage ?>"
                                                 class="form-control">
                                         </div>
                                     </div>

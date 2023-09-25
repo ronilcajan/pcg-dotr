@@ -1,8 +1,9 @@
-if (window.location.href.indexOf("edit_marep") > -1 || 
-window.location.href.indexOf("edit_urban_marsar") > -1 || 
-window.location.href.indexOf("edit_marslec") > -1 || 
-window.location.href.indexOf("edit_marsar") > -1 || 
-window.location.href.indexOf("edit_marsaf") > -1) {
+
+if (window.location.href.indexOf("edit_marep") > -2 || 
+window.location.href.indexOf("edit_urban_marsar") > -2 || 
+window.location.href.indexOf("edit_marslec") > -2 || 
+window.location.href.indexOf("edit_marsar") > -2 || 
+window.location.href.indexOf("edit_marsaf") > -2) {
     selectSubStation()
     selectReportSelection()
     selectMaritimeIncident()
