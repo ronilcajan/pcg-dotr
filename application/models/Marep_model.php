@@ -64,7 +64,9 @@ class Marep_model extends CI_Model {
         $query = $this->db
             ->where('id', $id)
             ->where('marep.report_type = report_selection.report_selection_id')
-            ->get('marep, report_selection');
+            ->where('marep.station = station.station_id')
+            ->where('marep.sub_station = sub_station.sub_station_id')
+            ->get('marep, report_selection, station, sub_station');
  
         if($query->num_rows() > 0){
             return $query->result()[0];

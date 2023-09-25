@@ -47,7 +47,6 @@
     <script>
     const showInputCheckboxes = document.querySelectorAll('.show-input-checkbox');
     const inputContainers = document.querySelectorAll('.input-container');
-    const inputTextbox = document.querySelectorAll('.others_input');
 
     showInputCheckboxes.forEach((checkbox, index) => {
         checkbox.addEventListener('change', function() {
@@ -55,7 +54,6 @@
                 inputContainers[index].style.display = 'block';
             } else {
                 inputContainers[index].style.display = 'none';
-                inputTextbox[index].value = "";
             }
         });
     });

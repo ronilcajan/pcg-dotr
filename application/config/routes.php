@@ -10,7 +10,7 @@ $route['marep'] = 'marep/index';
 $route['add_marep'] = 'marep/add';
 $route['insert_marep'] = 'marep/insert'; 
 $route['filter_marep'] = 'marep/filter'; 
-$route['view_marep/(:num)'] = 'marep/view_marep/$1';
+$route['marep/view/(:num)'] = 'marep/view_marep/$1';
 
 
 // marsaf 

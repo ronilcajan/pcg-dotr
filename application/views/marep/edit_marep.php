@@ -683,24 +683,29 @@
                                             <?php foreach ($training_type as $keys => $type): ?>
                                             <?php 
                                                 $inputId = "training_type_{$report_selection_id}_{$type->id}";
-                                                $inputClass = $type->training_type == 'OTHERS' ? 'show-input-checkbox' : '';
-                                                $checked = (isset($training[$keys]) && $training[$keys] == $type->id) || ($type->training_type == 'OTHERS');
+                                                $checked =  in_array($type->id, $training);
+                                                $class =  $type->training_type == 'OTHERS' ? 'show-input-checkbox' : '';
                                             ?>
+
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="training_type[]" id="<?= $inputId ?>"
-                                                    class="<?= $inputClass ?>"
-                                                    value="<?= $type->training_type == 'OTHERS' ? 'OTHER' : $type->id ?>"
-                                                    <?= $checked ? 'checked' : '' ?> <?= $checked ? 'checked' : '' ?>>
+                                                    class="<?= $class ?>" value="<?= $type->id ?>"
+                                                    <?= $checked ? 'checked' : '' ?>>
                                                 <label for="<?= $inputId ?>"><?= $type->training_type ?></label>
                                             </div>
-                                            <?php endforeach ?>
+
+                                            <?php if($type->training_type == 'OTHERS'): ?>
                                             <div class="input-container"
-                                                style="display: <?= $marep->training_type_others ? 'block' : 'none' ?>;">
+                                                style="display: <?= $checked ? 'block' : 'none' ?>;">
                                                 <input type="text" name="training_type_others"
                                                     placeholder="Enter others training type"
-                                                    value="<?= $marep->training_type_others ?>" id="others_input"
-                                                    class="form-control">
+                                                    value="<?= $marep->training_type_others ?>"
+                                                    class="form-control others_input">
                                             </div>
+                                            <?php endif ?>
+
+                                            <?php endforeach ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -728,26 +733,20 @@
                                         <label class="col-sm-12">CAUSE OF INCIDENT</label>
                                         <div class="col-sm-12">
                                             <div class="radio-list">
-                                                <?php $cause = explode(",",$marep->incident_cause ?? 0 ); $j=0;   ?>
-                                                <?php for($i=0; $i <count($incident_cause); $i++): ?>
-                                                <?php if(isset($cause[$j]) && $cause[$j] == $incident_cause[$i]->id):?>
+                                                <?php $cause = explode(",",$marep->incident_cause ?? 0 ); ?>
+                                                <?php foreach($incident_cause as $incident): ?>
+
+                                                <?php
+                                                       $inputId = "incident_cause_{$report_selection_id}_{$incident->id}";
+                                                       $checked =  in_array($incident->id, $cause);      
+                                                ?>
                                                 <div class="radio radio-info">
-                                                    <input type="radio" name="incident_cause"
-                                                        id="incident_cause_<?= $report_selection_id . "_" . $incident_cause[$i]->id  ?>"
-                                                        value="<?= $incident_cause[$i]->id  ?>" checked>
+                                                    <input type="radio" name="incident_cause" id="<?= $inputId  ?>"
+                                                        value="<?= $incident->id  ?>" <?= $checked ? 'checked' : '' ?>>
                                                     <label
-                                                        for="incident_cause_<?= $report_selection_id . "_" . $incident_cause[$i]->id  ?>"><?= $incident_cause[$i]->incident_cause ?></label>
+                                                        for="<?= $inputId ?>"><?= $incident->incident_cause ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="radio radio-info">
-                                                    <input type="radio" name="incident_cause"
-                                                        id="incident_cause_<?= $report_selection_id . "_" . $incident_cause[$i]->id  ?>"
-                                                        value="<?= $incident_cause[$i]->id  ?>">
-                                                    <label
-                                                        for="incident_cause_<?= $report_selection_id . "_" . $incident_cause[$i]->id  ?>"><?= $incident_cause[$i]->incident_cause ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -788,11 +787,11 @@
                                                 <?php foreach($vessel_type as $row): ?>
                                                 <div class="radio radio-info">
                                                     <input type="radio" name="vessel_type"
-                                                        id="vessel_type_<?php echo $report_selection_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>"
-                                                        <?= $marep->vessel_type==$row->id ? 'checked' : null ?>>
+                                                        id="vessel_type_<?= $report_selection_id . "_" . $row->id  ?>"
+                                                        value="<?= $row->id  ?>"
+                                                        <?= $marep->vessel_type == $row->id ? 'checked' : null ?>>
                                                     <label
-                                                        for="vessel_type_<?php echo $report_selection_id . "_" . $row->id  ?>"><?php echo $row->vessel_type ?></label>
+                                                        for="vessel_type_<?= $report_selection_id . "_" . $row->id  ?>"><?= $row->vessel_type ?></label>
                                                 </div>
                                                 <?php endforeach ?>
                                             </div>
@@ -865,7 +864,7 @@
                                                     <input type="radio" name="spiller"
                                                         id="spiller_<?= $report_selection_id . "_" . $row->id  ?>"
                                                         value="<?= $row->id  ?>"
-                                                        <?= $marep->spiller==$row->id ? 'checked' : null ?>>
+                                                        <?= $marep->spiller == $row->id ? 'checked' : null ?>>
                                                     <label
                                                         for="spiller_<?= $report_selection_id . "_" . $row->id  ?>"><?= $row->spiller ?></label>
                                                 </div>
@@ -904,7 +903,7 @@
                                                         <input type="radio" name="tier_level"
                                                             id="tier_level_<?= $report_selection_id . "_" . $row->id  ?>"
                                                             value="<?= $row->id  ?>"
-                                                            <?= $marep->tier_level==$row->id ? 'checked' : null ?>>
+                                                            <?= $marep->tier_level == $row->id ? 'checked' : null ?>>
                                                         <label
                                                             for="tier_level_<?= $report_selection_id . "_" . $row->id  ?>"><?= $row->tier_level ?></label>
                                                     </div>
@@ -918,26 +917,22 @@
                                             <label>TYPES OF OIL</label>
                                             <div class="col-sm-12">
                                                 <div class="radio-list">
-                                                    <?php $oil = explode(",",$marep->oil_type); $j=0;   ?>
-                                                    <?php for($i=0; $i <count($oil_type); $i++): ?>
-                                                    <?php if(isset($oil[$j]) && $oil[$j] == $oil_type[$i]->id):?>
+                                                    <?php $oil = explode(",",$marep->oil_type); $j=0; ?>
+
+                                                    <?php foreach($oil_type as $oil_t): ?>
+
+                                                    <?php 
+                                                        $inputID = "oil_type_{$report_selection_id}_{$oil_t->id}"; 
+                                                        $checked = in_array($oil_t->id, $oil);
+                                                    ?>
+
                                                     <div class="checkbox checkbox-custom">
-                                                        <input type="checkbox" name="oil_type[]"
-                                                            id="oil_type<?= $report_selection_id . "_" . $oil_type[$i]->id  ?>"
-                                                            value="<?= $oil_type[$i]->id  ?>" checked>
-                                                        <label
-                                                            for="oil_type<?= $report_selection_id . "_" . $row->id  ?>"><?= $oil_type[$i]->oil_type ?></label>
+                                                        <input type="checkbox" name="oil_type[]" id="<?= $inputID  ?>"
+                                                            value="<?= $oil_t->id ?>" <?= $checked ? 'checked' : '' ?>>
+                                                        <label for="<?= $inputID ?>"><?= $oil_t->oil_type ?></label>
                                                     </div>
-                                                    <?php $j++; else: ?>
-                                                    <div class="checkbox checkbox-custom">
-                                                        <input type="checkbox" name="oil_type[]"
-                                                            id="oil_type<?= $report_selection_id . "_" . $oil_type[$i]->id  ?>"
-                                                            value="<?= $oil_type[$i]->id  ?>">
-                                                        <label
-                                                            for="oil_type<?= $report_selection_id . "_" . $row->id  ?>"><?= $oil_type[$i]->oil_type ?></label>
-                                                    </div>
-                                                    <?php endif ?>
-                                                    <?php endfor ?>
+
+                                                    <?php endforeach ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -946,26 +941,36 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">RESPONDING UNITS</label>
                                             <div class="col-sm-12">
-                                                <?php $res_unit = explode(",",$marep->responding_unit); $j=0;   ?>
-                                                <?php for($i=0; $i <count($responding_unit); $i++): ?>
-                                                <?php if(isset($res_unit[$j]) && $res_unit[$j] == $responding_unit[$i]->id):?>
+
+                                                <?php 
+                                                    $res_unit = explode(",", $marep->responding_unit);
+                                                ?>
+                                                <?php foreach ($responding_unit as $unit): ?>
+                                                <?php 
+                                                    $inputId = "responding_unit_{$report_selection_id}_{$unit->id}";
+                                                    $checked = in_array($unit->id, $res_unit);
+                                                    $class = $unit->responding_unit == 'OTHERS' ? 'show-input-checkbox' : '';
+                                                ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="responding_unit[]"
-                                                        id="responding_unit_<?= $report_selection_id . "_" . $responding_unit[$i]->id  ?>"
-                                                        value="<?= $responding_unit[$i]->id  ?>" checked>
-                                                    <label
-                                                        for="responding_unit_<?= $report_selection_id . "_" . $row->id  ?>"><?= $responding_unit[$i]->responding_unit ?></label>
+                                                    <input type="checkbox" name="responding_unit[]" id="<?= $inputId ?>"
+                                                        class="<?= $class ?>" value="<?= $unit->id ?>"
+                                                        <?= $checked ? 'checked' : '' ?>>
+                                                    <label for="<?= $inputId ?>"><?= $unit->responding_unit ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="responding_unit[]"
-                                                        id="responding_unit_<?= $report_selection_id . "_" . $responding_unit[$i]->id  ?>"
-                                                        value="<?= $responding_unit[$i]->id  ?>">
-                                                    <label
-                                                        for="responding_unit_<?= $report_selection_id . "_" . $row->id  ?>"><?= $responding_unit[$i]->responding_unit ?></label>
+
+                                                <?php if($unit->responding_unit == 'OTHERS'): ?>
+                                                <div class="input-container"
+                                                    style="display: <?= $checked ? 'block' : 'none' ?>;">
+                                                    <input type="text" name="responding_unit_other"
+                                                        placeholder="Enter other responding unit"
+                                                        value="<?= $marep->responding_unit_other ?>" id="others_input"
+                                                        class="form-control">
                                                 </div>
                                                 <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
+
                                             </div>
                                         </div>
                                     </div>

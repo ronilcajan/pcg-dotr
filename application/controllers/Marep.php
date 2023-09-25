@@ -212,7 +212,7 @@ class Marep extends CI_Controller {
             'oil_spill_vessel_name' => $this->input->post('oil_spill_vessel_name'),
             'oil_spill_companyl_name' => $this->input->post('oil_spill_companyl_name'),
             'tier_level' => $this->input->post('tier_level'),
-            'oil_type' => $this->input->post('oil_type'), 
+            'oil_type' =>  implode(',',(array) $this->input->post('oil_type')), 
             'responding_unit' => implode(',',(array) $this->input->post('responding_unit')),
             'responding_unit_other' => $this->input->post('responding_unit_other'),
             'oil_retrieved_volume' => $this->input->post('oil_retrieved_volume'), 

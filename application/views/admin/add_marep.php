@@ -582,22 +582,25 @@
                                             <?php foreach($training_type as $row): ?>
                                             <?php
                                                 $inputId = "training_type_{$report_selection_id}_{$row->id}";
-                                                $inputClass = $row->training_type == 'OTHERS' ? 'show-input-checkbox' : '';
-                                                $inputValue = $row->training_type == 'OTHERS' ? 'OTHERS' : $row->id;
+                                                $class = $row->training_type == 'OTHERS' ? 'show-input-checkbox' : '';
                                             ?>
 
                                             <div class="checkbox checkbox-custom">
-                                                <input class="<?= $inputClass ?>" type="checkbox" name="training_type[]"
-                                                    id="<?= $inputId ?>" value="<?= $inputValue ?>">
-                                                <label for="<?= $inputId ?>"><?php echo $row->training_type ?></label>
+                                                <input class="<?= $class ?>" type="checkbox" name="training_type[]"
+                                                    id="<?= $inputId ?>" value="<?= $row->id ?>">
+                                                <label for="<?= $inputId ?>"><?= $row->training_type ?></label>
                                             </div>
 
-                                            <?php endforeach ?>
+                                            <?php if($row->training_type == 'OTHERS'): ?>
                                             <div class="input-container" style="display: none;">
                                                 <input type="text" name="training_type_others"
                                                     placeholder="Enter others training type" id="others_input"
                                                     class="form-control">
                                             </div>
+                                            <?php endif ?>
+
+                                            <?php endforeach ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -811,24 +814,26 @@
                                                 <?php foreach($responding_unit as $row): ?>
                                                 <?php
                                                     $inputId = "responding_unit_{$report_selection_id}_{$row->id}";
-                                                    $inputClass = $row->responding_unit == 'OTHERS' ? 'show-input-checkbox' : '';
-                                                    $inputValue = $row->responding_unit == 'OTHERS' ? 'OTHERS' : $row->id;
+                                                    $class = $row->responding_unit == 'OTHERS' ? 'show-input-checkbox' : '';
                                                 ?>
 
                                                 <div class="checkbox checkbox-custom">
-                                                    <input class="<?= $inputClass ?>" type="checkbox"
-                                                        name="responding_unit[]" id="<?= $inputId ?>"
-                                                        value="<?= $inputValue ?>">
-                                                    <label
-                                                        for="<?= $inputId ?>"><?php echo $row->responding_unit ?></label>
+                                                    <input type="checkbox" name="responding_unit[]" id="<?= $inputId ?>"
+                                                        class="<?= $class ?>" value="<?= $row->id ?>">
+                                                    <label for="<?= $inputId ?>"><?= $row->responding_unit ?></label>
                                                 </div>
 
-                                                <?php endforeach ?>
+                                                <?php if($row->responding_unit == 'OTHERS'): ?>
                                                 <div class="input-container" style="display: none;">
                                                     <input type="text" name="responding_unit_other"
                                                         placeholder="Enter other responding unit type" id="others_input"
-                                                        class="form-control others_input">
+                                                        class="form-control">
                                                 </div>
+                                                <?php endif ?>
+
+
+                                                <?php endforeach ?>
+
                                             </div>
                                         </div>
                                     </div>
