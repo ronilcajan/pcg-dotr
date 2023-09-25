@@ -142,26 +142,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">PARTICIPATING AGENCIES</label>
                                         <div class="col-sm-12">
-                                            <?php $agency = explode(",",$marep->participating_agency); $j=0;   ?>
-                                            <?php for($i=0; $i <count($participating_agency); $i++): ?>
-                                            <?php if(isset($agency[$j]) && $agency[$j] == $participating_agency[$i]->id):?>
+                                            <?php $agency = explode(",",$marep->participating_agency); ?>
+
+                                            <?php foreach($participating_agency as $row): ?>
+                                            <?php
+                                                $inputID = "participating_agency_{$report_selection_id}_{$row->id}";
+                                                $checked = in_array($row->id, $agency) ? 'checked' : '';
+                                            ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="participating_agency[]"
-                                                    id="participating_agency_<?= $report_selection_id . "_" . $participating_agency[$i]->id  ?>"
-                                                    value="<?= $participating_agency[$i]->id  ?>" checked>
-                                                <label
-                                                    for="participating_agency_<?= $report_selection_id . "_" . $participating_agency[$i]->id  ?>"><?= $participating_agency[$i]->participating_agency ?></label>
+                                                    id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                <label for="<?= $inputID ?>"><?= $row->participating_agency ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="participating_agency[]"
-                                                    id="participating_agency_<?= $report_selection_id . "_" . $participating_agency[$i]->id  ?>"
-                                                    value="<?= $participating_agency[$i]->id  ?>">
-                                                <label
-                                                    for="participating_agency_<?= $report_selection_id . "_" . $participating_agency[$i]->id  ?>"><?= $participating_agency[$i]->participating_agency ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -192,27 +185,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPES OF GARBAGE COLLECTED</label>
                                         <div class="col-sm-12">
-                                            <?php $garbage = explode(",",$marep->garbage_type_collected); $j=0;  ?>
-                                            <?php for($i=0; $i <count($garbage_type_collected); $i++): ?>
-                                            <?php if(isset($garbage[$j]) && $garbage[$j] == $garbage_type_collected[$i]->id): ?>
-                                            <div class=" checkbox checkbox-custom">
-                                                <input type="checkbox" name="garbage_type_collected[]"
-                                                    id="garbage_type_collected_<?= $report_selection_id . "_" . $garbage_type_collected[$i]->id  ?>"
-                                                    value="<?= $garbage_type_collected[$i]->id  ?>" checked>
-                                                <label
-                                                    for="garbage_type_collected_<?= $report_selection_id . "_" . $garbage_type_collected[$i]->id  ?>"><?= $garbage_type_collected[$i]->garbage_type_collected ?></label>
-                                            </div>
-                                            <?php $j++; else: ?>
-                                            <div class=" checkbox checkbox-custom">
-                                                <input type="checkbox" name="garbage_type_collected[]"
-                                                    id="garbage_type_collected_<?= $report_selection_id . "_" . $garbage_type_collected[$i]->id  ?>"
-                                                    value="<?= $garbage_type_collected[$i]->id  ?>">
-                                                <label
-                                                    for="garbage_type_collected_<?= $report_selection_id . "_" . $garbage_type_collected[$i]->id  ?>"><?= $garbage_type_collected[$i]->garbage_type_collected ?></label>
-                                            </div>
-                                            <?php endif ?>
+                                            <?php $garbage = explode(",",$marep->garbage_type_collected);?>
 
-                                            <?php endfor ?>
+                                            <?php foreach($garbage_type_collected as $row): ?>
+                                            <?php
+                                            $inputID = "garbage_type_collected_{$report_selection_id}_{$row->id}";
+                                            $checked = in_array($row->id, $garbage) ? 'checked' : '';
+                                            ?>
+                                            <div class=" checkbox checkbox-custom">
+                                                <input type="checkbox" name="garbage_type_collected[]"
+                                                    id="<?= $inputID ?>" value="<?= $row->id ?>" <?= $checked ?>>
+                                                <label for="<?= $inputID ?>"><?= $row->garbage_type_collected ?></label>
+                                            </div>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -276,26 +261,20 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">PARTICIPATING AGENCIES</label>
                                         <div class="col-sm-12">
-                                            <?php $agency = explode(",",$marep->participating_agency); $j=0;   ?>
-                                            <?php for($i=0; $i <count($participating_agency); $i++): ?>
-                                            <?php if(isset($agency) && $agency[$j] == $participating_agency[$i]->id):?>
+                                            <?php $agency = explode(",",$marep->participating_agency); ?>
+
+                                            <?php foreach($participating_agency as $row): ?>
+                                            <?php
+                                                $inputID = "participating_agency_{$report_selection_id}_{$row->id}";
+                                                $checked = in_array($row->id, $agency) ? 'checked' : '';
+                                            ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="participating_agency[]"
-                                                    id="participating_agency_<?= $report_selection_id . "_" . $participating_agency[$i]->id  ?>"
-                                                    value="<?= $participating_agency[$i]->id  ?>" checked>
-                                                <label
-                                                    for="participating_agency_<?= $report_selection_id . "_" . $row->id  ?>"><?= $participating_agency[$i]->participating_agency ?></label>
+                                                    id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                <label for="<?= $inputID ?>"><?= $row->participating_agency ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="participating_agency[]"
-                                                    id="participating_agency_<?= $report_selection_id . "_" . $participating_agency[$i]->id  ?>"
-                                                    value="<?= $participating_agency[$i]->id  ?>">
-                                                <label
-                                                    for="participating_agency_<?= $report_selection_id . "_" . $row->id  ?>"><?= $participating_agency[$i]->participating_agency ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -521,26 +500,21 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">MEP VIOLATION (ACCREDITATION OF CERTIFICATE)</label>
                                         <div class="col-sm-12">
-                                            <?php $mep_vio = explode(",",$marep->mep_violation); $j=0;   ?>
-                                            <?php for($i=0; $i <count($mep_violation); $i++): ?>
-                                            <?php if(isset($mep_vio[$j]) && $mep_vio[$j] == $mep_violation[$i]->id):?>
+                                            <?php $mep_vio = explode(",",$marep->mep_violation); ?>
+
+                                            <?php foreach($mep_violation as $row): ?>
+                                            <?php
+                                                    $inputID = "mep_violation_{$report_selection_id}_{$row->id}"; 
+                                                    $checked = in_array($row->id,$mep_vio);   
+                                                ?>
+
                                             <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mep_violation[]"
-                                                    id="mep_violation_<?= $report_selection_id . "_" . $mep_violation[$i]->id  ?>"
-                                                    value="<?= $mep_violation[$i]->id  ?>" checked>
-                                                <label
-                                                    for="mep_violation_<?= $report_selection_id . "_" . $mep_violation[$i]->id  ?>"><?= $mep_violation[$i]->mep_violation ?></label>
+                                                <input type="checkbox" name="mep_violation[]" id="<?= $inputID  ?>"
+                                                    value="<?= $row->id  ?>" <?= $checked ? 'checked' : '' ?>>
+                                                <label for="<?= $inputID  ?>"><?= $row->mep_violation ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mep_violation[]"
-                                                    id="mep_violation_<?= $report_selection_id . "_" . $mep_violation[$i]->id  ?>"
-                                                    value="<?= $mep_violation[$i]->id  ?>">
-                                                <label
-                                                    for="mep_violation_<?= $report_selection_id . "_" . $mep_violation[$i]->id  ?>"><?= $mep_violation[$i]->mep_violation ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -549,26 +523,23 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">MEP VIOLATION (MARPOL EQUIPMENT)</label>
                                         <div class="col-sm-12">
-                                            <?php $mep_violation_marpol = explode(",",$marep->mep_violation_marpol_equipment); $j=0;   ?>
-                                            <?php for($i=0; $i <count($participating_agency); $i++): ?>
-                                            <?php if(isset($mep_violation_marpol[$j]) && $mep_violation_marpol[$j] == $mep_violation_marpol_equipment[$i]->id):?>
+                                            <?php $mep_violation_marpol_equi = explode(",",$marep->mep_violation_marpol_equipment); ?>
+
+                                            <?php foreach($mep_violation_marpol_equipment as $row): ?>
+                                            <?php
+                                                    $inputID = "mep_violation_marpol_equipment_{$report_selection_id}_{$row->id}"; 
+                                                    $checked = in_array($row->id, $mep_violation_marpol_equi);   
+                                                ?>
+
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mep_violation_marpol_equipment[]"
-                                                    id="mep_violation_marpol_equipment_<?= $report_selection_id . "_" . $mep_violation_marpol_equipment[$i]->id  ?>"
-                                                    value="<?= $mep_violation_marpol_equipment[$i]->id  ?>" checked>
+                                                    id="<?= $inputID  ?>" value="<?= $row->id  ?>"
+                                                    <?= $checked ? 'checked' : '' ?>>
                                                 <label
-                                                    for="mep_violation_marpol_equipment_<?= $report_selection_id . "_" . $mep_violation_marpol_equipment[$i]->id  ?>"><?= $mep_violation_marpol_equipment[$i]->mep_violation_marpol_equipment ?></label>
+                                                    for="<?= $inputID  ?>"><?= $row->mep_violation_marpol_equipment ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mep_violation_marpol_equipment[]"
-                                                    id="mep_violation_marpol_equipment_<?= $report_selection_id . "_" . $mep_violation_marpol_equipment[$i]->id  ?>"
-                                                    value="<?= $mep_violation_marpol_equipment[$i]->id  ?>">
-                                                <label
-                                                    for="mep_violation_marpol_equipment_<?= $report_selection_id . "_" . $mep_violation_marpol_equipment[$i]->id  ?>"><?= $mep_violation_marpol_equipment[$i]->mep_violation_marpol_equipment ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -917,7 +888,7 @@
                                             <label>TYPES OF OIL</label>
                                             <div class="col-sm-12">
                                                 <div class="radio-list">
-                                                    <?php $oil = explode(",",$marep->oil_type); $j=0; ?>
+                                                    <?php $oil = explode(",",$marep->oil_type); ?>
 
                                                     <?php foreach($oil_type as $oil_t): ?>
 
@@ -992,26 +963,19 @@
                                         <div class="form-group">
                                             <label class=" ">AFFECTED AREAS </label>
                                             <div class="col-sm-12">
-                                                <?php $affected = explode(",",$marep->affected_area); $j=0;   ?>
-                                                <?php for($i=0; $i <count($affected_area); $i++): ?>
-                                                <?php if(isset($affected[$j]) && $affected[$j] == $affected_area[$i]->id):?>
+                                                <?php $affected = explode(",",$marep->affected_area);?>
+
+                                                <?php foreach($affected_area as $row): ?>
+                                                <?php 
+                                                    $inputID = "affected_area_{$report_selection_id}_{$row->id}";
+                                                    $checked = in_array($row->id, $affected) ? 'checked' : '';
+                                                ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="affected_area[]"
-                                                        id="affected_area_<?= $report_selection_id . "_" . $affected_area[$i]->id  ?>"
-                                                        value="<?= $affected_area[$i]->id  ?>" checked>
-                                                    <label
-                                                        for="affected_area_<?= $report_selection_id . "_" . $row->id  ?>"><?= $affected_area[$i]->affected_area ?></label>
+                                                    <input type="checkbox" name="affected_area[]" id="<?= $inputID ?>"
+                                                        value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label for="<?= $inputID ?>"><?= $row->affected_area ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="affected_area[]"
-                                                        id="affected_area_<?= $report_selection_id . "_" . $affected_area[$i]->id  ?>"
-                                                        value="<?= $affected_area[$i]->id  ?>">
-                                                    <label
-                                                        for="affected_area_<?= $report_selection_id . "_" . $row->id  ?>"><?= $affected_area[$i]->affected_area ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1019,26 +983,20 @@
                                         <div class="form-group">
                                             <label class=" ">AFFECTED BIODIVERSITY</label>
                                             <div class="col-sm-12">
-                                                <?php $biodiversity = explode(",",$marep->affected_biodiversity); $j=0;   ?>
-                                                <?php for($i=0; $i <count($affected_biodiversity); $i++): ?>
-                                                <?php if(isset($biodiversity[$j]) && $biodiversity[$j] == $affected_biodiversity[$i]->id):?>
+                                                <?php $biodiversity = explode(",",$marep->affected_biodiversity); ?>
+
+                                                <?php foreach($affected_biodiversity as $row): ?>
+                                                <?php 
+                                                    $inputID = "affected_biodiversity_{$report_selection_id}_{$row->id}";
+                                                    $checked = in_array($row->id, $biodiversity) ? 'checked' : '';
+                                                ?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="affected_biodiversity[]"
-                                                        id="affected_biodiversity_<?= $report_selection_id . "_" . $affected_biodiversity[$i]->id  ?>"
-                                                        value="<?= $affected_biodiversity[$i]->id  ?>" checked>
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
                                                     <label
-                                                        for="affected_biodiversity_<?= $report_selection_id . "_" . $row->id  ?>"><?= $affected_biodiversity[$i]->affected_biodiversity ?></label>
+                                                        for="<?= $inputID ?>"><?= $row->affected_biodiversity ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="affected_biodiversity[]"
-                                                        id="affected_biodiversity_<?= $report_selection_id . "_" . $affected_biodiversity[$i]->id  ?>"
-                                                        value="<?= $affected_biodiversity[$i]->id  ?>">
-                                                    <label
-                                                        for="affected_biodiversity_<?= $report_selection_id . "_" . $row->id  ?>"><?= $affected_biodiversity[$i]->affected_biodiversity ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
