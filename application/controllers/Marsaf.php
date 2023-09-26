@@ -197,180 +197,70 @@ class Marsaf extends CI_Controller {
     public function insert()
 	{ 
 
+        $this->form_validation->set_rules('station', 'Station', 'required');
+        $this->form_validation->set_rules('sub_station', 'Sub-station', 'required');
+        $this->form_validation->set_rules('report_type', 'Report Type', 'required');
+
+        if ($this->form_validation->run() === FALSE)
+        {
+            $this->session->set_flashdata('errors', validation_errors());
+            redirect("add_marsaf",'refresh');
+        }
+        
         // // insert to marsaf table
         $marsaf_data = array( 
             'station' => $this->input->post('station'),
             'sub_station' => $this->input->post('sub_station'),
             'report_type' => $this->input->post('report_type'),
-            'date_created' => $this->input->post('date_created') . " " .$this->input->post('hour_created') . ":" .$this->input->post('minute_created') . ":00",  //2022-12-30 11:55:46
-            'psc_center' => $this->input->post('psc_center'),  
+            'date_created' => $this->input->post('date_created') . " " .$this->input->post('time'),  //2022-12-30 11:55:46
         ); 
         
-        $marsaf_insert_id = $this->marsaf_model->insert($marsaf_data); 
+        $marsaf_id = $this->marsaf_model->insert($marsaf_data); 
 
         if( (int) $this->input->post('report_type') === 1){  
 
             // insert to marsaf pdi table 
             $marsaf_pdi = array( 
-                'marsaf_report_type' => $marsaf_insert_id, 
-                'bulk_carrier' => $this->input->post('bulk_carrier'),
-                'bulk_carrier_2' => $this->input->post('BULK_CARRIER'), 
-                'cargo' => $this->input->post('CARGO'),
-                'chemical_tanker' => $this->input->post('CHEMICAL_TANKER'),
-                'container' => $this->input->post('CONTAINER'),
-                'fishing_vessel' => $this->input->post('FISHING_VESSEL'),
-                'passenger' => $this->input->post('PASSENGER'),
-                'roll_on_roll_off' => $this->input->post('ROLL-ON/ROLL-OFF'),
-                'tanker' => $this->input->post('TANKER'),
-                'tugboat' => $this->input->post('TUGBOAT'), 
-                'noted_deficiency' => implode(',',(array) $this->input->post('noted_deficiency')),
-                'cleared_to_depart' => implode(',',(array) $this->input->post('CLEARED_TO_DEPART')),
-                'not_cleared_to_depart' => implode(',',(array) $this->input->post('NOT_CLEARED_TO_DEPART')), 
-    
+                'marsaf_id' => $marsaf_id, 
+                'vessel_name' => $this->input->post('pdi_vessel_name'),
+                'port_place' => $this->input->post('pdi_port_place'), 
+                'vessel_type' => implode(',',(array) $this->input->post('pdi_vessel_type')),
+                'company' => $this->input->post('company'),
+                'captain_name' => $this->input->post('captain_name'),
+                'gross_tonnage' => $this->input->post('gross_tonnage'),
+                'kilowat' => $this->input->post('kilowats'),
+                'pdi_result' => $this->input->post('pdi_result'),
+                'action_code' => implode(',',(array) $this->input->post('pdi_action_code')),
+                'noted_deficiency' => implode(',',(array) $this->input->post('pdi_noted_deficiency')), 
+                'specify_noted_deficiency' => $this->input->post('pdi_specify_noted_deficiency'),
             );
     
+            $this->marsaf_pdi_data_model->insert($marsaf_pdi);
             
-            $marsaf_pdi_isnert_id = $this->marsaf_pdi_model->insert($marsaf_pdi);
- 
-
-            $marsaf_pdi_data = [];
-
-            // insert to marsaf pdi data table  
-            if(isset($_POST['pdi_vessel_name'])){
-                foreach($_POST['pdi_vessel_name'] as $key => $row){
-                    $marsaf_pdi_data['marsaf_pdi'] = $marsaf_insert_id;
-                    $marsaf_pdi_data['vessel_name'] = $_POST['pdi_vessel_name'][$key];
-                    $marsaf_pdi_data['port_place'] = $_POST['pdi_port_place'][$key];
-     
-                    
-                    if(isset($_POST['pdi_vessel_type'][$key])){
-                        $marsaf_pdi_data['vessel_type'] =implode(',',(array) $_POST['pdi_vessel_type'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['vessel_type'] = "";
-                    }
-    
-    
-                    $marsaf_pdi_data['company'] = $_POST['company'][$key];
-                    $marsaf_pdi_data['captain_name'] = $_POST['captain_name'][$key];
-                    $marsaf_pdi_data['gross_tonnage'] = $_POST['gross_tonnage'][$key]; 
-    
-                    if(isset($_POST['kilowat'][$key])){
-                        $marsaf_pdi_data['kilowat'] =implode(',',(array) $_POST['kilowat'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['kilowat'] = "";
-                    }
-                        
-                    $marsaf_pdi_data['pdi_result'] = $_POST['pdi_result'][$key]; 
-    
-                    if(isset($_POST['pdi_action_code'][$key])){
-                        $marsaf_pdi_data['action_code'] =implode(',',(array) $_POST['pdi_action_code'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['action_code'] = "";
-                    }
-                    if(isset($_POST['pdi_noted_deficiency'][$key])){
-                        $marsaf_pdi_data['noted_deficiency'] =implode(',',(array) $_POST['pdi_noted_deficiency'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['noted_deficiency'] = "";
-                    } 
-    
-                    $marsaf_pdi_data['specify_noted_deficiency'] = $_POST['pdi_specify_noted_deficiency'][$key];
-     
-                    // insert
-                    $this->marsaf_pdi_data_model->insert($marsaf_pdi_data);
-                    
-                }
-            } 
         } else if ( (int) $this->input->post('report_type') === 2) {
 
 
             // insert to marsaf vsei table 
             $marsaf_vsei = array( 
-                'marsaf_report_type'   => $marsaf_insert_id, 
-                'bulk_carrier'         => implode(',',(array) $this->input->post('vsei_BULK_CARRIER')),
-                'cargo'                => implode(',',(array) $this->input->post('vsei_CARGO')),
-                'chemical_tanker'      => implode(',',(array) $this->input->post('vsei_CHEMICAL_TANKER')), 
-                'container'            => implode(',',(array) $this->input->post('vsei_CONTAINER')),
-                'fishing_vessel'       => implode(',',(array) $this->input->post('vsei_FISHING_VESSEL')),
-                'passenger'            => implode(',',(array) $this->input->post('vsei_PASSENGER')),
-                'roll_on_roll_off'     => implode(',',(array) $this->input->post('vsei_ROLL-ON/ROLL-OFF')), 
-                'tanker'               => implode(',',(array) $this->input->post('vsei_TANKER')),
-                'tugboat'              => implode(',',(array) $this->input->post('vsei_TUGBOAT')), 
-                'vsei_deficiency_code' => implode(',',(array) $this->input->post('vsei_deficiency_code')),
-                'detained'             => implode(',',(array) $this->input->post('vsei_DETAINED')),
-                'not_detained'         => implode(',',(array) $this->input->post('vsei_NOT_DETAINEDs')), 
+                'marsaf_id'   => $marsaf_id, 
+                'vessel_name'         => $this->input->post('vsei_vessel_name'),
+                'port_place'                => $this->input->post('vsei_port_place'),
+                'vessel_type'      => implode(',',(array) $this->input->post('vsei_vessel_type')), 
+                'company'            => $this->input->post('vsei_company'),
+                'captain_name'       => $this->input->post('vsei_captain_name'),
+                'vessel_age'            => $this->input->post('vsei_vessel_age'),
+                'gross_tonnage'     => $this->input->post('vsei_gross_tonnage'), 
+                'kilowat'               => $this->input->post('vsei_kilowats'),
+                'inspection_type'              => implode(',',(array) $this->input->post('vsei_inspection_type')), 
+                'vsei_result' => implode(',',(array) $this->input->post('vsei_result')),
+                'action_code'             => implode(',',(array) $this->input->post('vsei_action_code')),
+                'deficiency_code'         => implode(',',(array) $this->input->post('vsei_deficiency_code_2')), 
+                'specify_noted_deficiency'         => $this->input->post('vsei_specify_noted_deficiency'), 
+                'next_schedule'         => $this->input->post('vsei_next_schedule'), 
     
             );
-            
-            $marsaf_vsei_isnert_id = $this->marsaf_vsei_model->insert($marsaf_vsei);
 
-
-
-            $marsaf_vsei_data = [];
-
-            // insert to marsaf vsei data table  
-            if(isset($_POST['vsei_vessel_name'])){
-                foreach($_POST['vsei_vessel_name'] as $key => $row){
-                    $marsaf_vsei_data['marsaf_vsei'] = $marsaf_insert_id;
-                    $marsaf_vsei_data['vessel_name'] = $_POST['vsei_vessel_name'][$key];
-                    $marsaf_vsei_data['port_place'] = $_POST['vsei_port_place'][$key];
-     
-                    
-                    if(isset($_POST['vsei_vessel_type'][$key])){
-                        $marsaf_vsei_data['vessel_type'] =implode(',',(array) $_POST['vsei_vessel_type'][$key]); 
-                    }else{
-                        $marsaf_vsei_data['vessel_type'] = "";
-                    }
-    
-    
-                    $marsaf_vsei_data['company'] = $_POST['vsei_company'][$key];
-                    $marsaf_vsei_data['captain_name'] = $_POST['vsei_captain_name'][$key];
-                    $marsaf_vsei_data['vessel_age'] = $_POST['vsei_vessel_age'][$key];
-                    $marsaf_vsei_data['gross_tonnage'] = $_POST['vsei_gross_tonnage'][$key]; 
-    
-                    if(isset($_POST['vsei_kilowats'][$key])){
-                        $marsaf_vsei_data['kilowat'] =implode(',',(array) $_POST['vsei_kilowats'][$key]); 
-                    }else{
-                        $marsaf_vsei_data['kilowat'] = "";
-                    }
-                    
-
-                    
-
-                    if(isset($_POST['vsei_inspection_type'][$key])){
-                        $marsaf_vsei_data['inspection_type'] =implode(',',(array) $_POST['vsei_inspection_type'][$key]); 
-                    }else{
-                        $marsaf_vsei_data['inspection_type'] = "";
-                    } 
-                    if(isset($_POST['vsei_result'][$key])){
-                        $marsaf_vsei_data['vsei_result'] =implode(',',(array) $_POST['vsei_result'][$key]); 
-                    }else{
-                        $marsaf_vsei_data['vsei_result'] = "";
-                    }
- 
-    
-                    if(isset($_POST['vsei_action_code'][$key])){
-                        $marsaf_vsei_data['action_code'] =implode(',',(array) $_POST['vsei_action_code'][$key]); 
-                    }else{
-                        $marsaf_vsei_data['action_code'] = "";
-                    }
-                    
-                    if(isset($_POST['vsei_deficiency_code_2'][$key])){
-                        $marsaf_vsei_data['deficiency_code'] =implode(',',(array) $_POST['vsei_deficiency_code_2'][$key]); 
-                    }else{
-                        $marsaf_vsei_data['deficiency_code'] = "";
-                    } 
-
-    
-                    $marsaf_vsei_data['specify_noted_deficiency'] = $_POST['vsei_specify_noted_deficiency'][$key];
-     
-                    $marsaf_vsei_data['next_schedule'] = $_POST['vsei_next_schedule'][$key];
-     
-                    // insert
-                    $this->marsaf_vsei_data_model->insert($marsaf_vsei_data);
-                    
-                }
-
-            } 
+            $this->marsaf_vsei_data_model->insert($marsaf_vsei);
      
         } else if ( (int) $this->input->post('report_type') === 3) {
             

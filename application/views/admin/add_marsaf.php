@@ -94,13 +94,13 @@
                         </div>
                         <div class="panel-body">
                             <?php 
-                                foreach($report_type as $row){
+                                foreach($report_type as $row):
                                     $report_type_id = $row['id'] ;
                             ?>
 
-                            <div class="toggle-show" data-id="<?php echo $report_type_id; ?>" style="display:none">
+                            <div class="toggle-show" data-id="<?= $report_type_id; ?>" style="display:none">
                                 <?php 
-                                    if($report_type_id == 1){ // PRE-DEPARTURE INSPECTION (PDI) 
+                                    if($report_type_id == 1): // PRE-DEPARTURE INSPECTION (PDI) 
                                 ?>
                                 <fieldset id="pdi_fieldset" class="pdi_fieldset">
                                     <legend class="scheduler-border">PRE-DEPARTURE INSPECTION DATA</legend>
@@ -108,13 +108,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF VESSEL</label>
-                                                <input type="text" name="pdi_vessel_name[]" class="form-control">
+                                                <input type="text" name="pdi_vessel_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF PORT</label>
-                                                <input type="text" name="pdi_port_place[]" class="form-control">
+                                                <input type="text" name="pdi_port_place" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -122,18 +122,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">TYPE OF VESSEL</label>
                                             <div class="col-sm-12">
-                                                <?php
-                                                $i = 1; 
-                                                foreach($vessel_type as $row){ ?>
+                                                <?php foreach($vessel_type as $i => $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_vessel_type[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->vessel_type ?></label>
+                                                    <input type="checkbox" name="pdi_vessel_type[]"
+                                                        id="pdi_vessel_type_<?= $i ?>" value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="pdi_vessel_type_<?= $i ?>"><?= $row->vessel_type ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -141,13 +137,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">OWNER/COMPANY</label>
-                                                <input type="text" name="company[]" class="form-control">
+                                                <input type="text" name="company" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">CAPTAINS NAME</label>
-                                                <input type="text" name="captain_name[]" class="form-control">
+                                                <input type="text" name="captain_name" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -155,14 +151,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">GROSS TONNAGE (GT)</label>
-                                                <input type="number" step="0.01" name="gross_tonnage[]"
+                                                <input type="number" step="0.01" name="gross_tonnage"
                                                     class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">KILOWATS (KW)</label>
-                                                <input type="number" step="0.01" name="kilowats[]" class="form-control">
+                                                <input type="number" step="0.01" name="kilowats" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -173,9 +169,9 @@
                                                 <?php  $i = 1;  foreach($pdi_result as $row): ?>
                                                 <div class="radio radio-info">
                                                     <input type="radio" name="pdi_result" checked
-                                                        id="pdi_result<?= $row->id  ?>" value="<?= $row->id  ?>">
+                                                        id="pdi_result_<?= $row->id  ?>" value="<?= $row->id  ?>">
                                                     <label
-                                                        for="pdi_result<?= $row->id  ?>"><?= $row->pdi_result ?></label>
+                                                        for="pdi_result_<?= $row->id  ?>"><?= $row->pdi_result ?></label>
                                                 </div>
                                                 <?php endforeach ?>
                                             </div>
@@ -185,19 +181,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">ACTION CODES (IF ANY)</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1; 
-                                                    foreach($action_code as $row){
-                                                ?>
+                                                <?php foreach($action_code as $i => $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_action_code[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->action_code ?></label>
+                                                    <input type="checkbox" name="pdi_action_code[]"
+                                                        value="<?= $row->id ?>" id="pdi_action_code_<?= $i; ?>">
+                                                    <label
+                                                        for="pdi_action_code_<?= $i; ?>"><?= $row->action_code ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -205,19 +196,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">NOTED DEFICIENCY/IES (IF ANY)</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1; 
-                                                    foreach($noted_deficiency as $row){
-                                                ?>
+                                                <?php foreach($noted_deficiency as $i => $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_noted_deficiency[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->noted_deficiency ?></label>
+                                                    <input type="checkbox" name="pdi_noted_deficiency[]"
+                                                        id="pdi_noted_deficiency_<?= $i; ?>" value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="pdi_noted_deficiency_<?= $i; ?>"><?= $row->noted_deficiency ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -225,172 +211,14 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-sm-12">SPECIFY NOTED DEFICIENCY/IES (IF ANY)</label>
-                                                <textarea name="pdi_specify_noted_deficiency[]" class="form-control"
-                                                    id="" cols="30" rows="10"></textarea>
+                                                <textarea name="pdi_specify_noted_deficiency" class="form-control" id=""
+                                                    cols="30" rows="10"></textarea>
                                             </div>
                                         </div>
                                     </div>
-                                </fieldset>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="pdi-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="pdi-remove-clone-btn" class="btn btn-danger btn-sm" type="button">
-                                            <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="control-label">BULK CARRIER</label>
-                                            <div class="radio-list">
-                                                <?php 
-                                                    foreach(range(1,5) as $i){
-                                                ?>
-                                                <label class="radio-inline p-0">
-                                                    <div class="radio radio-info">
-                                                        <input type="radio" name="bulk_carrier"
-                                                            id="bulk_carrier_<?php echo $i; ?>"
-                                                            value="<?php echo $i; ?>">
-                                                        <label
-                                                            for="bulk_carrier_<?php echo $i; ?>"><?php echo $i; ?></label>
-                                                    </div>
-                                                </label>
-                                                <?php
-                                                    }
-                                                ?>
-                                                <label class="radio-inline">
-                                                    <div class="radio radio-info">
-                                                        <input type="radio" name="bulk_carrier" id="bulk_carrier_6_10"
-                                                            value="6-10">
-                                                        <label for="bulk_carrier_6_10">6-10</label>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NR OF PDI CONDUCTED PER TYPE OF VESSEL
-                                    </legend>
-                                    <?php 
-                                        foreach($vessel_type as $row){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $row->vessel_type ?></label>
-                                                <div class="radio-list">
-                                                    <?php 
-                                                        foreach(range(1,5) as $i){
-                                                    ?>
-                                                    <label class="radio-inline p-0">
-                                                        <div class="radio radio-info">
-                                                            <input type="radio" name="<?php echo $row->vessel_type ?>"
-                                                                id="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                    <label class="radio-inline">
-                                                        <div class="radio radio-info">
-                                                            <input type="radio" name="<?php echo $row->vessel_type ?>"
-                                                                id="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_6-10"   ?>"
-                                                                value="6">
-                                                            <label for="radio2">6-10</label>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <?php
-                                        }
-                                    ?>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">CHECK BOXES OF ALL NOTED DEFICIENCY/IES (IF
-                                                ANY)</label>
-                                            <div class="col-sm-12">
-                                                <?php 
-																			foreach($noted_deficiency as $row){
-																		?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="noted_deficiency[]"
-                                                        id="noted_deficiency_<?php echo $report_type_id . "_" . $row->id  ?>_2"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label
-                                                        for="noted_deficiency_<?php echo $report_type_id . "_" . $row->id  ?>_2"><?php echo $row->noted_deficiency ?></label>
-                                                </div>
-                                                <?php
-																			}
-																		?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NUMBER OF VESSEL THAT HAVE BEEN CLEARED TO
-                                        DEPART AND NOT CLEARED TO DEPART</legend>
-                                    <?php  
-                                        foreach($pdi_result as $row){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $row->pdi_result; ?></label>
-                                                <div class="checkbox-list">
-                                                    <?php 
-                                                        foreach(range(1,6) as $i){
-                                                            if($i < 6){
-                                                    ?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox"
-                                                                name="<?php echo $row->pdi_result; ?>[]"
-                                                                id="<?php echo $row->pdi_result . "_" .  $report_type_id . "_" . $row->id . "_" . $i   ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $row->pdi_result . "_" .  $report_type_id . "_" . $row->id . "_" . $i   ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php
-
-                                                            }else{
-                                                    ?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox"
-                                                                name="<?php echo $row->pdi_result; ?>[]"
-                                                                id="<?php echo $row->pdi_result . "_" .  $report_type_id . "_6-10"    ?>"
-                                                                value="6-10">
-                                                            <label
-                                                                for="<?php echo $row->pdi_result . "_" .  $report_type_id . "_6-10"    ?>">6-10</label>
-                                                        </div>
-                                                    </label>
-                                                    <?php
-                                                            }
-                                                    ?>
-                                                    <?php 
-                                                        }
-                                                    ?>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
                                 </fieldset>
                                 <?php
-                                    }else if($report_type_id == 2){ // VESSEL SAFETY ENFORCEMENT INSPECTION (VSEI)
+                                    elseif($report_type_id == 2): // VESSEL SAFETY ENFORCEMENT INSPECTION (VSEI)
                                 ?>
                                 <fieldset class="vsei_fieldset">
                                     <legend class="scheduler-border">VESSEL SAFETY ENFORCEMENT INSPECTION DATA</legend>
@@ -398,13 +226,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF VESSEL</label>
-                                                <input type="text" name="vsei_vessel_name[]" class="form-control">
+                                                <input type="text" name="vsei_vessel_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF PORT</label>
-                                                <input type="text" name="vsei_port_place[]" class="form-control">
+                                                <input type="text" name="vsei_port_place" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -413,32 +241,30 @@
                                             <label class="col-sm-12">TYPE OF VESSEL</label>
                                             <div class="col-sm-12">
                                                 <?php
-                                                $i = 1; 
-                                                foreach($vessel_type as $row){ ?>
+                                               
+                                                foreach($vessel_type as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="vsei_vessel_type[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->vessel_type ?></label>
+                                                    <input type="checkbox" name="vsei_vessel_type[]"
+                                                        value="<?= $row->id ?>" id="vsei_vessel_type_<?= $row->id ?>">
+                                                    <label
+                                                        for="vsei_vessel_type_<?= $row->id ?>"><?= $row->vessel_type ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class=" row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">OWNER/COMPANY</label>
-                                                <input type="text" name="vsei_company[]" class="form-control">
+                                                <input type="text" name="vsei_company" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">CAPTAINS NAME</label>
-                                                <input type="text" name="vsei_captain_name[]" class="form-control">
+                                                <input type="text" name="vsei_captain_name" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -446,21 +272,21 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">AGE OF VESSEL</label>
-                                                <input type="number" step="0.01" name="vsei_vessel_age[]"
+                                                <input type="number" step="0.01" name="vsei_vessel_age"
                                                     class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">GROSS TONNAGE (GT)</label>
-                                                <input type="number" step="0.01" name="vsei_gross_tonnage[]"
+                                                <input type="number" step="0.01" name="vsei_gross_tonnage"
                                                     class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">KILOWATS (KW)</label>
-                                                <input type="number" step="0.01" name="vsei_kilowats[]"
+                                                <input type="number" step="0.01" name="vsei_kilowats"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -471,37 +297,28 @@
                                             <div class="form-group">
                                                 <label class="col-sm-12">TYPE OF INSPECTION</label>
 
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($inspection_type as $row){
-                                                ?>
+                                                <?php foreach($inspection_type as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="vsei_inspection_type[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->inspection_type ?></label>
+                                                    <input type="checkbox" name="vsei_inspection_type[]"
+                                                        id="vsei_inspection_type_<?= $row->id ?>"
+                                                        value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="vsei_inspection_type_<?= $row->id ?>"><?= $row->inspection_type ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">RESULT OF VSEI</label>
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($vsei_result as $row){
-                                                ?>
+                                                <?php  foreach($vsei_result as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="vsei_result[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->vsei_result ?></label>
+                                                    <input type="checkbox" name="vsei_result[]"
+                                                        id="vsei_result_<?= $row->id ?>" value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="vsei_result_<?= $row->id ?>"><?= $row->vsei_result ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -509,24 +326,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">ACTION CODES (IF ANY)</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($action_code as $row){
-                                                ?>
+                                                <?php foreach($action_code as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="vsei_action_code[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->action_code ?></label>
+                                                    <input type="checkbox" name="vsei_action_code[]"
+                                                        id="vsei_action_code_<?= $row->id ?>" value="<?= $row->id ?>">
+                                                    <label
+                                                        for="vsei_action_code_<?= $row->id ?>"><?= $row->action_code ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
-                                                <!-- <div class="checkbox checkbox-custom">
-                                                    <input id="garbagetype5" type="checkbox">
-                                                    <label for="garbagetype5">Other</label>
-                                                    <input type="text">
-                                                </div> -->
+                                                <?php endforeach  ?>
                                             </div>
                                         </div>
                                     </div>
@@ -535,27 +342,24 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">VSEI DEFICIENCY CODE (IF ANY)</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($vsei_deficiency_code as $row){
-                                                ?>
+                                                <?php foreach($vsei_deficiency_code as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="vsei_deficiency_code_2[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->vsei_deficiency_code ?></label>
+                                                    <input type="checkbox" name="vsei_deficiency_code_2[]"
+                                                        id="vsei_deficiency_code_2_<?= $row->id ?>"
+                                                        value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="vsei_deficiency_code_2_<?= $row->id ?>"><?= $row->vsei_deficiency_code ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-sm-12">SPECIFY NOTED DEFICIENCY/IES (IF ANY)</label>
-                                                <textarea name="vsei_specify_noted_deficiency[]" class="form-control"
+                                                <label class="col-sm-12">SPECIFY NOTED DEFICIENCY/IES (IF
+                                                    ANY)</label>
+                                                <textarea name="vsei_specify_noted_deficiency" class="form-control"
                                                     id="" cols="30" rows="10"></textarea>
                                             </div>
                                         </div>
@@ -564,115 +368,14 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NEXT SCHEDULE OF VSEI</label>
-                                                <input type="date" name="vsei_next_schedule[]" class="form-control">
+                                                <input type="date" name="vsei_next_schedule" class="form-control">
                                             </div>
                                         </div>
                                     </div>
-                                </fieldset>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="vsei-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="vsei-remove-clone-btn" class="btn btn-danger btn-sm" type="button">
-                                            <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NR OF PDI CONDUCTED PER TYPE OF VESSEL
-                                    </legend>
-                                    <?php 
-                                        foreach($vessel_type as $row){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $row->vessel_type ?></label>
-                                                <div class="checkbox-list">
-                                                    <?php 
-                                                        foreach(range(1,3) as $i){
-                                                    ?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox"
-                                                                name="vsei <?php echo $row->vessel_type ?>[]"
-                                                                id="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
-                                </fieldset>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label class="col-sm-12">VSEI DEFICIENCY CODE (IF ANY)</label>
-                                        <div class="col-sm-12">
-                                            <?php 
-																		foreach($vsei_deficiency_code as $row){
-																	?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="vsei_deficiency_code[]"
-                                                    id="vsei_deficiency_code_<?php echo $report_type_id . "_" . $row->id  ?>_2"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label
-                                                    for="vsei_deficiency_code_<?php echo $report_type_id . "_" . $row->id  ?>_2"><?php echo $row->vsei_deficiency_code ?></label>
-                                            </div>
-                                            <?php
-																		}
-																	?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NUMBER OF VESSEL DETAINED AND DETAINED
-                                    </legend>
-                                    <?php 
-                                        $status = ['DETAINED', 'NOT DETAINEDs']; 
-                                        foreach($status as $stat){
-                                    ?>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $stat; ?></label>
-                                                <div class="checkbox-list">
-                                                    <?php 
-                                                        foreach(range(1,3) as $i){
-                                                    ?>
-
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox" name="vsei <?php echo $stat; ?>[]"
-                                                                id="<?php echo $stat . "_" . $report_type_id . "_" . $i ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $stat . "_" . $report_type_id . "_" . $i ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
                                 </fieldset>
 
                                 <?php
-                                    }else if($report_type_id == 3){ // EMERGENCY READINESS EVALUATION (ERE) 
+                                    elseif($report_type_id == 3): // EMERGENCY READINESS EVALUATION (ERE) 
                                 ?>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -842,90 +545,9 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                >hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="ere-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="ere-remove-clone-btn" class="btn btn-danger btn-sm" type="button">
-                                            <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
-
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NR OF PDI CONDUCTED PER TYPE OF VESSEL
-                                    </legend>
-                                    <?php 
-                                        foreach($vessel_type as $row){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $row->vessel_type ?></label>
-                                                <div class="checkbox-list">
-                                                    <?php 
-                                                        foreach(range(1,3) as $i){
-                                                    ?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox"
-                                                                name="ere <?php echo $row->vessel_type ?>[]"
-                                                                id="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
-                                </fieldset>
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NUMBER OF VESSEL THAT HAVE PASSED AND FAILED
-                                    </legend>
-                                    <?php 
-                                        $status = ['PASSED', 'FAILED']; 
-                                        foreach($status as $stat){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $stat; ?></label>
-                                                <div class="checkbox-list">
-                                                    <?php 
-                                                        foreach(range(1,3) as $i){
-                                                    ?>
-
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox" name="ere <?php echo $stat; ?>"
-                                                                id="<?php echo $stat . "_" . $report_type_id . "_" . $i ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $stat . "_" . $report_type_id . "_" . $i ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php 
-                                                            }
-                                                        ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                            }
-                                        ?>
-                                </fieldset>
 
                                 <?php
-                                    }else if($report_type_id == 4){ // PORT STATE CONTROL (PSC) 
+                                    elseif($report_type_id == 4): // PORT STATE CONTROL (PSC) 
                                 ?>
 
                                 <div class="row">
@@ -1073,89 +695,9 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="psc-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="psc-remove-clone-btn" class="btn btn-danger btn-sm" type="button">
-                                            <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NR OF PSC CONDUCTED PER TYPE OF VESSEL
-                                    </legend>
-                                    <?php 
-                                        foreach($vessel_type as $row){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $row->vessel_type ?></label>
-                                                <div class="checkbox-list">
-                                                    <?php 
-                                                        foreach(range(1,3) as $i){
-                                                    ?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox"
-                                                                name="psc <?php echo $row->vessel_type ?>[]"
-                                                                id="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
-
-                                </fieldset>
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NUMBER OF VESSEL NOT-DETAINED AND DETAINED
-                                    </legend>
-                                    <?php 
-                                        $status = ['DETAINED', 'NOT DETAINED']; 
-                                        foreach($status as $stat){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $stat; ?></label>
-                                                <div class="checkbox-list">
-                                                    <?php 
-                                                        foreach(range(1,3) as $i){
-                                                    ?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox" name="psc <?php echo $stat; ?>"
-                                                                id="<?php echo $stat . "_" . $report_type_id . "_" . $i ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $stat . "_" . $report_type_id . "_" . $i ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                        }
-                                    ?>
-                                </fieldset>
 
                                 <?php
-                                    }else if($report_type_id == 5){ // COASTAL AND BEACH RESORT SAFETY AND SECURITY INSPECTION
+                                    elseif($report_type_id == 5): // COASTAL AND BEACH RESORT SAFETY AND SECURITY INSPECTION
                                             
                                 ?>
 
@@ -1232,17 +774,8 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="cabrsasi-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="cabrsasi-remove-clone-btn" class="btn btn-danger btn-sm"
-                                            type="button"> <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
                                 <?php
-                                    }else if($report_type_id == 6){ //   RECREATIONAL SAFETY ENFORCEMENT INSPECTION (RSEI)
+                                    elseif($report_type_id == 6): //   RECREATIONAL SAFETY ENFORCEMENT INSPECTION (RSEI)
                                 ?>
 
                                 <div class="row">
@@ -1318,18 +851,8 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="rsei-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="rsei-remove-clone-btn" class="btn btn-danger btn-sm" type="button">
-                                            <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
-
                                 <?php
-                                    }else if($report_type_id == 7){ //   AIDS TO NAVIGATION (ATON) INSPECTION 
+                                    elseif($report_type_id == 7): //   AIDS TO NAVIGATION (ATON) INSPECTION 
                                 ?>
 
                                 <div class="row">
@@ -1646,7 +1169,7 @@
                                 </fieldset>
 
                                 <?php
-                                    }else if($report_type_id == 8){ // MARITIME CASUALTY INVESTIGATION (MCI) 
+                                   elseif($report_type_id == 8): // MARITIME CASUALTY INVESTIGATION (MCI) 
                                 ?>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -2045,7 +1568,7 @@
 
 
                                 <?php
-                                    }else if($report_type_id == 9){ // SALVAGE OPERATION 
+                                    elseif($report_type_id == 9): // SALVAGE OPERATION 
                                 ?>
 
                                 <div class="row">
@@ -2126,7 +1649,7 @@
                                     </div>
                                 </div>
                                 <?php
-                                    }else if($report_type_id == 10){ // MARINE PARADES, REGATTAS AND MARITIME RELATED ACTIVITY
+                                    elseif($report_type_id == 10): // MARINE PARADES, REGATTAS AND MARITIME RELATED ACTIVITY
                                 ?>
 
                                 <div class="row">
@@ -2282,24 +1805,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-													}
-												?>
+                                <?php endif ?>
 
                             </div>
-                            <?php
-											}
-										?>
-
+                            <?php endforeach ?>
+                            <button type="submit" class="btn btn-danger pull-right" type="button">Finish!</button>
                         </div>
-                        <!-- <button class="btn btn-danger pull-right" type="button">Finish!</button> -->
-
-                        <button type="submit" class="btn btn-danger pull-right" type="button">Finish!</button>
                     </div>
                 </form>
             </div>
         </div>
-
         <div class="col-sm-6">
             <div class="white-box">
                 <h3 class="box-title m-b-0">LIST OF DATA ENTERED</h3>
