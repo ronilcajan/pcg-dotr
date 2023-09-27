@@ -390,13 +390,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF VESSEL</label>
-                                                <input type="text" name="ere_vessel_name[]" class="form-control">
+                                                <input type="text" name="ere_vessel_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF PORT</label>
-                                                <input type="text" name="ere_port_place[]" class="form-control">
+                                                <input type="text" name="ere_port_place" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -404,18 +404,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">TYPE OF VESSEL</label>
                                             <div class="col-sm-12">
-                                                <?php
-                                                $i = 1; 
-                                                foreach($vessel_type as $row){ ?>
+                                                <?php foreach($vessel_type as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="ere_vessel_type[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->vessel_type ?></label>
+                                                    <input type="checkbox" name="ere_vessel_type[]"
+                                                        id="ere_vessel_type_<?= $row->id ?>" value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="ere_vessel_type_<?= $row->id ?>"><?= $row->vessel_type ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -424,13 +420,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">OWNER/COMPANY</label>
-                                                <input type="text" name="ere_company[]" class="form-control">
+                                                <input type="text" name="ere_company" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">CAPTAINS NAME</label>
-                                                <input type="text" name="ere_captain_name[]" class="form-control">
+                                                <input type="text" name="ere_captain_name" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -438,14 +434,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">AGE OF VESSEL</label>
-                                                <input type="number" step="0.01" name="ere_vessel_age[]"
+                                                <input type="number" step="0.01" name="ere_vessel_age"
                                                     class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">GROSS TONNAGE (GT)</label>
-                                                <input type="number" step="0.01" name="ere_gross_tonnage[]"
+                                                <input type="number" step="0.01" name="ere_gross_tonnage"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -457,14 +453,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">KILOWATS (KW)</label>
-                                                <input type="number" step="0.01" name="ere_kilowats[]"
+                                                <input type="number" step="0.01" name="ere_kilowats"
                                                     class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">DATE OF PREVIOUS ERE</label>
-                                                <input type="date" name="ere_previous_date[]" class="form-control">
+                                                <input type="date" name="ere_previous_date" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -474,55 +470,42 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">TYPE OF INSPECTION</label>
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($inspection_type as $row){
-                                                ?>
+                                                <?php foreach($inspection_type as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="inspection_type"
-                                                        name="ere_inspection_type[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->inspection_type ?></label>
+                                                    <input type="checkbox" name="ere_inspection_type[]"
+                                                        value="<?= $row->id  ?>"
+                                                        id="ere_inspection_type_<?= $row->id ?>">
+                                                    <label
+                                                        for="ere_inspection_type_<?= $row->id ?>"><?= $row->inspection_type ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">DRILLS CONDUCTED</label>
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($drill_conducted as $row){
-                                                ?>
+                                                <?php foreach($drill_conducted as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="ere_drill_conducted[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->drill_conducted ?></label>
+                                                    <input type="checkbox" name="ere_drill_conducted[]"
+                                                        id="ere_drill_conducted_<?= $row->id ?>"
+                                                        value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="ere_drill_conducted_<?= $row->id ?>"><?= $row->drill_conducted ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">RESULT OF VSEI</label>
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($vsei_result as $row){
-                                                ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="ere_vsei_result[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->vsei_result ?></label>
+                                                <?php foreach($vsei_result as $row): ?>
+                                                <div class="radio radio-info">
+                                                    <input type="radio" name="ere_vsei_result"
+                                                        id="ere_vsei_result_<?= $row->id ?>" value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="ere_vsei_result_<?= $row->id ?>"><?= $row->vsei_result ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -531,7 +514,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NEXT SCHEDULE OF ERE</label>
-                                                <input type="date" class="form-control" name="ere_next_schedule[]">
+                                                <input type="date" class="form-control" name="ere_next_schedule">
                                             </div>
                                         </div>
                                     </div>
@@ -539,7 +522,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-sm-12">COMMENTS AND RECOMMENDATIONS</label>
-                                                <textarea name="ere_comment[]" class="form-control" id="" cols="30"
+                                                <textarea name="ere_comment" class="form-control" cols="30"
                                                     rows="10"></textarea>
                                             </div>
                                         </div>
@@ -563,13 +546,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF VESSEL</label>
-                                                <input type="text" name="psc_vessel_name[]" class="form-control">
+                                                <input type="text" name="psc_vessel_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF PORT</label>
-                                                <input type="text" name="psc_port_place[]" class="form-control">
+                                                <input type="text" name="psc_port_place" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -577,18 +560,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">TYPE OF VESSEL</label>
                                             <div class="col-sm-12">
-                                                <?php
-                                                $i = 1; 
-                                                foreach($vessel_type as $row){ ?>
+                                                <?php foreach($vessel_type as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="psc_vessel_type[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->vessel_type ?></label>
+                                                    <input type="checkbox" name="psc_vessel_type[]"
+                                                        id="psc_vessel_type_<?= $row->id ?>" value="<?= $row->id ?>">
+                                                    <label
+                                                        for="psc_vessel_type_<?= $row->id ?>"><?= $row->vessel_type ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -596,19 +575,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">FLAG OF REGISTRY</label>
-                                                <input type="text" name="psc_registry_flag[]" class="form-control">
+                                                <input type="text" name="psc_registry_flag" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">IMO NR</label>
-                                                <input type="text" name="psc_imo_nr[]" class="form-control">
+                                                <input type="text" name="psc_imo_nr" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">GT/NT</label>
-                                                <input type="text" name="psc_gt_nt[]" class="form-control">
+                                                <input type="text" name="psc_gt_nt" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -616,19 +595,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">AGE OF VESSEL</label>
-                                                <input type="text" name="psc_vessel_age[]" class="form-control">
+                                                <input type="text" name="psc_vessel_age" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF OWNER/COMPANY</label>
-                                                <input type="text" name="psc_company[]" class="form-control">
+                                                <input type="text" name="psc_company" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">CAPTAINS NAME</label>
-                                                <input type="text" name="psc_captain_name[]" class="form-control">
+                                                <input type="text" name="psc_captain_name" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -636,61 +615,48 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label class="col-sm-12">TYPE OF INSPECTION</label>
-                                            <?php 
-                                                $i = 1;
-                                                foreach($inspection_type as $row){
-                                            ?>
+                                            <?php foreach($inspection_type as $row): ?>
                                             <div class="checkbox checkbox-custom">
-                                                <input type="checkbox"
-                                                    name="psc_inspection_type[0][<?php echo $i; $i++; ?>]"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label><?php echo $row->inspection_type ?></label>
+                                                <input type="checkbox" name="psc_inspection_type[]"
+                                                    id="psc_inspection_type_<?= $row->id ?>" value="<?= $row->id  ?>">
+                                                <label
+                                                    for="psc_inspection_type_<?= $row->id ?>"><?= $row->inspection_type ?></label>
                                             </div>
-                                            <?php
-                                                }
-                                            ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>ACTION CODES (IF VESSEL HAS NOTED DEFICIENCY)</label>
-                                            <?php 
-                                                $i = 1;
-                                                foreach($psc_action_code as $row){
-                                            ?>
+                                            <?php foreach($psc_action_code as $row): ?>
                                             <div class="checkbox checkbox-custom">
-                                                <input type="checkbox"
-                                                    name="psc_action_code[0][<?php echo $i; $i++; ?>]"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label><?php echo $row->psc_action_code ?></label>
+                                                <input type="checkbox" name="psc_action_code[]"
+                                                    id="psc_action_code_<?= $row->id ?>" value="<?= $row->id  ?>">
+                                                <label
+                                                    for="psc_action_code_<?= $row->id ?>"><?= $row->psc_action_code ?></label>
                                             </div>
-                                            <?php
-                                                }
-                                            ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>RELATED INTERNATIONAL CONVENTIONS NOTED DEFICIENCY/IES</label>
-                                            <?php 
-                                                $i = 1;
-                                                foreach($related_international_conventions_noted_deficiency as $row){
-                                            ?>
+                                            <?php foreach($related_international_conventions_noted_deficiency as $row): ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox"
-                                                    name="psc_related_international_conventions_noted_deficiency[0][<?php echo $i; $i++; ?>]"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label><?php echo $row->related_international_conventions_noted_deficiency ?></label>
+                                                    name="psc_related_international_conventions_noted_deficiency[]"
+                                                    id="psc_related_international_conventions_noted_deficiency_<?= $row->id ?>"
+                                                    value="<?= $row->id  ?>">
+                                                <label
+                                                    for="psc_related_international_conventions_noted_deficiency_<?= $row->id ?>"><?= $row->related_international_conventions_noted_deficiency ?></label>
                                             </div>
-                                            <?php
-                                                }
-                                            ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>SPECIFY NOTED DEFICIENCY/IES (IF ANY)</label>
-                                            <textarea name="psc_noted_deficiency[]" class="form-control" id="" cols="30"
+                                            <textarea name="psc_noted_deficiency" class="form-control" id="" cols="30"
                                                 rows="10"></textarea>
                                         </div>
                                     </div>
@@ -709,25 +675,23 @@
                                 </div>
 
                                 <fieldset class="cabrsasi_fieldset">
-                                    <legend class="scheduler-border">COASTAL AND BEACH RESORT SAFETY AND SECURITY
-                                        INSPECTION DATA</legend>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF COASTAL/RESORT</label>
-                                                <input type="text" name="cabrsasi_coastal_name[]" class="form-control">
+                                                <input type="text" name="cabrsasi_coastal_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF COASTAL/BEACH RESORT</label>
-                                                <input type="text" name="cabrsasi_coastal_place[]" class="form-control">
+                                                <input type="text" name="cabrsasi_coastal_place" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF OWNER</label>
-                                                <input type="text" name="cabrsasi_owner_name[]" class="form-control">
+                                                <input type="text" name="cabrsasi_owner_name" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -737,19 +701,15 @@
                                             <label class="col-sm-12 font-weight-bold m-t-20">LENGTH OF BEACH COAST
                                                 LINE</label>
                                             <div class="col-sm-12">
-                                                <?php
-                                                    $i = 1;
-                                                    foreach($beach_coast_line_length as $row){
-                                                ?>
+                                                <?php foreach($beach_coast_line_length as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="cabrsasi_beach_coast_line_length[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->beach_coast_line_length ?></label>
+                                                    <input type="checkbox" name="cabrsasi_beach_coast_line_length[]"
+                                                        id="cabrsasi_beach_coast_line_length_<?= $row->id ?>"
+                                                        value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="cabrsasi_beach_coast_line_length_<?= $row->id ?>"><?= $row->beach_coast_line_length ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -757,19 +717,15 @@
                                         <div class="form-group">
                                             <label class="col-sm-12 font-weight-bold m-t-20">VIOLATIONS (IF ANY)</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($coastal_and_beach_violation as $row){
-                                                ?>
+                                                <?php  foreach($coastal_and_beach_violation as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="cabrsasi_coastal_and_beach_violation[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->coastal_and_beach_violation ?></label>
+                                                    <input type="checkbox" name="cabrsasi_coastal_and_beach_violation[]"
+                                                        id="cabrsasi_coastal_and_beach_violation_<?= $row->id ?>"
+                                                        value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="cabrsasi_coastal_and_beach_violation_<?= $row->id ?>"><?= $row->coastal_and_beach_violation ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -786,25 +742,23 @@
                                 </div>
 
                                 <fieldset class="rsei_fieldset">
-                                    <legend class="scheduler-border">RECREATIONAL SAFETY ENFORCEMENT INSPECTION DATA
-                                    </legend>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF RESORT</label>
-                                                <input type="text" name="rsei_resort_name[]" class="form-control">
+                                                <input type="text" name="rsei_resort_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF INSPECTION</label>
-                                                <input type="text" name="rsei_inspection_place[]" class="form-control">
+                                                <input type="text" name="rsei_inspection_place" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF OWNER</label>
-                                                <input type="text" name="rsei_owner_name[]" class="form-control">
+                                                <input type="text" name="rsei_owner_name" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -814,19 +768,15 @@
                                             <label class="col-sm-12 font-weight-bold m-t-20">RECRATION
                                                 WATERCRAFTS</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($recration_watercraft as $row){
-                                                ?>
+                                                <?php foreach($recration_watercraft as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="rsei_recration_watercraft[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->recration_watercraft ?></label>
+                                                    <input type="checkbox" name="rsei_recration_watercraft[]"
+                                                        id="rsei_recration_watercraft_<?= $row->id ?>"
+                                                        value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="rsei_recration_watercraft_<?= $row->id ?>"><?= $row->recration_watercraft ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -834,19 +784,15 @@
                                         <div class="form-group">
                                             <label class="col-sm-12 font-weight-bold m-t-20">VIOLATIONS (IF ANY)</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($recreational_violation as $row){
-                                                ?>
+                                                <?php foreach($recreational_violation as $row): ?>
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="rsei_recreational_violation[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->recreational_violation ?></label>
+                                                    <input type="checkbox" name="rsei_recreational_violation[]"
+                                                        id="rsei_recreational_violation_<?= $row->id ?>"
+                                                        value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="rsei_recreational_violation_<?= $row->id ?>"><?= $row->recreational_violation ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -875,37 +821,28 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">TYPE OF LH</label>
-                                                <?php 
-                                                    foreach($lighthouse_type as $row){
-                                                ?>
+                                                <?php foreach($lighthouse_type as $row): ?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lh_type[]"
-                                                        id="lh_type_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label
-                                                        for="lh_type_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->lighthouse_type ?></label>
+                                                        id="lh_type_<?= $row->id  ?>" value="<?= $row->id  ?>">
+                                                    <label for="lh_type_<?= $row->id  ?>"
+                                                        value="<?= $row->id  ?>"><?= $row->lighthouse_type ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PURPOSE OF INSPECTION</label>
-                                                <?php 
-                                                    foreach($lighthouse_inspection_purpose as $row){
-                                                ?>
+                                                <?php foreach($lighthouse_inspection_purpose as $row): ?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lh_inspection_purpose[]"
-                                                        id="lh_inspection_purpose_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
+                                                        id="lh_inspection_purpose_<?= $row->id  ?>"
+                                                        value="<?= $row->id ?>">
                                                     <label
-                                                        for="lh_inspection_purpose_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->lighthouse_inspection_purpose ?></label>
+                                                        for="lh_inspection_purpose_<?= $row->id  ?>"><?= $row->lighthouse_inspection_purpose ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -931,19 +868,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">STATUS</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    foreach($lighthouse_status as $row){
-                                                ?>
+                                                <?php  foreach($lighthouse_status as $row): ?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lh_status[]"
-                                                        id="lh_status_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
+                                                        id="lh_status_<?= $row->id  ?>" value="<?= $row->id  ?>">
                                                     <label
-                                                        for="lh_status_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->lighthouse_status ?></label>
+                                                        for="lh_status_<?= $row->id  ?>"><?= $row->lighthouse_status ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -951,19 +883,15 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">IF NOT OPERATING, WHAT IS THE CAUSED?</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    foreach($lighthouse_cause_if_not_operating as $row){
-                                                ?>
+                                                <?php foreach($lighthouse_cause_if_not_operating as $row): ?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lh_cause_if_not_operating[]"
-                                                        id="lh_cause_if_not_operating_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
+                                                        id="lh_cause_if_not_operating_<?= $row->id  ?>"
+                                                        value="<?= $row->id ?>">
                                                     <label
-                                                        for="lh_cause_if_not_operating_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->lighthouse_cause_if_not_operating ?></label>
+                                                        for="lh_cause_if_not_operating_<?= $row->id  ?>"><?= $row->lighthouse_cause_if_not_operating ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -971,39 +899,29 @@
                                 <fieldset>
                                     <legend class="scheduler-border">TOTAL NUMBER OF LH NOT OPERATING AND OPERATING
                                     </legend>
-                                    <?php 
-                                        foreach($lighthouse_status as $row){
-                                    ?>
+                                    <?php  foreach($lighthouse_status as $row): ?>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label
-                                                    class="control-label"><?php echo $row->lighthouse_status; ?></label>
+                                                <label class="control-label"><?= $row->lighthouse_status; ?></label>
                                                 <div class="radio-list">
-                                                    <?php
-                                                        foreach(range(1,5) as $i){
-                                                    ?>
+                                                    <?php foreach(range(1,5) as $i): ?>
                                                     <label class="radio-inline p-0">
                                                         <div class="radio radio-info">
                                                             <input type="radio"
-                                                                name="lh_<?php echo $row->lighthouse_status; ?>"
-                                                                id="<?php echo $row->lighthouse_status . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
-                                                                value="<?php echo $i; ?>">
+                                                                name="lh_<?= $row->lighthouse_status; ?>"
+                                                                id="<?= $row->lighthouse_status . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
+                                                                value="<?= $i; ?>">
                                                             <label
-                                                                for="<?php echo $row->lighthouse_status . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?php echo $i; ?></label>
+                                                                for="<?= $row->lighthouse_status . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?= $i; ?></label>
                                                         </div>
                                                     </label>
-                                                    <?php
-
-																					}
-																				?>
+                                                    <?php endforeach ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
-																}
-															?>
+                                    <?php endforeach ?>
                                 </fieldset>
                                 <fieldset>
                                     <legend class="scheduler-border">Part 2. LIGHTED BUOYS</legend>
@@ -1018,21 +936,15 @@
 
                                     <div class="row">
                                         <div class="form-group">
-                                            <label class="col-sm-12">TYPE OF BOUY</label>
+                                            <label class="col-sm-12 m-t-15">TYPE OF BOUY</label>
                                             <div class="col-sm-12">
-                                                <?php 
-																			foreach($bouy_type as $row){
-																		?>
+                                                <?php foreach($bouy_type as $row):	?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lb_type[]"
-                                                        id="lb_type_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label
-                                                        for="lb_type_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->bouy_type ?></label>
+                                                        id="lb_type_<?= $row->id  ?>" value="<?= $row->id  ?>">
+                                                    <label for="lb_type_<?= $row->id  ?>"><?= $row->bouy_type ?></label>
                                                 </div>
-                                                <?php
-																			}
-																		?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1051,19 +963,15 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">PURPOSE OF INSPECTION</label>
                                             <div class="col-sm-12">
-                                                <?php 
-																			foreach($light_bouy_inspection_purpose as $row){
-																		?>
+                                                <?php foreach($light_bouy_inspection_purpose as $row): ?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lb_inspection_purpose[]"
-                                                        id="lb_inspection_purpose_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
+                                                        id="lb_inspection_purpose_<?= $row->id  ?>"
+                                                        value="<?= $row->id  ?>">
                                                     <label
-                                                        for="lb_inspection_purpose_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->light_bouy_inspection_purpose ?></label>
+                                                        for="lb_inspection_purpose_<?= $row->id  ?>"><?= $row->light_bouy_inspection_purpose ?></label>
                                                 </div>
-                                                <?php
-																			}
-																		?>
+                                                <?php endforeach	?>
                                             </div>
                                         </div>
                                     </div>
@@ -1089,19 +997,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">STATUS</label>
                                             <div class="col-sm-12">
-                                                <?php 
-																			foreach($light_buoy_status as $row){
-																		?>
+                                                <?php foreach($light_buoy_status as $row): ?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lb_status[]"
-                                                        id="lb_status_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
+                                                        id="lb_status_<?= $row->id  ?>" value="<?= $row->id  ?>">
                                                     <label
-                                                        for="lb_status_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->light_buoy_status ?></label>
+                                                        for="lb_status_<?= $row->id  ?>"><?= $row->light_buoy_status ?></label>
                                                 </div>
-                                                <?php
-																			}
-																		?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1110,19 +1013,15 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">IF NOT OPERATING, WHAT IS THE CAUSED?</label>
                                             <div class="col-sm-12">
-                                                <?php 
-																			foreach($light_buoy__cause_if_not_operating as $row){
-																		?>
+                                                <?php foreach($light_buoy__cause_if_not_operating as $row):?>
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lb_cause_if_not_operating[]"
-                                                        id="lb_cause_if_not_operating_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                        value="<?php echo $row->id  ?>">
+                                                        id="lb_cause_if_not_operating_<?= $row->id  ?>"
+                                                        value="<?= $row->id  ?>">
                                                     <label
-                                                        for="lb_cause_if_not_operating_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->light_buoy__cause_if_not_operating ?></label>
+                                                        for="lb_cause_if_not_operating_<?= $row->id  ?>"><?= $row->light_buoy__cause_if_not_operating ?></label>
                                                 </div>
-                                                <?php
-																			}
-																		?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1132,40 +1031,30 @@
                                     <legend class="scheduler-border">TOTAL NUMBER OF BOUY NOT-OPERATING AND OPERATING
                                     </legend>
 
-                                    <?php 
-                                        foreach($light_buoy_status as $row){
-                                    ?>
+                                    <?php  foreach($light_buoy_status as $row):  ?>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label
-                                                    class="control-label"><?php echo $row->light_buoy_status; ?></label>
+                                                <label class="control-label"><?= $row->light_buoy_status; ?></label>
                                                 <div class="radio-list">
-                                                    <?php
-																					foreach(range(1,5) as $i){
-																				?>
+                                                    <?php foreach(range(1,5) as $i):	?>
                                                     <label class="radio-inline p-0">
                                                         <div class="radio radio-info">
                                                             <input type="radio"
-                                                                name="lb_<?php echo $row->light_buoy_status; ?>"
-                                                                id="<?php echo $row->light_buoy_status . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
-                                                                value="<?php echo $i; ?>">
+                                                                name="lb_<?= $row->light_buoy_status; ?>"
+                                                                id="<?= $row->light_buoy_status . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
+                                                                value="<?= $i; ?>">
                                                             <label
-                                                                for="<?php echo $row->light_buoy_status . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?php echo $i; ?></label>
+                                                                for="<?= $row->light_buoy_status . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?= $i; ?></label>
                                                         </div>
                                                     </label>
-                                                    <?php
-
-																					}
-																				?>
+                                                    <?php endforeach	?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
-																}
-															?>
+                                    <?php endforeach ?>
                                 </fieldset>
 
                                 <?php
@@ -1587,21 +1476,16 @@
 
                                 <div class="row">
                                     <div class="form-group">
-                                        <label class="col-sm-12">TYPE OF APPLICATION</label>
+                                        <label class="col-sm-12 m-t-15">TYPE OF APPLICATION</label>
                                         <div class="col-sm-12">
-                                            <?php 
-																		foreach($application_type as $row){
-																	?>
+                                            <?php foreach($application_type as $row): ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="so_application_type[]"
-                                                    id="application_type_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="application_type_<?= $row->id  ?>" value="<?= $row->id  ?>">
                                                 <label
-                                                    for="application_type_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->application_type ?></label>
+                                                    for="application_type_<?= $row->id  ?>"><?= $row->application_type ?></label>
                                             </div>
-                                            <?php
-																		}
-																	?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1619,19 +1503,15 @@
                                         <label class="col-sm-12 font-weight-bold m-t-20">PURPOSE OF SALVAGE
                                             OPERATION</label>
                                         <div class="col-sm-12">
-                                            <?php 
-																		foreach($salvage_operation_purpose as $row){
-																	?>
+                                            <?php foreach($salvage_operation_purpose as $row): ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="so_purpose[]"
-                                                    id="salvage_operation_purpose_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="salvage_operation_purpose_<?= $row->id  ?>"
+                                                    value="<?= $row->id  ?>">
                                                 <label
-                                                    for="salvage_operation_purpose_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->salvage_operation_purpose ?></label>
+                                                    for="salvage_operation_purpose_<?= $row->id  ?>"><?= $row->salvage_operation_purpose ?></label>
                                             </div>
-                                            <?php
-																		}
-																	?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
