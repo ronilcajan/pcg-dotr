@@ -12,7 +12,7 @@ class Marsaf_rsei_data_model extends CI_Model {
 
     public function find($id)
     {
-        $this->db->where('marsaf_rsei', $id);
+        $this->db->where('marsaf_id', $id);
         $query = $this->db 
             ->get($this->table_name); 
 
@@ -33,7 +33,7 @@ class Marsaf_rsei_data_model extends CI_Model {
     } 
 
     public function delete($id){
-        $this->db->where('marsaf_rsei', $id);
+        $this->db->where('marsaf_id', $id);
         $this->db->delete($this->table_name);
         return $this->db->affected_rows();
     }

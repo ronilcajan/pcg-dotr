@@ -344,7 +344,7 @@ class Marsaf extends CI_Controller {
 
             // insert to marsaf aton table 
             $marsaf_aton = array(
-                'marsaf_report_type'        => $marsaf_id,
+                'marsaf_id'        => $marsaf_id,
                 'lh_name'                   => $this->input->post('lh_name'),
                 'lh_type'                   => implode(',',(array) $this->input->post('lh_type')),
                 'lh_inspection_purpose'     => implode(',',(array) $this->input->post('lh_inspection_purpose')),
@@ -397,49 +397,46 @@ class Marsaf extends CI_Controller {
         } else if ( (int) $this->input->post('report_type') === 8) {  
   
             $marsaf_mci = array(
-                'marsaf_report_type'                  => $marsaf_insert_id,  
-                'exact_location'                      => $_POST['mci_exact_location'],
-                'vessel_name'                         => $_POST['mci_vessel_name'],
-                'registry_flag'                       => $_POST['mci_registry_flag'],
-                'foreign_imo_number'                  => $_POST['mci_foreign_imo_number'],
-                'domestic_official_number'            => $_POST['mci_domestic_official_number'],
-                'gt_nt'                               => $_POST['mci_gt_nt'],
-                'company_name'                        => $_POST['mci_company_name'],
-                'company_address'                     => $_POST['mci_company_address'],
-                'captain_name'                        => $_POST['mci_captain_name'],
-                'crew_nationality_number'             => $_POST['mci_crew_nationality_number'],
-                'passenger_number'                    => $_POST['mci_passenger_number'],
-                'cargoe_onboard'                      => $_POST['mci_cargoe_onboard'],
-                'port_origin'                         => $_POST['mci_port_origin'],
-                'departure_date_from_port_origin'     => $_POST['mci_departure_date_from_port_origin'],
-                'departure_time_from_port_origin'     => $_POST['mci_departure_time_from_port_origin'],
-                'incident_time'                       => $_POST['mci_incident_time'],
+                'marsaf_id'                  => $marsaf_id,  
+                'exact_location'                      => $this->input->post('mci_exact_location'),
+                'vessel_name'                         => $this->input->post('mci_vessel_name'),
+                'registry_flag'                       => $this->input->post('mci_registry_flag'),
+                'foreign_imo_number'                  => $this->input->post('mci_foreign_imo_number'),
+                'domestic_official_number'            => $this->input->post('mci_domestic_official_number'),
+                'gt_nt'                               => $this->input->post('mci_gt_nt'),
+                'company_name'                        => $this->input->post('mci_company_name'),
+                'company_address'                     => $this->input->post('mci_company_address'),
+                'captain_name'                        => $this->input->post('mci_captain_name'),
+                'crew_nationality_number'             => $this->input->post('mci_crew_nationality_number'),
+                'passenger_number'                    => $this->input->post('mci_passenger_number'),
+                'cargoe_onboard'                      => $this->input->post('mci_cargoe_onboard'),
+                'port_origin'                         => $this->input->post('mci_port_origin'),
+                'departure_date_from_port_origin'     => $this->input->post('mci_departure_date_from_port_origin').' '.$this->input->post('mci_departure_time_from_port_origin'),
+                'incident_date'                       => $this->input->post('mci_incident_date').' '.$this->input->post('mci_incident_time'),
                 'maritime_casualty_nature'            => implode(',',(array) $this->input->post('mci_maritime_casualty_nature')), 
                 'incident_cause'                      => implode(',',(array) $this->input->post('mci_incident_cause')), 
                 'incident_consequences'               => implode(',',(array) $this->input->post('mci_incident_consequences')), 
                 'maritime_incident_severity'          => implode(',',(array) $this->input->post('mci_maritime_incident_severity')), 
                 'very_serious_mc_category'            => implode(',',(array) $this->input->post('mci_very_serious_mc_category')),
-                'ship_name_involved'                  => $_POST['mci_ship_name_involved'],
-                'registry_flag_2'                     => $_POST['mci_registry_flag_2'],
-                'foreign_imo_number_2'                => $_POST['mci_foreign_imo_number_2'],
-                'domestic_official_number_2'          => $_POST['mci_domestic_official_number_2'],
-                'vessel_type'                         => $_POST['mci_vessel_type'],
-                'gt_nt_2'                             => $_POST['mci_gt_nt_2'],
-                'company_name_2'                      => $_POST['mci_company_name_2'],
-                'company_address_2'                   => $_POST['mci_company_address_2'],
-                'captain_name_2'                      => $_POST['mci_captain_name_2'],
-                'crew_nationality_number_2'           => $_POST['mci_crew_nationality_number_2'],
-                'passenger_number_2'                  => $_POST['mci_passenger_number_2'],
-                'cargoe_onboard_2'                    => $_POST['mci_cargoe_onboard_2'],
-                'port_origin_2'                       => $_POST['mci_port_origin_2'],
-                'departure_date_from_port_origin_2'   => $_POST['mci_departure_date_from_port_origin_2'],
-                'departure_hour_from_port_origin_2'   => $_POST['mci_departure_hour_from_port_origin_2'],
-                'departure_minute_from_port_origin_2' => $_POST['mci_departure_minute_from_port_origin_2'],
-                'total_injured_person'                => $_POST['mci_total_injured_person'],
-                'total_death'                         => $_POST['mci_total_death'],
-                'total_missing_person'                => $_POST['mci_total_missing_person'],
-                'total_survivor'                      => $_POST['mci_total_survivor'],
-                'safety_recommendation'               => $_POST['mci_safety_recommendation'],
+                'ship_name_involved'                  => $this->input->post('mci_ship_name_involved'),
+                'registry_flag_2'                     => $this->input->post('mci_registry_flag_2'),
+                'foreign_imo_number_2'                => $this->input->post('mci_foreign_imo_number_2'),
+                'domestic_official_number_2'          => $this->input->post('mci_domestic_official_number_2'),
+                'vessel_type'                         => $this->input->post('mci_vessel_type'),
+                'gt_nt_2'                             => $this->input->post('mci_gt_nt_2'),
+                'company_name_2'                      => $this->input->post('mci_company_name_2'),
+                'company_address_2'                   => $this->input->post('mci_company_address_2'),
+                'captain_name_2'                      => $this->input->post('mci_captain_name_2'),
+                'crew_nationality_number_2'           => $this->input->post('mci_crew_nationality_number_2'),
+                'passenger_number_2'                  => $this->input->post('mci_passenger_number_2'),
+                'cargoe_onboard_2'                    => $this->input->post('mci_cargoe_onboard_2'),
+                'port_origin_2'                       => $this->input->post('mci_port_origin_2'),
+                'departure_date_from_port_origin_2'   => $this->input->post('mci_departure_date_from_port_origin_2') .' '.$this->input->post('mci_departure_time_from_port_origin_2'),
+                'total_injured_person'                => $this->input->post('mci_total_injured_person'),
+                'total_death'                         => $this->input->post('mci_total_death'),
+                'total_missing_person'                => $this->input->post('mci_total_missing_person'),
+                'total_survivor'                      => $this->input->post('mci_total_survivor'),
+                'safety_recommendation'               => $this->input->post('mci_safety_recommendation'),
             );  
 
             // // insert
@@ -449,10 +446,10 @@ class Marsaf extends CI_Controller {
         } else if ( (int) $this->input->post('report_type') === 9) {   
 
             $marsaf_so = array(
-                'marsaf_report_type' => $marsaf_id, 
-                'salvor_name'        => $_POST['so_salvor_name'],
+                'marsaf_id'          => $marsaf_id, 
+                'salvor_name'        => $this->input->post('so_salvor_name'),
                 'application_type'   => implode(',',(array) $this->input->post('so_application_type')),
-                'exact_location'     => $_POST['so_exact_location'],
+                'exact_location'     => $this->input->post('so_exact_location'),
                 'purpose'            => implode(',',(array) $this->input->post('so_purpose')), 
             );  
 
@@ -470,18 +467,16 @@ class Marsaf extends CI_Controller {
             
             // var_dump($_POST);
             $marsaf_mpramra = array(
-                'marsaf_report_type'                 => $marsaf_id,   
-                'location'                           => $_POST['mpramra_location'],
-                'application_date'                   => $_POST['mpramra_application_date'],
-                'event_organizer'                    => $_POST['mpramra_event_organizer'],
+                'marsaf_id'                         => $marsaf_id,   
+                'location'                           => $this->input->post('mpramra_location'),
+                'application_date'                   => $this->input->post('mpramra_application_date'),
+                'event_organizer'                    => $this->input->post('mpramra_event_organizer'),
                 'maritime_acitivity'                 => implode(',',(array) $this->input->post('mpramra_maritime_acitivity')),
-                'departure_date_from_origin_port'    => $_POST['mpramra_departure_date_from_origin_port'],
-                'departure_hour_from_origin_port'    => $_POST['mpramra_departure_hour_from_origin_port'],
-                'departure_minutefrom_origin_port'   => $_POST['mpramra_departure_minutefrom_origin_port'],
-                'origin_point'                       => $_POST['mpramra_origin_point'],
-                'destination_point'                  => $_POST['mpramra_destination_point'],
-                'involved_vessel'                    => $_POST['mpramra_involved_vessel'],
-                'mpramra_involved_vessel_total'      => $_POST['mpramra_involved_vessel_total'],
+                'departure_date_from_origin_port'    => $this->input->post('mpramra_departure_date_from_origin_port'). ' '. $this->input->post('mpramra_departure_time_from_origin_port'),
+                'origin_point'                       => $this->input->post('mpramra_origin_point'),
+                'destination_point'                  => $this->input->post('mpramra_destination_point'),
+                'involved_vessel'                    => $this->input->post('mpramra_involved_vessel'),
+                'mpramra_involved_vessel_total'      => $this->input->post('mpramra_involved_vessel_total'),
                 'mpramra_maritime_related_violation' => implode(',',(array) $this->input->post('mpramra_maritime_related_violation')),
             );    
 
@@ -544,28 +539,21 @@ class Marsaf extends CI_Controller {
         
         switch($report_type){
             case 1: 
-
-                $data['marsaf_pdi'] = $this->marsaf_pdi_model->find($id);
                 $data['marsaf_pdi_data'] = $this->marsaf_pdi_data_model->find($id);
                 break;
             case 2: 
-                $data['marsaf_vsei'] = $this->marsaf_vsei_model->find($id);
                 $data['marsaf_vsei_data'] = $this->marsaf_vsei_data_model->find($id);
                 break; 
             case 3: 
-                $data['marsaf_ere'] = $this->marsaf_ere_model->find($id);
                 $data['marsaf_ere_data'] = $this->marsaf_ere_data_model->find($id);
                 break;
             case 4: 
-                $data['marsaf_psc'] = $this->marsaf_psc_model->find($id);
                 $data['marsaf_psc_data'] = $this->marsaf_psc_data_model->find($id);
                 break;
             case 5: 
-                $data['marsaf_cabrsasi'] = $this->marsaf_cabrsasi_model->find($id);
                 $data['marsaf_cabrsasi_data'] = $this->marsaf_cabrsasi_data_model->find($id);
                 break;
             case 6: 
-                $data['marsaf_rsei'] = $this->marsaf_rsei_model->find($id);
                 $data['marsaf_rsei_data'] = $this->marsaf_rsei_data_model->find($id);
                 break;
             case 7: 
@@ -594,8 +582,7 @@ class Marsaf extends CI_Controller {
             'station' => $this->input->post('station'),
             'sub_station' => $this->input->post('sub_station'),
             'report_type' => $this->input->post('report_type'),
-            'date_created' => $this->input->post('date_created') . " " .$this->input->post('hour_created') . ":" .$this->input->post('minute_created') . ":00",  //2022-12-30 11:55:46
-            'psc_center' => $this->input->post('psc_center'),  
+            'date_created' => $this->input->post('date_created') . " " .$this->input->post('time'),  //2022-12-30 11:55:46
         ); 
         
         $this->marsaf_model->update($marsaf_data, $id); 
@@ -604,80 +591,21 @@ class Marsaf extends CI_Controller {
 
             // insert to marsaf pdi table 
             $marsaf_pdi = array( 
-                'bulk_carrier' => $this->input->post('bulk_carrier'),
-                'bulk_carrier_2' => $this->input->post('BULK_CARRIER'), 
-                'cargo' => $this->input->post('CARGO'),
-                'chemical_tanker' => $this->input->post('CHEMICAL_TANKER'),
-                'container' => $this->input->post('CONTAINER'),
-                'fishing_vessel' => $this->input->post('FISHING_VESSEL'),
-                'passenger' => $this->input->post('PASSENGER'),
-                'roll_on_roll_off' => $this->input->post('ROLL-ON/ROLL-OFF'),
-                'tanker' => $this->input->post('TANKER'),
-                'tugboat' => $this->input->post('TUGBOAT'), 
-                'noted_deficiency' => implode(',',(array) $this->input->post('noted_deficiency')),
-                'cleared_to_depart' => implode(',',(array) $this->input->post('CLEARED_TO_DEPART')),
-                'not_cleared_to_depart' => implode(',',(array) $this->input->post('NOT_CLEARED_TO_DEPART')), 
-    
+                'vessel_name' => $this->input->post('pdi_vessel_name'),
+                'port_place' => $this->input->post('pdi_port_place'), 
+                'vessel_type' => implode(',',(array) $this->input->post('pdi_vessel_type')),
+                'company' => $this->input->post('company'),
+                'captain_name' => $this->input->post('captain_name'),
+                'gross_tonnage' => $this->input->post('gross_tonnage'),
+                'kilowat' => $this->input->post('kilowats'),
+                'pdi_result' => $this->input->post('pdi_result'),
+                'action_code' => implode(',',(array) $this->input->post('pdi_action_code')),
+                'noted_deficiency' => implode(',',(array) $this->input->post('pdi_noted_deficiency')), 
+                'specify_noted_deficiency' => $this->input->post('pdi_specify_noted_deficiency'),
             );
     
             
-            $this->marsaf_pdi_model->update($marsaf_pdi, $id);
- 
-
-            $marsaf_pdi_data = [];
-
-            // insert to marsaf pdi data table  
-            if(isset($_POST['pdi_vessel_name'])){
-                
-                $this->marsaf_pdi_data_model->delete($id); //delete the previous data
-
-                foreach($_POST['pdi_vessel_name'] as $key => $row){
-                    $marsaf_pdi_data['marsaf_pdi'] = $id;
-                    $marsaf_pdi_data['vessel_name'] = $_POST['pdi_vessel_name'][$key];
-                    $marsaf_pdi_data['port_place'] = $_POST['pdi_port_place'][$key];
-     
-                    
-                    if(isset($_POST['pdi_vessel_type'][$key])){
-                        $marsaf_pdi_data['vessel_type'] =implode(',',(array) $_POST['pdi_vessel_type'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['vessel_type'] = "";
-                    }
-    
-    
-                    $marsaf_pdi_data['company'] = $_POST['company'][$key];
-                    $marsaf_pdi_data['captain_name'] = $_POST['captain_name'][$key];
-                    $marsaf_pdi_data['gross_tonnage'] = $_POST['gross_tonnage'][$key]; 
-    
-                    if(isset($_POST['kilowat'][$key])){
-                        $marsaf_pdi_data['kilowat'] =implode(',',(array) $_POST['kilowats'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['kilowat'] = "";
-                    }
-                    
-                    if(isset($_POST['pdi_result'][$key])){
-                        $marsaf_pdi_data['pdi_result'] =implode(',',(array) $_POST['pdi_result'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['pdi_result'] = "";
-                    }
-    
-                    if(isset($_POST['pdi_action_code'][$key])){
-                        $marsaf_pdi_data['action_code'] =implode(',',(array) $_POST['pdi_action_code'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['action_code'] = "";
-                    }
-                    if(isset($_POST['pdi_noted_deficiency'][$key])){
-                        $marsaf_pdi_data['noted_deficiency'] =implode(',',(array) $_POST['pdi_noted_deficiency'][$key]); 
-                    }else{
-                        $marsaf_pdi_data['noted_deficiency'] = "";
-                    } 
-    
-                    $marsaf_pdi_data['specify_noted_deficiency'] = $_POST['pdi_specify_noted_deficiency'][$key];
-     
-                    // insert
-                    $this->marsaf_pdi_data_model->update($marsaf_pdi_data, $id);
-                    
-                }
-            } 
+            $this->marsaf_pdi_data_model->update($marsaf_pdi, $id);
             
         } else if ( (int) $this->input->post('report_type') === 2) {
 

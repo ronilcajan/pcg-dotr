@@ -12,16 +12,16 @@ class Marsaf_pdi_data_model extends CI_Model {
     
     public function find($id)
     {
-        $this->db->where('marsaf_pdi', $id);
+        $this->db->where('marsaf_id', $id);
         $query = $this->db 
             ->get($this->table_name);
  
-            return $query->result();
+            return $query->row();
     } 
 
-    public function update($data)
+    public function update($data, $id)
     {
-        $update = $this->db->insert($this->table_name, $data);
+        $update = $this->db->update($this->table_name, $data, "marsaf_id=".$id);
         if( !$update ){
             $errNo   = $this->db->_error_number();
             $errMess = $this->db->_error_message();
@@ -32,7 +32,7 @@ class Marsaf_pdi_data_model extends CI_Model {
 
     } 
     public function delete($id){
-        $this->db->where('marsaf_pdi', $id);
+        $this->db->where('marsaf_id', $id);
         $this->db->delete($this->table_name);
         return $this->db->affected_rows();
     }

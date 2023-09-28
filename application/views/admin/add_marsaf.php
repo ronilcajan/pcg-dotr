@@ -1166,112 +1166,101 @@
                                             <div class="form-group">
                                                 <label>DATE OF DEPARTURE FROM PORT OF ORIGIN</label>
                                                 <input type="date" name="mci_departure_date_from_port_origin"
-                                                    class="form-control">
+                                                    class="form-control" value="<?= date('Y-m-d') ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>TIME OF DEPARTURED FROM PORT OF ORIGIN</label>
-                                                <input type="text" name="mci_departure_time_from_port_origin"
-                                                    class="form-control">
+                                                <input type="time" name="mci_departure_time_from_port_origin"
+                                                    class="form-control" value="<?= date('H:i') ?>">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group">
-                                            <label>DATE AND TIME OF INCIDENT</label>
-                                            <input type="text" name="mci_incident_time" class="form-control">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>DATE OF INCIDENT</label>
+                                                <input type="date" name="mci_incident_date" class="form-control"
+                                                    value="<?= date('Y-m-d') ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>TIME OF INCIDENT</label>
+                                                <input type="time" name="mci_incident_time" class="form-control"
+                                                    value="<?= date('H:i') ?>">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>NATURE OF MARITIME CASUALTY</label>
-                                            <?php 
-                                                foreach($maritime_casualty_nature as $row){
-                                            ?>
+                                            <?php foreach($maritime_casualty_nature as $row): ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_maritime_casualty_nature[]"
-                                                    id="maritime_casualty_nature_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="maritime_casualty_nature_<?= $row->id  ?>"
+                                                    value="<?= $row->id  ?>">
                                                 <label
-                                                    for="maritime_casualty_nature_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->maritime_casualty_nature ?></label>
+                                                    for="maritime_casualty_nature_<?= $row->id  ?>"><?= $row->maritime_casualty_nature ?></label>
                                             </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
+                                            <?php endforeach  ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>CAUSE OF INCIDENT</label>
-                                            <?php 
-                                                                        foreach($incident_cause as $row){ 
-                                                                    ?>
+                                            <?php foreach($incident_cause as $row): ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_incident_cause[]"
-                                                    id="incident_cause_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="incident_cause_<?= $row->id  ?>" value="<?= $row->id  ?>">
                                                 <label
-                                                    for="incident_cause_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->incident_cause ?></label>
+                                                    for="incident_cause_<?= $row->id  ?>"><?= $row->incident_cause ?></label>
                                             </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
+                                            <?php endforeach   ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>CONSEQUENCES OF INCIDENT</label>
-                                            <?php 
-                                                                        foreach($incident_consequences as $row){
-                                                                    ?>
+                                            <?php  foreach($incident_consequences as $row):  ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_incident_consequences[]"
-                                                    id="incident_consequences_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="incident_consequences_<?= $row->id  ?>"
+                                                    value="<?= $row->id  ?>">
                                                 <label
-                                                    for="incident_consequences_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->incident_consequences ?></label>
+                                                    for="incident_consequences_<?= $row->id  ?>"><?= $row->incident_consequences ?></label>
                                             </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group">
                                             <label>SEVERITY OF MARITIME CASUALTY/INCIDENT</label>
-                                            <?php 
-                                                                        foreach($maritime_incident_severity as $row){
-                                                                    ?>
+                                            <?php  foreach($maritime_incident_severity as $row):  ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_maritime_incident_severity[]"
-                                                    id="maritime_incident_severity_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="maritime_incident_severity_<?= $row->id  ?>"
+                                                    value="<?= $row->id  ?>">
                                                 <label
-                                                    for="maritime_incident_severity_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->maritime_incident_severity ?></label>
+                                                    for="maritime_incident_severity_<?= $row->id  ?>"><?= $row->maritime_incident_severity ?></label>
                                             </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
+                                            <?php endforeach  ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>IF VERY SERIOUS MC, WHAT IS THE CATEGORY?</label>
-                                            <?php 
-                                                                        foreach($very_serious_mc_category as $row){
-                                                                    ?>
+                                            <?php foreach($very_serious_mc_category as $row): ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_very_serious_mc_category[]"
-                                                    id="very_serious_mc_category_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="very_serious_mc_category_<?= $row->id  ?>"
+                                                    value="<?= $row->id  ?>">
                                                 <label
-                                                    for="very_serious_mc_category_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->very_serious_mc_category ?></label>
+                                                    for="very_serious_mc_category_<?= $row->id  ?>"><?= $row->very_serious_mc_category ?></label>
                                             </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
+                                            <?php endforeach  ?>
                                         </div>
                                     </div>
 
@@ -1373,44 +1362,15 @@
                                                 <label class="control-label">DATE OF DEPARTURE FROM PORT OF
                                                     ORIGIN</label>
                                                 <input type="date" name="mci_departure_date_from_port_origin_2"
-                                                    class="form-control">
+                                                    class="form-control" value="<?= date('Y-m-d') ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">TIME OF DEPARTURE FROM PORT OF
                                                     ORIGIN</label>
-                                                <div class="input-group ">
-                                                    <span class="input-group-btn">
-                                                        <select name="mci_departure_hour_from_port_origin_2"
-                                                            class="form-control">
-                                                            <option value=""> </option>
-                                                            <?php 
-                                                                foreach(range(intval('00:00:00'),intval('23:00:00')) as $time) {
-                                                            ?>
-                                                            <option value="<?php echo date("H", mktime($time)) ?>">
-                                                                <?php echo date("H", mktime($time)) ?></option>
-                                                            <?php  
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </span>
-                                                    <span class="input-group-btn">
-                                                        <select name="mci_departure_minute_from_port_origin_2"
-                                                            class="form-control">
-                                                            <option value=""> </option>
-                                                            <?php 
-                                                                foreach(range(intval('00'),intval('59')) as $minute) { 
-                                                                    $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                            ?>
-                                                            <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                            </option>
-                                                            <?php  
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </span>
-                                                </div>
+                                                <input type="time" name="mci_departure_time_from_port_origin_2"
+                                                    class="form-control" value="<?= date('H:i') ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -1548,7 +1508,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-sm-12">DATE OF APPLICATION</label>
-                                            <input type="date" name="mpramra_application_date" class="form-control">
+                                            <input type="date" name="mpramra_application_date"
+                                                value="<?= date('Y-m-d') ?>" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -1563,19 +1524,14 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">MARITIME ACTIVITY / IES</label>
                                         <div class="col-sm-12">
-                                            <?php 
-                                                foreach($maritime_acitivity as $row){
-                                            ?>
+                                            <?php   foreach($maritime_acitivity as $row): ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mpramra_maritime_acitivity[]"
-                                                    id="maritime_acitivity_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="maritime_acitivity_<?= $row->id  ?>" value="<?= $row->id  ?>">
                                                 <label
-                                                    for="maritime_acitivity_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->maritime_acitivity ?></label>
+                                                    for="maritime_acitivity_<?= $row->id  ?>"><?= $row->maritime_acitivity ?></label>
                                             </div>
-                                            <?php
-                                                    }
-                                                ?>
+                                            <?php endforeach   ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1585,44 +1541,15 @@
                                         <div class="form-group">
                                             <label class="control-label">DATE OF DEPARTURE FROM PORT OF ORIGIN</label>
                                             <input type="date" name="mpramra_departure_date_from_origin_port"
-                                                class="form-control">
+                                                class="form-control" value="<?= date('Y-m-d') ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">TIME OF DEPARTURE FROM PORT OF ORIGIN</label>
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="mpramra_departure_hour_from_origin_port"
-                                                        class="form-control">
-                                                        <option value=""> </option>
-                                                        <?php 
-                                                            foreach(range(intval('00:00:00'),intval('23:00:00')) as $time) {
-                                                        ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>">
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php  
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="mpramra_departure_minutefrom_origin_port"
-                                                        class="form-control">
-                                                        <option value=""> </option>
-                                                        <?php 
-                                                            foreach(range(intval('00'),intval('59')) as $minute) { 
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                        </option>
-                                                        <?php  
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time" name="mpramra_departure_time_from_origin_port"
+                                                class="form-control" value="<?= date('H:i') ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -1660,7 +1587,7 @@
                                         <label class="col-sm-12 font-weight-bold m-t-20">HOW MANY VESSEL
                                             INVOLVED?</label>
                                         <div class="col-sm-12">
-                                            <input type="text" name="mpramra_involved_vessel_total"
+                                            <input type="number" name="mpramra_involved_vessel_total"
                                                 class="form-control">
                                         </div>
                                     </div>
@@ -1669,19 +1596,15 @@
                                     <div class="form-group">
                                         <label class="col-sm-12 font-weight-bold m-t-20">VIOLATIONS (IF ANY)</label>
                                         <div class="col-sm-12">
-                                            <?php 
-                                                foreach($maritime_related_violation as $row){
-                                            ?>
+                                            <?php  foreach($maritime_related_violation as $row): ?>
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mpramra_maritime_related_violation[]"
-                                                    id="maritime_related_violation_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
+                                                    id="maritime_related_violation_<?= $row->id  ?>"
+                                                    value="<?= $row->id  ?>">
                                                 <label
-                                                    for="maritime_related_violation_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->maritime_related_violation ?></label>
+                                                    for="maritime_related_violation_<?= $row->id  ?>"><?= $row->maritime_related_violation ?></label>
                                             </div>
-                                            <?php
-                                                }
-                                            ?>
+                                            <?php endforeach  ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1710,7 +1633,7 @@
                         <?php foreach($marsaf as $row):?>
                         <tr>
                             <td scope="row"><?php echo $row->report_type ?></td>
-                            <td><?php echo date('F d, Y \a\t\ H:i', strtotime($row->date_created )) ?></td>
+                            <td><?php echo date('F d, Y \a\t\ h:i A', strtotime($row->date_created )) ?></td>
                             <td> <a title="View" class="text-info" href="<?= site_url('marsaf/view/').$row->id ?>"><i
                                         class="fa fa-eye"></i></a>
                                 <a title="Edit" class="text-success"

@@ -12,7 +12,7 @@ class Marsaf_mci_model extends CI_Model {
 
     public function find($id)
     {
-        $this->db->where('marsaf_report_type', $id);
+        $this->db->where('marsaf_id', $id);
         $query = $this->db 
             ->get($this->table_name);
 
@@ -20,7 +20,7 @@ class Marsaf_mci_model extends CI_Model {
     } 
     public function update($data,$id)
     {
-        $update = $this->db->update($this->table_name, $data, "marsaf_report_type=".$id);
+        $update = $this->db->update($this->table_name, $data, "marsaf_id=".$id);
         if( !$update ){
             $errNo   = $this->db->_error_number();
             $errMess = $this->db->_error_message();

@@ -25,22 +25,13 @@
                         <div class="panel-body">
                             <div class="row">
                                 <p><strong style="font-size: 1.3em;color: #000;">PROJECT 1 : MARSAF CGDNM</strong></p>
-                                <p>This is a prototype data gathering system to monitor and evaluate CGDNM performance
-                                    concerning its Maritime Safety Function (MARSAF) which
-                                    helps prevent or minimize unnecessary loss of lives and properties at sea. These are
-                                    the following; Pre-Departure Inspection (PDI), Vessel Safety
-                                    Enforcement Inspection (VSEI), Emergency Readiness Evaluation (ERE), Port State
-                                    Control (PSC) Inspection, Coastal & Beach Resort Safety and Security
-                                    Inspection, Recreational Safety Enforcement Inspection (RSEI), Aids to Navigation
-                                    (ATON), Maritime Casualty and Incident Investigation, Salvage Operation
-                                    and Marine Parades, Regattas and Maritime related activity.</p>
                             </div>
                             <div class="row" style="margin-top: 50px;">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">DTG</label>
                                         <input type="date" name="date_created"
-                                            value="<?= date('Y-m-d', strtotime($marsaf->date_created)) ?>"
+                                            value="<?= date('Y-m-d', strtotime($marsaf->date_created)) ?>" required
                                             class="form-control">
                                     </div>
                                 </div>
@@ -48,31 +39,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Time</label>
-                                        <div class="input-group ">
-                                            <span class="input-group-btn">
-                                                <select name="hour_created" class="form-control">
-                                                    <option value=""> </option>
-                                                    <?php foreach(range(intval('00:00:00'),intval('23:00:00')) as $time): ?>
-                                                    <option value="<?php echo date("H", mktime($time)) ?>"
-                                                        <?= date("H", strtotime($marsaf->date_created)) ==  date("H", mktime($time)) ? 'selected' : null ?>>
-                                                        <?php echo date("H", mktime($time)) ?></option>
-                                                    <?php endforeach ?>
-                                                </select>
-                                            </span>
-                                            <span class="input-group-btn">
-                                                <select name="minute_created" class="form-control">
-                                                    <option value=""> </option>
-                                                    <?php foreach(range(intval('00'),intval('59')) as $minute) :
-                                                            $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                    ?>
-                                                    <option value="<?php echo $minute ?>"
-                                                        <?= date("i", strtotime($marsaf->date_created)) ==  $minute ? 'selected' : null ?>>
-                                                        <?php echo $minute ?>
-                                                    </option>
-                                                    <?php endforeach ?>
-                                                </select>
-                                            </span>
-                                        </div>
+                                        <input type="time" class="form-control" name="time"
+                                            value="<?= date('H:i' , strtotime($marsaf->date_created)) ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -82,16 +50,12 @@
                                         <label>CGDNM STATIONS <strong class="text-danger">*</strong> </label>
                                         <select id="station" name="station" class="form-control">
                                             <option value="">Select</option>
-                                            <?php 
-                                                foreach($station as $row){
-                                            ?>
-                                            <option value="<?php echo $row->station_id ?>"
-                                                <?= $marsaf->station_id==$row->station_id ? 'selected' : null ?>>
-                                                <?php echo $row->station ?>
+                                            <?php foreach($station as $row): ?>
+                                            <option value="<?= $row->station_id ?>"
+                                                <?= $marsaf->station_id==$row->station_id ? 'selected' : '' ?>>
+                                                <?= $row->station ?>
                                             </option>
-                                            <?php
-                                                }
-                                            ?>
+                                            <?php endforeach ?>
                                         </select>
                                     </div>
                                 </div>
@@ -106,41 +70,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group">
-                                    <label class="col-sm-12">PSC CENTER</label>
-                                    <div class="col-sm-12">
-                                        <div class="radio-list">
-                                            <?php foreach($psc_center as $row){ ?>
-                                            <div class="radio radio-info">
-                                                <input type="radio" name="psc_center"
-                                                    id="psc_center_<?php echo $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>"
-                                                    <?= $marsaf->psc_center == $row->id ? 'checked' : null ?>>
-                                                <label
-                                                    for="psc_center_<?php echo $row->id  ?>"><?php echo $row->psc_center ?></label>
-                                            </div>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-12 ">
                                     <div class="form-group">
                                         <input type="hidden" id="or_report_type" value="<?= $marsaf->report_type_id ?>">
                                         <label>REPORT TYPE<strong class="text-danger">*</strong> </label>
                                         <select id="report-type" name="report_type" class="form-control" required>
                                             <option value="">Select</option>
-                                            <?php 
-                                                foreach($report_type as $row){
-                                            ?>
-                                            <option value="<?php echo $row['id']; ?>"
+                                            <?php  foreach($report_type as $row):  ?>
+                                            <option value="<?= $row['id']; ?>"
                                                 <?= $marsaf->report_type_id == $row['id'] ? 'selected' : null ?>>
-                                                <?php echo $row['report_type']; ?>
+                                                <?= $row['report_type']; ?>
                                             </option>
-                                            <?php
-                                                }
-                                            ?>
+                                            <?php endforeach  ?>
                                         </select>
                                     </div>
                                 </div>
@@ -161,26 +102,22 @@
                             ?>
 
                             <div class="toggle-show" data-id="<?php echo $report_type_id; ?>" style="display:none">
-                                <?php 
-                                if($report_type_id == 1){ // PRE-DEPARTURE INSPECTION (PDI) 
-                                
-                                if(!empty($marsaf_pdi_data)): ?>
-                                <?php foreach($marsaf_pdi_data as $pdi): ?>
+                                <?php if($report_type_id == 1){ // PRE-DEPARTURE INSPECTION (PDI)  ?>
                                 <fieldset id="pdi_fieldset" class="pdi_fieldset">
                                     <legend class="scheduler-border">PRE-DEPARTURE INSPECTION DATA</legend>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF VESSEL</label>
-                                                <input type="text" name="pdi_vessel_name[]"
-                                                    value="<?= $pdi->vessel_name ?>" class="form-control">
+                                                <input type="text" name="pdi_vessel_name"
+                                                    value="<?= $marsaf_pdi_data->vessel_name ?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF PORT</label>
-                                                <input type="text" name="pdi_port_place[]"
-                                                    value="<?= $pdi->port_place ?>" class="form-control">
+                                                <input type="text" name="pdi_port_place"
+                                                    value="<?= $marsaf_pdi_data->port_place ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -188,24 +125,21 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">TYPE OF VESSEL</label>
                                             <div class="col-sm-12">
-                                                <?php $ves_type = explode(",",$pdi->vessel_type); $j=0;   ?>
-                                                <?php for($i=0; $i <count($vessel_type); $i++): ?>
-                                                <?php if(isset($ves_type[$j]) && $ves_type[$j] == $vessel_type[$i]->id):?>
+                                                <?php $ves_type = explode(",",$marsaf_pdi_data->vessel_type); ?>
+                                                <?php foreach($vessel_type as $row): ?>
+
+                                                <?php
+                                                        $inputID = "pdi_vessel_type_{$row->id}";
+                                                        $checked = in_array($row->id, $ves_type) ? 'checked' : '';
+                                                ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_vessel_type[0][<?php echo $i+1; $i  ?>]"
-                                                        value="<?php echo $vessel_type[$i]->id  ?>" checked>
-                                                    <label><?php echo $vessel_type[$i]->vessel_type ?></label>
+                                                    <input type="checkbox" name="pdi_vessel_type[]" id="<?= $inputID ?>"
+                                                        value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label for="<?= $inputID ?>"><?= $row->vessel_type ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_vessel_type[0][<?php echo $i+1; $i ?>]"
-                                                        value="<?php echo $vessel_type[$i]->id  ?>">
-                                                    <label><?php echo $vessel_type[$i]->vessel_type ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -213,15 +147,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">OWNER/COMPANY</label>
-                                                <input type="text" name="company[]" value="<?= $pdi->company ?>"
-                                                    class="form-control">
+                                                <input type="text" name="company"
+                                                    value="<?= $marsaf_pdi_data->company ?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">CAPTAINS NAME</label>
-                                                <input type="text" name="captain_name[]"
-                                                    value="<?= $pdi->captain_name ?>" class="form-control">
+                                                <input type="text" name="captain_name"
+                                                    value="<?= $marsaf_pdi_data->captain_name ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -229,165 +163,16 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">GROSS TONNAGE (GT)</label>
-                                                <input type="number" step="0.01" value="<?= $pdi->gross_tonnage ?>"
-                                                    name="gross_tonnage[]" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">KILOWATS (KW)</label>
-                                                <input type="number" step="0.01" name="kilowats[]"
-                                                    value="<?= $pdi->kilowat ?>" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">RESULT OF PDI</label>
-                                            <div class="col-sm-12">
-                                                <?php $pdi_res = explode(",",$pdi->pdi_result); $j=0;   ?>
-                                                <?php for($i=0; $i <count($pdi_result); $i++): ?>
-                                                <?php if(isset($pdi_res[$j]) && $pdi_res[$j] == $pdi_result[$i]->id):?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="pdi_result[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo $pdi_result[$i]->id  ?>" checked>
-                                                    <label><?php echo $pdi_result[$i]->pdi_result ?></label>
-                                                </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="pdi_result[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo $pdi_result[$i]->id  ?>">
-                                                    <label><?php echo $pdi_result[$i]->pdi_result ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">ACTION CODES (IF ANY)</label>
-                                            <div class="col-sm-12">
-                                                <?php $act_code = explode(",",$pdi->action_code); $j=0;   ?>
-                                                <?php for($i=0; $i <count($action_code); $i++): ?>
-                                                <?php if(isset($act_code[$j]) && $act_code[$j] == $action_code[$i]->id):?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_action_code[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo $action_code[$i]->id  ?>" checked>
-                                                    <label><?php echo $action_code[$i]->action_code ?></label>
-                                                </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_action_code[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo $action_code[$i]->id  ?>">
-                                                    <label><?php echo $action_code[$i]->action_code ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">NOTED DEFICIENCY/IES (IF ANY)</label>
-                                            <div class="col-sm-12">
-                                                <?php $no_defi = explode(",",$pdi->noted_deficiency); $j=0;   ?>
-                                                <?php for($i=0; $i <count($noted_deficiency); $i++): ?>
-                                                <?php if(isset($no_defi[$j]) && $no_defi[$j] == $noted_deficiency[$i]->id):?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_noted_deficiency[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo  $noted_deficiency[$i]->id  ?>" checked>
-                                                    <label><?php echo $noted_deficiency[$i]->noted_deficiency ?></label>
-                                                </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_noted_deficiency[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo  $noted_deficiency[$i]->id  ?>">
-                                                    <label><?php echo $noted_deficiency[$i]->noted_deficiency ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">SPECIFY NOTED DEFICIENCY/IES (IF ANY)</label>
-                                                <textarea name="pdi_specify_noted_deficiency[]" class="form-control"
-                                                    id="" cols="30"
-                                                    rows="10"><?= $pdi->specify_noted_deficiency ?></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <?php endforeach ?>
-                                <?php else: ?>
-                                <fieldset id="pdi_fieldset" class="pdi_fieldset">
-                                    <legend class="scheduler-border">PRE-DEPARTURE INSPECTION DATA</legend>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">NAME OF VESSEL</label>
-                                                <input type="text" name="pdi_vessel_name[]" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">PLACE OF PORT</label>
-                                                <input type="text" name="pdi_port_place[]" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">TYPE OF VESSEL</label>
-                                            <div class="col-sm-12">
-                                                <?php
-                                                $i = 1; 
-                                                foreach($vessel_type as $row){ ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_vessel_type[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->vessel_type ?></label>
-                                                </div>
-                                                <?php
-                                                    }
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">OWNER/COMPANY</label>
-                                                <input type="text" name="company[]" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">CAPTAINS NAME</label>
-                                                <input type="text" name="captain_name[]" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">GROSS TONNAGE (GT)</label>
-                                                <input type="number" step="0.01" name="gross_tonnage[]"
+                                                <input type="number" step="0.01"
+                                                    value="<?= $marsaf_pdi_data->gross_tonnage ?>" name="gross_tonnage"
                                                     class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">KILOWATS (KW)</label>
-                                                <input type="number" step="0.01" name="kilowats[]" class="form-control">
+                                                <input type="number" step="0.01" name="kilowats"
+                                                    value="<?= $marsaf_pdi_data->kilowat ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -395,18 +180,21 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">RESULT OF PDI</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1; 
-                                                    foreach($pdi_result as $row){
-                                                ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="pdi_result[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->pdi_result ?></label>
-                                                </div>
+                                                <?php $pdi_res = explode(",",$marsaf_pdi_data->pdi_result); ?>
+
+                                                <?php foreach($pdi_result as $row): ?>
                                                 <?php
-                                                    }
-                                                ?>
+                                                    $inputID = "pdi_result_{$row->id}";
+                                                    $checked = in_array($row->id, $pdi_res) ? 'checked' : '';
+                                                    ?>
+
+                                                <div class="radio radio-info">
+                                                    <input type="radio" name="pdi_result" <?= $checked ?>
+                                                        id="pdi_result_<?= $row->id  ?>" value="<?= $row->id  ?>">
+                                                    <label
+                                                        for="pdi_result_<?= $row->id  ?>"><?= $row->pdi_result ?></label>
+                                                </div>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -414,19 +202,20 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">ACTION CODES (IF ANY)</label>
                                             <div class="col-sm-12">
+                                                <?php $act_code = explode(",",$marsaf_pdi_data->action_code); ?>
+
+                                                <?php foreach($action_code as $row): ?>
                                                 <?php 
-                                                    $i = 1; 
-                                                    foreach($action_code as $row){
-                                                ?>
+                                                     $inputID = "pdi_action_code{$row->id}";
+                                                     $checked = in_array($row->id, $act_code) ? 'checked' : '';
+                                                        ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_action_code[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->action_code ?></label>
+                                                    <input type="checkbox" name="pdi_action_code[]" id="<?= $inputID ?>"
+                                                        value="<?= $row->id ?>" <?= $checked ?>>
+                                                    <label for="<?= $inputID  ?>"><?= $row->action_code ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -434,19 +223,21 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">NOTED DEFICIENCY/IES (IF ANY)</label>
                                             <div class="col-sm-12">
+                                                <?php $no_defi = explode(",",$marsaf_pdi_data->noted_deficiency); ?>
+
+                                                <?php foreach($noted_deficiency as $row): ?>
                                                 <?php 
-                                                    $i = 1; 
-                                                    foreach($noted_deficiency as $row){
-                                                ?>
+                                                     $inputID = "pdi_noted_deficiency{$row->id}";
+                                                     $checked = in_array($row->id, $no_defi) ? 'checked' : '';
+                                                        ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="pdi_noted_deficiency[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->noted_deficiency ?></label>
+                                                    <input type="checkbox" name="pdi_noted_deficiency[]"
+                                                        id="<?= $inputID ?>" value="<?= $row->id ?>" <?= $checked ?>>
+                                                    <label for="<?= $inputID  ?>"><?= $row->noted_deficiency ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -454,211 +245,18 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-sm-12">SPECIFY NOTED DEFICIENCY/IES (IF ANY)</label>
-                                                <textarea name="pdi_specify_noted_deficiency[]" class="form-control"
-                                                    id="" cols="30" rows="10"></textarea>
+                                                <textarea name="pdi_specify_noted_deficiency" class="form-control"
+                                                    cols="30"
+                                                    rows="10"><?= $marsaf_pdi_data->specify_noted_deficiency ?></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
-                                <?php endif ?>
-                                <hr>
-                                <div class="row m-b-30">
-                                    <div class="col-md-12">
-                                        <button id="pdi-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="pdi-remove-clone-btn" class="btn btn-danger btn-sm" type="button">
-                                            <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
-                                <!-- <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="control-label">BULK CARRIER</label>
-                                            <div class="radio-list">
-                                                <?php 
-                                                    foreach(range(1,5) as $i){
-                                                ?>
-                                                <label class="radio-inline p-0">
-                                                    <div class="radio radio-info">
-                                                        <input type="radio" name="bulk_carrier"
-                                                            id="bulk_carrier_<?php echo $i; ?>"
-                                                            value="<?php echo $i; ?>"
-                                                            <?= $marsaf_pdi->bulk_carrier ?? 0 == $i ? 'checked' : null ?>>
-                                                        <label
-                                                            for="bulk_carrier_<?php echo $i; ?>"><?php echo $i; ?></label>
-                                                    </div>
-                                                </label>
-                                                <?php
-                                                    }
-                                                ?>
-                                                <label class="radio-inline">
-                                                    <div class="radio radio-info">
-                                                        <input type="radio" name="bulk_carrier" id="bulk_carrier_6_10"
-                                                            value="6-10"
-                                                            <?= $marsaf_pdi->bulk_carrier ?? 0 == 6 ? 'checked' : null ?>>
-                                                        <label for="bulk_carrier_6_10">6-10</label>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <fieldset>
-                                    <legend class="scheduler-border m-t-30">TOTAL NR OF PDI CONDUCTED PER TYPE OF VESSEL
-                                    </legend>
-                                    <?php 
-                                        $vessel = array(
-                                            $marsaf_pdi->bulk_carrier_2 ?? 0,
-                                            $marsaf_pdi->cargo ?? 0,
-                                            $marsaf_pdi->chemical_tanker ?? 0,
-                                            $marsaf_pdi->container ?? 0,
-                                            $marsaf_pdi->fishing_vessel ?? 0,
-                                            $marsaf_pdi->passenger ?? 0,
-                                            $marsaf_pdi->roll_on_roll_off ?? 0,
-                                            $marsaf_pdi->tanker ?? 0,
-                                            $marsaf_pdi->tugboat ?? 0,
-                                        );
 
-                                        $count = 0;
-                                        
-                                        foreach($vessel_type as $row){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $row->vessel_type ?></label>
-                                                <div class="radio-list">
-                                                    <?php 
-                                                        foreach(range(1,5) as $i){
-                                                    ?>
-                                                    <label class="radio-inline p-0">
-                                                        <div class="radio radio-info">
-                                                            <input type="radio" name="<?php echo $row->vessel_type ?>"
-                                                                id="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"
-                                                                value="<?php echo $i; ?>"
-                                                                <?= $vessel[$count] == $i ? 'checked' : null ?>>
-                                                            <label
-                                                                for="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_" . $i  ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                    <label class="radio-inline">
-                                                        <div class="radio radio-info">
-                                                            <input type="radio" name="<?php echo $row->vessel_type ?>"
-                                                                id="<?php echo $row->vessel_type . "_" .  $report_type_id . "_" . $row->id . "_6-10"   ?>"
-                                                                value="6-10"
-                                                                <?= $vessel[$count] == 6 ? 'checked' : null ?>>
-                                                            <label for="radio2">6-10</label>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <?php  $count++; 
-                                        }
-                                    ?>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">CHECK BOXES OF ALL NOTED DEFICIENCY/IES (IF
-                                                ANY)</label>
-                                            <div class="col-sm-12">
-                                                <?php $noted_def = explode(",",$marsaf_pdi->noted_deficiency ?? 0 ); $j=0;   ?>
-                                                <?php for($i=0; $i < count($noted_deficiency); $i++): ?>
-                                                <?php if(isset($noted_def[$j]) && $noted_def[$j] == $noted_deficiency[$i]->id):?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="noted_deficiency[]"
-                                                        id="noted_deficiency_<?php echo $report_type_id . "_" .  $noted_deficiency[$i]->id  ?>_2"
-                                                        value="<?php echo  $noted_deficiency[$i]->id  ?>" checked>
-                                                    <label
-                                                        for="noted_deficiency_<?php echo $report_type_id . "_" .  $noted_deficiency[$i]->id  ?>_2"><?php echo  $noted_deficiency[$i]->noted_deficiency ?></label>
-                                                </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="noted_deficiency[]"
-                                                        id="noted_deficiency_<?php echo $report_type_id . "_" .  $noted_deficiency[$i]->id  ?>_2"
-                                                        value="<?php echo  $noted_deficiency[$i]->id  ?>">
-                                                    <label
-                                                        for="noted_deficiency_<?php echo $report_type_id . "_" .  $noted_deficiency[$i]->id  ?>_2"><?php echo  $noted_deficiency[$i]->noted_deficiency ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset>
-                                    <legend class="scheduler-border">TOTAL NUMBER OF VESSEL THAT HAVE BEEN CLEARED TO
-                                        DEPART AND NOT CLEARED TO DEPART</legend>
-                                    <?php 
-                                        $cleared = array(
-                                            $marsaf_pdi->cleared_to_depart ?? 0,
-                                            $marsaf_pdi->not_cleared_to_depart ?? 0
-                                        ); 
-                                     $count=0;   ?>
-                                    <?php  
-                                        foreach($pdi_result as $row){
-                                    ?>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label"><?php echo $row->pdi_result; ?></label>
-                                                <div class="checkbox-list">
-                                                    <?php $clear_depart = explode(",",$cleared[$count]); $j=0; ?>
-                                                    <?php for($i=1; $i < 7; $i++): ?>
-                                                    <?php if($i < 6):?>
-                                                    <?php if(isset($clear_depart[$j]) && $clear_depart[$j] == $i):?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox"
-                                                                name="<?php echo $row->pdi_result; ?>[]"
-                                                                id="<?php echo $row->pdi_result . "_" .  $report_type_id . "_" . $row->id . "_" . $i   ?>"
-                                                                value="<?php echo $i; ?>" checked>
-                                                            <label
-                                                                for="<?php echo $row->pdi_result . "_" .  $report_type_id . "_" . $row->id . "_" . $i   ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-                                                    <?php $j++; else: ?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox"
-                                                                name="<?php echo $row->pdi_result; ?>[]"
-                                                                id="<?php echo $row->pdi_result . "_" .  $report_type_id . "_" . $row->id . "_" . $i   ?>"
-                                                                value="<?php echo $i; ?>">
-                                                            <label
-                                                                for="<?php echo $row->pdi_result . "_" .  $report_type_id . "_" . $row->id . "_" . $i   ?>"><?php echo $i; ?></label>
-                                                        </div>
-                                                    </label>
-
-                                                    <?php endif ?>
-                                                    <?php else: ?>
-                                                    <?php $last_item = count($clear_depart)-1; ?>
-                                                    <label class="checkbox-inline p-0">
-                                                        <div class="checkbox checkbox-info">
-                                                            <input type="checkbox"
-                                                                name="<?php echo $row->pdi_result; ?>[]"
-                                                                id="<?php echo $row->pdi_result . "_" .  $report_type_id . "_6-10"    ?>"
-                                                                value="6"
-                                                                <?= $clear_depart[$last_item]  ==  $i ? 'checked' : null ?>>
-                                                            <label
-                                                                for="<?php echo $row->pdi_result . "_" .  $report_type_id . "_6-10"    ?>">6-10</label>
-                                                        </div>
-                                                    </label>
-                                                    <?php endif ?>
-                                                    <?php endfor ?>
-                                                    <?php $count++; }  ?>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
                                 <?php
                                     }else if($report_type_id == 2){ // VESSEL SAFETY ENFORCEMENT INSPECTION (VSEI)
                                 ?>
+
                                 <?php if(!empty($marsaf_vsei_data)): ?>
                                 <?php foreach($marsaf_vsei_data as $vsei): ?>
                                 <fieldset class="vsei_fieldset">
@@ -4063,11 +3661,9 @@
 
                             </div>
                             <?php	} ?>
-
+                            <button type="submit" class="btn btn-danger pull-right m-t-15"
+                                type="button">Finish!</button>
                         </div>
-                        <!-- <button class="btn btn-danger pull-right" type="button">Finish!</button> -->
-
-                        <button type="submit" class="btn btn-danger pull-right" type="button">Finish!</button>
                     </div>
                 </form>
             </div>
