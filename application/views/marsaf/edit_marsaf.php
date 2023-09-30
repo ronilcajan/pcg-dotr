@@ -840,8 +840,6 @@
                                                 AND SECURITY INSPECTION</strong></p>
                                     </div>
                                 </div>
-                                <?php if(!empty($marsaf_cabrsasi_data)): ?>
-                                <?php foreach($marsaf_cabrsasi_data as $cabrsasi): ?>
                                 <fieldset class="cabrsasi_fieldset">
                                     <legend class="scheduler-border">COASTAL AND BEACH RESORT SAFETY AND SECURITY
                                         INSPECTION DATA</legend>
@@ -849,22 +847,25 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF COASTAL/RESORT</label>
-                                                <input type="text" name="cabrsasi_coastal_name[]"
-                                                    value="<?= $cabrsasi->coastal_name ?>" class="form-control">
+                                                <input type="text" name="cabrsasi_coastal_name"
+                                                    value="<?= $marsaf_cabrsasi_data->coastal_name ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF COASTAL/BEACH RESORT</label>
-                                                <input type="text" value="<?= $cabrsasi->coastal_place ?>"
-                                                    name="cabrsasi_coastal_place[]" class="form-control">
+                                                <input type="text"
+                                                    value="<?= $marsaf_cabrsasi_data->coastal_place ?? '' ?>"
+                                                    name="cabrsasi_coastal_place" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF OWNER</label>
-                                                <input type="text" name="cabrsasi_owner_name[]"
-                                                    value="<?= $cabrsasi->owner_name ?>" class="form-control">
+                                                <input type="text" name="cabrsasi_owner_name"
+                                                    value="<?= $marsaf_cabrsasi_data->owner_name ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -873,97 +874,23 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">LENGTH OF BEACH COAST LINE</label>
                                             <div class="col-sm-12">
-                                                <?php $beach = explode(",",$cabrsasi->beach_coast_line_length); $j=0; ?>
-                                                <?php for($i=0; $i < count($beach_coast_line_length); $i++): ?>
-                                                <?php if(isset($beach[$j]) && $beach[$j] == $beach_coast_line_length[$i]->id):?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="cabrsasi_beach_coast_line_length[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo $beach_coast_line_length[$i]->id  ?>" checked>
-                                                    <label><?php echo $beach_coast_line_length[$i]->beach_coast_line_length ?></label>
-                                                </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="cabrsasi_beach_coast_line_length[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo $beach_coast_line_length[$i]->id  ?>">
-                                                    <label><?php echo $beach_coast_line_length[$i]->beach_coast_line_length ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">VIOLATIONS (IF ANY)</label>
-                                            <div class="col-sm-12">
-                                                <?php $beach_vio = explode(",",$cabrsasi->violation); $j=0; ?>
-                                                <?php for($i=0; $i < count($coastal_and_beach_violation); $i++): ?>
-                                                <?php if(isset($beach_vio[$j]) && $beach_vio[$j] == $coastal_and_beach_violation[$i]->id):?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="cabrsasi_coastal_and_beach_violation[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo $coastal_and_beach_violation[$i]->id  ?>"
-                                                        checked>
-                                                    <label><?php echo $coastal_and_beach_violation[$i]->coastal_and_beach_violation ?></label>
-                                                </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="cabrsasi_coastal_and_beach_violation[0][<?php echo $i+1; $i; ?>]"
-                                                        value="<?php echo $coastal_and_beach_violation[$i]->id  ?>">
-                                                    <label><?php echo $coastal_and_beach_violation[$i]->coastal_and_beach_violation ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <?php endforeach ?>
-                                <?php else: ?>
-                                <fieldset class="cabrsasi_fieldset">
-                                    <legend class="scheduler-border">COASTAL AND BEACH RESORT SAFETY AND SECURITY
-                                        INSPECTION DATA</legend>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">NAME OF COASTAL/RESORT</label>
-                                                <input type="text" name="cabrsasi_coastal_name[]" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">PLACE OF COASTAL/BEACH RESORT</label>
-                                                <input type="text" name="cabrsasi_coastal_place[]" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">NAME OF OWNER</label>
-                                                <input type="text" name="cabrsasi_owner_name[]" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <?php $beach = explode(",",$marsaf_cabrsasi_data->beach_coast_line_length ?? ''); ?>
 
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">LENGTH OF BEACH COAST LINE</label>
-                                            <div class="col-sm-12">
+                                                <?php foreach($beach_coast_line_length as $row): ?>
+
                                                 <?php
-                                                    $i = 1;
-                                                    foreach($beach_coast_line_length as $row){
+                                                        $inputID = "cabrsasi_beach_coast_line_length_{$row->id}";
+                                                        $checked = in_array($row->id, $beach) ? 'checked' : '';
                                                 ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="cabrsasi_beach_coast_line_length[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->beach_coast_line_length ?></label>
+                                                    <input type="checkbox" name="cabrsasi_beach_coast_line_length[]"
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label
+                                                        for="<?= $inputID ?>"><?= $row->beach_coast_line_length ?></label>
                                                 </div>
-                                                <?php
-                                                    }
-                                                ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -971,34 +898,26 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">VIOLATIONS (IF ANY)</label>
                                             <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($coastal_and_beach_violation as $row){
-                                                ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="cabrsasi_coastal_and_beach_violation[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->coastal_and_beach_violation ?></label>
-                                                </div>
+                                                <?php $beach_vio = explode(",",$marsaf_cabrsasi_data->violation ?? '');?>
+                                                <?php foreach($coastal_and_beach_violation as $row): ?>
+
                                                 <?php
-                                                    }
+                                                        $inputID = "cabrsasi_coastal_and_beach_violation_{$row->id}";
+                                                        $checked = in_array($row->id, $beach_vio) ? 'checked' : '';
                                                 ?>
+
+                                                <div class="checkbox checkbox-custom">
+                                                    <input type="checkbox" name="cabrsasi_coastal_and_beach_violation[]"
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label
+                                                        for="<?= $inputID ?>"><?= $row->coastal_and_beach_violation ?></label>
+                                                </div>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
-                                <?php endif ?>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="cabrsasi-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="cabrsasi-remove-clone-btn" class="btn btn-danger btn-sm"
-                                            type="button">
-                                            <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
                                 <?php
                                     }else if($report_type_id == 6){ //   RECREATIONAL SAFETY ENFORCEMENT INSPECTION (RSEI)
                                 ?>
@@ -1009,8 +928,6 @@
                                                 INSPECTION (RSEI)</strong></p>
                                     </div>
                                 </div>
-                                <?php if(!empty($marsaf_rsei_data)): ?>
-                                <?php foreach($marsaf_rsei_data as $rsei): ?>
                                 <fieldset class="rsei_fieldset">
                                     <legend class="scheduler-border">RECREATIONAL SAFETY ENFORCEMENT INSPECTION DATA
                                     </legend>
@@ -1018,22 +935,25 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF RESORT</label>
-                                                <input type="text" name="rsei_resort_name[]"
-                                                    value="<?= $rsei->resort_name ?>" class=" form-control">
+                                                <input type="text" name="rsei_resort_name"
+                                                    value="<?= $marsaf_rsei_data->resort_name ?? '' ?>"
+                                                    class=" form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PLACE OF INSPECTION</label>
-                                                <input type="text" name="rsei_inspection_place[]"
-                                                    value="<?= $rsei->inspection_place ?>" class="form-control">
+                                                <input type="text" name="rsei_inspection_place"
+                                                    value="<?= $marsaf_rsei_data->inspection_place ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF OWNER</label>
-                                                <input type="text" name="rsei_owner_name[]"
-                                                    value="<?= $rsei->owner_name ?>" class="form-control">
+                                                <input type="text" name="rsei_owner_name"
+                                                    value="<?= $marsaf_rsei_data->owner_name ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1042,25 +962,22 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">RECRATION WATERCRAFTS</label>
                                             <div class="col-sm-12">
-                                                <?php $rec = explode(",",$rsei->recration_watercraft); $j=0; ?>
-                                                <?php for($i=0; $i < count($recration_watercraft); $i++): ?>
-                                                <?php if(isset($rec[$j]) && $rec[$j] == $recration_watercraft[$i]->id):?>
+                                                <?php $rec = explode(",",$marsaf_rsei_data->recration_watercraft ?? '' ); ?>
+                                                <?php foreach($recration_watercraft as $row): ?>
+
+                                                <?php
+                                                        $inputID = "rsei_recration_watercraft_{$row->id}";
+                                                        $checked = in_array($row->id, $rec) ? 'checked' : '';
+                                                ?>
 
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="rsei_recration_watercraft[0][<?php echo $i+1; $i ?>]"
-                                                        value="<?php echo $recration_watercraft[$i]->id  ?>" checked>
-                                                    <label><?php echo $recration_watercraft[$i]->recration_watercraft ?></label>
+                                                    <input type="checkbox" name="rsei_recration_watercraft[]"
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label
+                                                        for="<?= $inputID ?>"><?= $row->recration_watercraft ?></label>
                                                 </div>
-                                                <?php $j++; else:?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="rsei_recration_watercraft[0][<?php echo $i+1; $i ?>]"
-                                                        value="<?php echo $recration_watercraft[$i]->id  ?>">
-                                                    <label><?php echo $recration_watercraft[$i]->recration_watercraft ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1068,106 +985,26 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">VIOLATIONS (IF ANY)</label>
                                             <div class="col-sm-12">
-                                                <?php $recreational_vio = explode(",",$rsei->recreational_violation); $j=0; ?>
-                                                <?php for($i=0; $i < count($recreational_violation); $i++): ?>
-                                                <?php if(isset($recreational_vio[$j]) && $recreational_vio[$j] == $recreational_violation[$i]->id):?>
+                                                <?php $recreational_vio = explode(",",$marsaf_rsei_data->recreational_violation ?? '' );?>
+                                                <?php foreach($recreational_violation as $row): ?>
+
+                                                <?php
+                                                        $inputID = "rsei_recreational_violation_{$row->id}";
+                                                        $checked = in_array($row->id, $recreational_vio) ? 'checked' : '';
+                                                ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="rsei_recreational_violation[0][<?php echo $i+1; $i ?>]"
-                                                        value="<?php echo $recreational_violation[$i]->id  ?>" checked>
-                                                    <label><?php echo $recreational_violation[$i]->recreational_violation ?></label>
+                                                    <input type="checkbox" name="rsei_recreational_violation[]"
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label
+                                                        for="<?= $inputID ?>"><?= $row->recreational_violation ?></label>
                                                 </div>
-                                                <?php $j++; else:?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="rsei_recreational_violation[0][<?php echo $i+1; $i ?>]"
-                                                        value="<?php echo $recreational_violation[$i]->id  ?>">
-                                                    <label><?php echo $recreational_violation[$i]->recreational_violation ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
-                                <?php endforeach ?>
-                                <?php else: ?>
-                                <fieldset class="rsei_fieldset">
-                                    <legend class="scheduler-border">RECREATIONAL SAFETY ENFORCEMENT INSPECTION DATA
-                                    </legend>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">NAME OF RESORT</label>
-                                                <input type="text" name="rsei_resort_name[]" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">PLACE OF INSPECTION</label>
-                                                <input type="text" name="rsei_inspection_place[]" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">NAME OF OWNER</label>
-                                                <input type="text" name="rsei_owner_name[]" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">RECRATION WATERCRAFTS</label>
-                                            <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($recration_watercraft as $row){
-                                                ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="rsei_recration_watercraft[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->recration_watercraft ?></label>
-                                                </div>
-                                                <?php
-                                                    }
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">VIOLATIONS (IF ANY)</label>
-                                            <div class="col-sm-12">
-                                                <?php 
-                                                    $i = 1;
-                                                    foreach($recreational_violation as $row){
-                                                ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox"
-                                                        name="rsei_recreational_violation[0][<?php echo $i; $i++; ?>]"
-                                                        value="<?php echo $row->id  ?>">
-                                                    <label><?php echo $row->recreational_violation ?></label>
-                                                </div>
-                                                <?php
-                                                    }
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <?php endif ?>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button id="rsei-clone-btn" class="btn btn-primary btn-sm" type="button"> <i
-                                                class="fa fa-plus"></i> Add</button>
-                                        <button id="rsei-remove-clone-btn" class="btn btn-danger btn-sm" type="button">
-                                            <i class="fa fa-times"></i> Remove</button>
-                                    </div>
-                                </div>
-
                                 <?php
                                     }else if($report_type_id == 7){ //   AIDS TO NAVIGATION (ATON) INSPECTION 
                                 ?>
@@ -1731,11 +1568,6 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <!-- <div class="form-group">
-                                                <label>TIME OF DEPARTURED FROM PORT OF ORIGIN</label>
-                                                <input type="text" name="departure_time_from_port_origin"
-                                                    value="<?= $marsaf_mci->port_origin ?>" class="form-control">
-                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
@@ -2485,27 +2317,21 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">TYPE OF APPLICATION</label>
                                         <div class="col-sm-12">
-                                            <?php $applicat = explode(",",$marsaf_so->application_type ?? 0); $j=0;   ?>
-                                            <?php for($i=0; $i <count($application_type); $i++): ?>
-                                            <?php if(isset($applicat[$j]) && $applicat[$j] == $application_type[$i]->id):?>
+                                            <?php $applicat = explode(",",$marsaf_so->application_type ?? 0); ?>
+                                            <?php foreach($application_type as $row): ?>
+
+                                            <?php
+                                                        $inputID = "so_application_type_{$row->id}";
+                                                        $checked = in_array($row->id, $applicat) ? 'checked' : '';
+                                                ?>
 
                                             <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="so_application_type[]"
-                                                    id="application_type_<?php echo $report_type_id . "_" . $application_type[$i]->id  ?>"
-                                                    value="<?php echo $application_type[$i]->id  ?>" checked>
-                                                <label
-                                                    for="application_type_<?php echo $report_type_id . "_" . $application_type[$i]->id  ?>"><?php echo $application_type[$i]->application_type ?></label>
+                                                <input type="checkbox" name="so_application_type[]" id="<?= $inputID ?>"
+                                                    value="<?= $row->id  ?>" <?= $checked ?>>
+                                                <label for="<?= $inputID ?>"><?= $row->application_type ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="so_application_type[]"
-                                                    id="application_type_<?php echo $report_type_id . "_" . $application_type[$i]->id  ?>"
-                                                    value="<?php echo $application_type[$i]->id  ?>">
-                                                <label
-                                                    for="application_type_<?php echo $report_type_id . "_" . $application_type[$i]->id  ?>"><?php echo $application_type[$i]->application_type ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -2523,27 +2349,22 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">PURPOSE OF SALVAGE OPERATION</label>
                                         <div class="col-sm-12">
-                                            <?php $purpose = explode(",",$marsaf_so->purpose ?? 0); $j=0;   ?>
-                                            <?php for($i=0; $i <count($salvage_operation_purpose); $i++): ?>
-                                            <?php if(isset($purpose[$j]) && $purpose[$j] == $salvage_operation_purpose[$i]->id):?>
+                                            <?php $purpose = explode(",",$marsaf_so->purpose ?? 0); ?>
+                                            <?php foreach($salvage_operation_purpose as $row): ?>
+
+                                            <?php
+                                                    $inputID = "so_purpose_{$row->id}";
+                                                    $checked = in_array($row->id, $purpose) ? 'checked' : '';
+                                            ?>
 
                                             <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="so_purpose[]"
-                                                    id="salvage_operation_purpose_<?php echo $report_type_id . "_" . $salvage_operation_purpose[$i]->id  ?>"
-                                                    value="<?php echo $salvage_operation_purpose[$i]->id  ?>" checked>
+                                                <input type="checkbox" name="so_purpose[]" id="<?= $inputID ?>"
+                                                    value="<?= $row->id  ?>" <?= $checked ?>>
                                                 <label
-                                                    for="salvage_operation_purpose_<?php echo $report_type_id . "_" . $salvage_operation_purpose[$i]->id  ?>"><?php echo $salvage_operation_purpose[$i]->salvage_operation_purpose ?></label>
+                                                    for="<?= $inputID ?>"><?= $row->salvage_operation_purpose ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="so_purpose[]"
-                                                    id="salvage_operation_purpose_<?php echo $report_type_id . "_" . $salvage_operation_purpose[$i]->id  ?>"
-                                                    value="<?php echo $salvage_operation_purpose[$i]->id  ?>">
-                                                <label
-                                                    for="salvage_operation_purpose_<?php echo $report_type_id . "_" . $salvage_operation_purpose[$i]->id  ?>"><?php echo $salvage_operation_purpose[$i]->salvage_operation_purpose ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -2600,27 +2421,21 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">MARITIME ACTIVITY / IES</label>
                                         <div class="col-sm-12">
-                                            <?php $maritime_a = explode(",",$marsaf_mpramra->maritime_acitivity); $j=0;   ?>
-                                            <?php for($i=0; $i <count($maritime_acitivity); $i++): ?>
-                                            <?php if(isset($maritime_a[$j]) && $maritime_a[$j] == $maritime_acitivity[$i]->id):?>
+                                            <?php $maritime_a = explode(",",$marsaf_mpramra->maritime_acitivity); ?>
+                                            <?php foreach($maritime_acitivity as $row): ?>
+
+                                            <?php
+                                                    $inputID = "mpramra_maritime_acitivity_{$row->id}";
+                                                    $checked = in_array($row->id, $maritime_a) ? 'checked' : '';
+                                            ?>
 
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mpramra_maritime_acitivity[]"
-                                                    id="maritime_acitivity_<?php echo $report_type_id . "_" . $maritime_acitivity[$i]->id  ?>"
-                                                    value="<?php echo $maritime_acitivity[$i]->id  ?>" checked>
-                                                <label
-                                                    for="maritime_acitivity_<?php echo $report_type_id . "_" . $maritime_acitivity[$i]->id  ?>"><?php echo $maritime_acitivity[$i]->maritime_acitivity ?></label>
+                                                    id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                <label for="<?= $inputID ?>"><?= $row->maritime_acitivity ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mpramra_maritime_acitivity[]"
-                                                    id="maritime_acitivity_<?php echo $report_type_id . "_" . $maritime_acitivity[$i]->id  ?>"
-                                                    value="<?php echo $maritime_acitivity[$i]->id  ?>">
-                                                <label
-                                                    for="maritime_acitivity_<?php echo $report_type_id . "_" . $maritime_acitivity[$i]->id  ?>"><?php echo $maritime_acitivity[$i]->maritime_acitivity ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -2642,41 +2457,9 @@
                                                 FROM PORT OF
                                                 ORIGIN</label>
 
-                                            <div class="input-group ">
-                                                <span class="input-group-btn">
-                                                    <select name="mpramra_departure_hour_from_origin_port"
-                                                        class="form-control">
-                                                        <option value=""> </option>
-
-                                                        <?php 
-                                                            foreach(range(intval('00:00:00'),intval('23:00:00')) as $time) {
-                                                        ?>
-                                                        <option value="<?php echo date("H", mktime($time)) ?>"
-                                                            <?= $marsaf_mpramra->departure_hour_from_origin_port == date("H", mktime($time)) ? 'selected' : null ?>>
-                                                            <?php echo date("H", mktime($time)) ?></option>
-                                                        <?php  
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <select name="mpramra_departure_minutefrom_origin_port"
-                                                        class="form-control">
-                                                        <option value=""> </option>
-                                                        <?php 
-                                                            foreach(range(intval('00'),intval('59')) as $minute) { 
-                                                                $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                        ?>
-                                                        <option value="<?php echo $minute ?>"
-                                                            <?= $marsaf_mpramra->departure_minutefrom_origin_port == $minute ? 'selected' : null ?>>
-                                                            <?php echo $minute ?>
-                                                        </option>
-                                                        <?php  
-                                                            }
-                                                        ?>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                            <input type="time"
+                                                value="<?= date('H:i', strtotime($marsaf_mpramra->departure_date_from_origin_port ?? 0)) ?>"
+                                                name="mpramra_departure_time_from_origin_port" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -2686,7 +2469,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">POINT OF ORIGIN (COORDINATES)</label>
                                         <div class="col-sm-12">
-                                            <input type="text" value="<?= $marsaf_mpramra->origin_point ?? null ?>"
+                                            <input type="text" value="<?= $marsaf_mpramra->origin_point ?? '' ?>"
                                                 name="mpramra_origin_point" class="form-control">
                                         </div>
                                     </div>
@@ -2695,7 +2478,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">POINT OF DESTINATION (COORDINATES)</label>
                                         <div class="col-sm-12">
-                                            <input type="text" value="<?= $marsaf_mpramra->destination_point ?? null ?>"
+                                            <input type="text" value="<?= $marsaf_mpramra->destination_point ?? '' ?>"
                                                 name="mpramra_destination_point" class="form-control">
                                         </div>
                                     </div>
@@ -2704,7 +2487,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-12">IS THERE ANY VESSEL INVOLVED?</label>
                                         <div class="col-sm-12">
-                                            <input type="text" value="<?= $marsaf_mpramra->involved_vessel ?? null ?>"
+                                            <input type="text" value="<?= $marsaf_mpramra->involved_vessel ?? '' ?>"
                                                 name="mpramra_involved_vessel" class="form-control">
                                         </div>
                                     </div>
@@ -2714,7 +2497,7 @@
                                         <label class="col-sm-12">HOW MANY VESSEL INVOLVED?</label>
                                         <div class="col-sm-12">
                                             <input type="text" name="mpramra_involved_vessel_total"
-                                                value="<?= $marsaf_mpramra->mpramra_involved_vessel_total ?? null ?>"
+                                                value="<?= $marsaf_mpramra->mpramra_involved_vessel_total ?? '' ?>"
                                                 class="form-control">
                                         </div>
                                     </div>
@@ -2723,27 +2506,22 @@
                                     <div class="form-group">
                                         <label class="col-sm-12 font-weight-bold m-t-20">VIOLATIONS (IF ANY)</label>
                                         <div class="col-sm-12">
-                                            <?php $mpramra_mari = explode(",",$marsaf_mpramra->mpramra_maritime_related_violation ?? 0 ); $j=0;   ?>
-                                            <?php for($i=0; $i < count($maritime_related_violation); $i++): ?>
-                                            <?php if(isset($mpramra_mari[$j]) && $mpramra_mari[$j] == $maritime_related_violation[$i]->id):?>
+                                            <?php $mpramra_mari = explode(",",$marsaf_mpramra->mpramra_maritime_related_violation ?? '' );  ?>
+                                            <?php foreach($maritime_related_violation as $row): ?>
+
+                                            <?php
+                                                    $inputID = "mpramra_maritime_related_violation_{$row->id}";
+                                                    $checked = in_array($row->id, $mpramra_mari) ? 'checked' : '';
+                                            ?>
 
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mpramra_maritime_related_violation[]"
-                                                    id="maritime_related_violation_<?php echo $report_type_id . "_" . $maritime_related_violation[$i]->id  ?>"
-                                                    value="<?php echo $maritime_related_violation[$i]->id  ?>" checked>
+                                                    id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
                                                 <label
-                                                    for="maritime_related_violation_<?php echo $report_type_id . "_" . $maritime_related_violation[$i]->id  ?>"><?php echo $maritime_related_violation[$i]->maritime_related_violation ?></label>
+                                                    for="<?= $inputID ?>"><?= $row->maritime_related_violation ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mpramra_maritime_related_violation[]"
-                                                    id="maritime_related_violation_<?php echo $report_type_id . "_" . $maritime_related_violation[$i]->id  ?>"
-                                                    value="<?php echo $maritime_related_violation[$i]->id  ?>">
-                                                <label
-                                                    for="maritime_related_violation_<?php echo $report_type_id . "_" . $maritime_related_violation[$i]->id  ?>"><?php echo $maritime_related_violation[$i]->maritime_related_violation ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>
@@ -2751,8 +2529,8 @@
 
                             </div>
                             <?php	} ?>
-                            <button type="submit" class="btn btn-danger pull-right m-t-15"
-                                type="button">Finish!</button>
+                            <button type="submit" class="btn btn-success pull-right m-t-15"
+                                type="button">Update</button>
                         </div>
                     </div>
                 </form>
