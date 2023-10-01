@@ -1015,15 +1015,14 @@
                                                 INSPECTION</strong></p>
                                     </div>
                                 </div>
-                                <?php if(!empty($marsaf_aton)): ?>
                                 <fieldset>
                                     <legend class="scheduler-border">Part 1. LIGHTHOUSE (LH)</legend>
                                     <div class="row">
                                         <div class="form-group">
                                             <label class="col-sm-12">NAME OF LH</label>
                                             <div class="col-sm-12">
-                                                <input type="text" name="lh_name" value="<?= $marsaf_aton->lh_name ?>"
-                                                    class="form-control">
+                                                <input type="text" name="lh_name"
+                                                    value="<?= $marsaf_aton->lh_name ?? '' ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1031,53 +1030,42 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">TYPE OF LH</label>
-                                                <?php $lh_type = explode(",",$marsaf_aton->lh_type ?? 0); $j=0; ?>
-                                                <?php for($i=0; $i < count($lighthouse_type); $i++): ?>
-                                                <?php if(isset($lh_type[$j]) && $lh_type[$j] == $lighthouse_type[$i]->id):?>
+                                                <?php $lh_type = explode(",",$marsaf_aton->lh_type ?? 0); ?>
+                                                <?php foreach($lighthouse_type as $row): ?>
+
+                                                <?php
+                                                        $inputID = "lh_type_{$row->id}";
+                                                        $checked = in_array($row->id, $lh_type) ? 'checked' : '';
+                                                ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lh_type[]"
-                                                        id="lh_type_<?php echo $report_type_id . "_" .  $lighthouse_type[$i]->id  ?>"
-                                                        value="<?php echo  $lighthouse_type[$i]->id  ?>" checked>
-                                                    <label
-                                                        for="lh_type_<?php echo $report_type_id . "_" .  $lighthouse_type[$i]->id  ?>"><?php echo  $lighthouse_type[$i]->lighthouse_type ?></label>
+                                                    <input type="checkbox" name="lh_type[]" id="<?= $inputID ?>"
+                                                        value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label for="<?= $inputID ?>"><?= $row->lighthouse_type ?></label>
                                                 </div>
-                                                <?php $j++; else:?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lh_type[]"
-                                                        id="lh_type_<?php echo $report_type_id . "_" .  $lighthouse_type[$i]->id  ?>"
-                                                        value="<?php echo  $lighthouse_type[$i]->id  ?>">
-                                                    <label
-                                                        for="lh_type_<?php echo $report_type_id . "_" .  $lighthouse_type[$i]->id  ?>"><?php echo  $lighthouse_type[$i]->lighthouse_type ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-sm-12">PURPOSE OF INSPECTION</label>
-                                                <?php $lh_inspection_purpose = explode(",",$marsaf_aton->lh_inspection_purpose ?? 0); $j=0; ?>
-                                                <?php for($i=0; $i < count($lighthouse_inspection_purpose); $i++): ?>
-                                                <?php if(isset($lh_inspection_purpose[$j]) && $lh_inspection_purpose[$j] == $lighthouse_inspection_purpose[$i]->id):?>
+                                                <?php $lh_inspection_purpose = explode(",",$marsaf_aton->lh_inspection_purpose ?? 0); ?>
+                                                <?php foreach($lighthouse_inspection_purpose as $row): ?>
+
+                                                <?php
+                                                        $inputID = "lh_inspection_purpose_{$row->id}";
+                                                        $checked = in_array($row->id, $lh_inspection_purpose) ? 'checked' : '';
+                                                ?>
 
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lh_inspection_purpose[]"
-                                                        id="lh_inspection_purpose_<?php echo $report_type_id . "_" . $lighthouse_inspection_purpose[$i]->id  ?>"
-                                                        value="<?php echo $lighthouse_inspection_purpose[$i]->id  ?>"
-                                                        checked>
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
                                                     <label
-                                                        for="lh_inspection_purpose_<?php echo $report_type_id . "_" . $lighthouse_inspection_purpose[$i]->id  ?>"><?php echo $lighthouse_inspection_purpose[$i]->lighthouse_inspection_purpose ?></label>
+                                                        for="<?= $inputID ?>"><?= $row->lighthouse_inspection_purpose ?></label>
                                                 </div>
-                                                <?php $j++; else:?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lh_inspection_purpose[]"
-                                                        id="lh_inspection_purpose_<?php echo $report_type_id . "_" . $lighthouse_inspection_purpose[$i]->id  ?>"
-                                                        value="<?php echo $lighthouse_inspection_purpose[$i]->id  ?>">
-                                                    <label
-                                                        for="lh_inspection_purpose_<?php echo $report_type_id . "_" . $lighthouse_inspection_purpose[$i]->id  ?>"><?php echo $lighthouse_inspection_purpose[$i]->lighthouse_inspection_purpose ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1086,7 +1074,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-12">NAME OF VESSEL</label>
                                                 <textarea name="lh_vessel_name" class="form-control" id="" cols="30"
-                                                    rows="10"><?= $marsaf_aton->lh_vessel_name ?? null ?></textarea>
+                                                    rows="10"><?= $marsaf_aton->lh_vessel_name ?? '' ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1096,7 +1084,7 @@
                                             <label class="col-sm-12">DATE OF LAST OPERATION</label>
                                             <div class="col-sm-12">
                                                 <input type="date" name="lh_last_operation"
-                                                    value="<?= date('Y-m-d', strtotime($marsaf_aton->lh_last_operation)) ?>"
+                                                    value="<?= date('Y-m-d', strtotime($marsaf_aton->lh_last_operation  ?? '')) ?>"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -1106,25 +1094,20 @@
                                             <label class="col-sm-12">STATUS</label>
                                             <div class="col-sm-12">
                                                 <?php $lh_status = explode(",",$marsaf_aton->lh_status ?? 0); $j=0; ?>
-                                                <?php for($i=0; $i < count($lighthouse_status); $i++): ?>
-                                                <?php if(isset($lh_status[$j]) && $lh_status[$j] == $lighthouse_status[$i]->id):?>
+                                                <?php foreach($lighthouse_status as $row): ?>
+
+                                                <?php
+                                                        $inputID = "lh_status_{$row->id}";
+                                                        $checked = in_array($row->id, $lh_status) ? 'checked' : '';
+                                                ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lh_status[]"
-                                                        id="lh_status_<?php echo $report_type_id . "_" . $lighthouse_status[$i]->id  ?>"
-                                                        value="<?php echo $lighthouse_status[$i]->id  ?>" checked>
-                                                    <label
-                                                        for="lh_status_<?php echo $report_type_id . "_" . $lighthouse_status[$i]->id  ?>"><?php echo $lighthouse_status[$i]->lighthouse_status ?></label>
+                                                    <input type="checkbox" name="lh_status[]" id="<?= $inputID ?>"
+                                                        value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label for="<?= $inputID ?>"><?= $row->lighthouse_status ?></label>
                                                 </div>
-                                                <?php $j++; else:?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lh_status[]"
-                                                        id="lh_status_<?php echo $report_type_id . "_" . $lighthouse_status[$i]->id  ?>"
-                                                        value="<?php echo $lighthouse_status[$i]->id  ?>">
-                                                    <label
-                                                        for="lh_status_<?php echo $report_type_id . "_" . $lighthouse_status[$i]->id  ?>"><?php echo $lighthouse_status[$i]->lighthouse_status ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1132,35 +1115,26 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">IF NOT OPERATING, WHAT IS THE CAUSED?</label>
                                             <div class="col-sm-12">
-                                                <?php $lh_cause_if_not_operating = explode(",",$marsaf_aton->lh_cause_if_not_operating ?? 0); $j=0; ?>
-                                                <?php for($i=0; $i < count($lighthouse_cause_if_not_operating); $i++): ?>
-                                                <?php if(isset($lh_cause_if_not_operating[$j]) && $lh_cause_if_not_operating[$j] == $lighthouse_cause_if_not_operating[$i]->id):?>
+                                                <?php $lh_cause_if_not_operating = explode(",",$marsaf_aton->lh_cause_if_not_operating ?? 0);?>
+                                                <?php foreach($lighthouse_cause_if_not_operating as $row): ?>
+
+                                                <?php
+                                                        $inputID = "lh_cause_if_not_operating_{$row->id}";
+                                                        $checked = in_array($row->id, $lh_cause_if_not_operating) ? 'checked' : '';
+                                                ?>
+
                                                 <div class="checkbox checkbox-custom">
-                                                    <div class="checkbox checkbox-custom">
-                                                        <input type="checkbox" name="lh_cause_if_not_operating[]"
-                                                            id="lh_cause_if_not_operating_<?php echo $report_type_id . "_" . $lighthouse_cause_if_not_operating[$i]->id  ?>"
-                                                            value="<?php echo $lighthouse_cause_if_not_operating[$i]->id  ?>"
-                                                            checked>
-                                                        <label
-                                                            for="lh_cause_if_not_operating_<?php echo $report_type_id . "_" . $lighthouse_cause_if_not_operating[$i]->id  ?>"><?php echo $lighthouse_cause_if_not_operating[$i]->lighthouse_cause_if_not_operating ?></label>
-                                                    </div>
+                                                    <input type="checkbox" name="lh_cause_if_not_operating[]"
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label
+                                                        for="<?= $inputID ?>"><?= $row->lighthouse_cause_if_not_operating ?></label>
                                                 </div>
-                                                <?php $j++; else:?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <div class="checkbox checkbox-custom">
-                                                        <input type="checkbox" name="lh_cause_if_not_operating[]"
-                                                            id="lh_cause_if_not_operating_<?php echo $report_type_id . "_" . $lighthouse_cause_if_not_operating[$i]->id  ?>"
-                                                            value="<?php echo $lighthouse_cause_if_not_operating[$i]->id  ?>">
-                                                        <label
-                                                            for="lh_cause_if_not_operating_<?php echo $report_type_id . "_" . $lighthouse_cause_if_not_operating[$i]->id  ?>"><?php echo $lighthouse_cause_if_not_operating[$i]->lighthouse_cause_if_not_operating ?></label>
-                                                    </div>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                 </fieldset>
-                                <?php endif ?>
+
                                 <fieldset>
                                     <legend class="scheduler-border">TOTAL NUMBER OF LH NOT OPERATING AND OPERATING
                                     </legend>
@@ -1218,27 +1192,21 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">TYPE OF BOUY</label>
                                             <div class="col-sm-12">
-                                                <?php $lb_type = explode(",",$marsaf_aton->lb_type ?? 0); $j=0;   ?>
-                                                <?php for($i=0; $i < count($bouy_type); $i++): ?>
-                                                <?php if(isset($lb_type[$j]) && $lb_type[$j] == $bouy_type[$i]->id):?>
+                                                <?php $lb_type = explode(",",$marsaf_aton->lb_type ?? ''); ?>
+                                                <?php foreach($bouy_type as $row): ?>
+
+                                                <?php
+                                                        $inputID = "lb_type_{$row->id}";
+                                                        $checked = in_array($row->id, $lb_type) ? 'checked' : '';
+                                                ?>
 
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lb_type[]"
-                                                        id="lb_type_<?php echo $report_type_id . "_" . $bouy_type[$i]->id  ?>"
-                                                        value="<?php echo $bouy_type[$i]->id  ?>" checked>
-                                                    <label
-                                                        for="lb_type_<?php echo $report_type_id . "_" . $bouy_type[$i]->id  ?>"><?php echo $bouy_type[$i]->bouy_type ?></label>
+                                                    <input type="checkbox" name="lb_type[]" id="<?= $inputID ?>"
+                                                        value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label for="<?= $inputID ?>"><?= $row->bouy_type ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lb_type[]"
-                                                        id="lb_type_<?php echo $report_type_id . "_" . $bouy_type[$i]->id  ?>"
-                                                        value="<?php echo $bouy_type[$i]->id  ?>">
-                                                    <label
-                                                        for="lb_type_<?php echo $report_type_id . "_" . $bouy_type[$i]->id  ?>"><?php echo $bouy_type[$i]->bouy_type ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1259,28 +1227,22 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">PURPOSE OF INSPECTION</label>
                                             <div class="col-sm-12">
-                                                <?php $lb_inspection_purpose = explode(",",$marsaf_aton->lb_inspection_purpose ?? 0); $j=0;   ?>
-                                                <?php for($i=0; $i < count($light_bouy_inspection_purpose); $i++): ?>
-                                                <?php if(isset($lb_inspection_purpose[$j]) && $lb_inspection_purpose[$j] == $light_bouy_inspection_purpose[$i]->id):?>
+                                                <?php $lb_inspection_purpose = explode(",",$marsaf_aton->lb_inspection_purpose ?? 0); ?>
+                                                <?php foreach($light_bouy_inspection_purpose as $row): ?>
+
+                                                <?php
+                                                        $inputID = "lb_inspection_purpose_{$row->id}";
+                                                        $checked = in_array($row->id, $lb_inspection_purpose) ? 'checked' : '';
+                                                ?>
 
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lb_inspection_purpose[]"
-                                                        id="lb_inspection_purpose_<?php echo $report_type_id . "_" . $light_bouy_inspection_purpose[$i]->id  ?>"
-                                                        value="<?php echo $light_bouy_inspection_purpose[$i]->id  ?>"
-                                                        checked>
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
                                                     <label
-                                                        for="lb_inspection_purpose_<?php echo $report_type_id . "_" . $light_bouy_inspection_purpose[$i]->id  ?>"><?php echo $light_bouy_inspection_purpose[$i]->light_bouy_inspection_purpose ?></label>
+                                                        for="<?= $inputID ?>"><?= $row->light_bouy_inspection_purpose ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lb_inspection_purpose[]"
-                                                        id="lb_inspection_purpose_<?php echo $report_type_id . "_" . $light_bouy_inspection_purpose[$i]->id  ?>"
-                                                        value="<?php echo $light_bouy_inspection_purpose[$i]->id  ?>">
-                                                    <label
-                                                        for="lb_inspection_purpose_<?php echo $report_type_id . "_" . $light_bouy_inspection_purpose[$i]->id  ?>"><?php echo $light_bouy_inspection_purpose[$i]->light_bouy_inspection_purpose ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1308,27 +1270,21 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">STATUS</label>
                                             <div class="col-sm-12">
-                                                <?php $lb_status = explode(",",$marsaf_aton->lb_status ?? 0); $j=0;   ?>
-                                                <?php for($i=0; $i < count($light_buoy_status); $i++): ?>
-                                                <?php if(isset($lb_status[$j]) && $lb_status[$j] == $light_buoy_status[$i]->id):?>
+                                                <?php $lb_status = explode(",",$marsaf_aton->lb_status ?? 0); ?>
+                                                <?php foreach($light_buoy_status as $row): ?>
+
+                                                <?php
+                                                        $inputID = "lb_status_{$row->id}";
+                                                        $checked = in_array($row->id, $lb_status) ? 'checked' : '';
+                                                ?>
 
                                                 <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lb_status[]"
-                                                        id="lb_status_<?php echo $report_type_id . "_" . $light_buoy_status[$i]->id  ?>"
-                                                        value="<?php echo $light_buoy_status[$i]->id  ?>" checked>
-                                                    <label
-                                                        for="lb_status_<?php echo $report_type_id . "_" . $light_buoy_status[$i]->id  ?>"><?php echo $light_buoy_status[$i]->light_buoy_status ?></label>
+                                                    <input type="checkbox" name="lb_status[]" id="<?= $inputID ?>"
+                                                        value="<?= $row->id  ?>" <?= $checked ?>>
+                                                    <label for="<?= $inputID ?>"><?= $row->light_buoy_status ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lb_status[]"
-                                                        id="lb_status_<?php echo $report_type_id . "_" . $light_buoy_status[$i]->id  ?>"
-                                                        value="<?php echo $light_buoy_status[$i]->id  ?>">
-                                                    <label
-                                                        for="lb_status_<?php echo $report_type_id . "_" . $light_buoy_status[$i]->id  ?>"><?php echo $light_buoy_status[$i]->light_buoy_status ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1337,28 +1293,22 @@
                                         <div class="form-group">
                                             <label class="col-sm-12">IF NOT OPERATING, WHAT IS THE CAUSED?</label>
                                             <div class="col-sm-12">
-                                                <?php $lb_cause_if = explode(",",$marsaf_aton->lb_cause_if_not_operating ?? 0); $j=0;   ?>
-                                                <?php for($i=0; $i < count($light_buoy__cause_if_not_operating); $i++): ?>
-                                                <?php if(isset($lb_cause_if[$j]) && $lb_cause_if[$j] == $light_buoy__cause_if_not_operating[$i]->id):?>
+                                                <?php $lb_cause_if = explode(",",$marsaf_aton->lb_cause_if_not_operating ?? 0); ?>
+                                                <?php foreach($light_buoy__cause_if_not_operating as $row): ?>
+
+                                                <?php
+                                                        $inputID = "lb_cause_if_not_operating_{$row->id}";
+                                                        $checked = in_array($row->id, $lb_cause_if) ? 'checked' : '';
+                                                ?>
 
                                                 <div class="checkbox checkbox-custom">
                                                     <input type="checkbox" name="lb_cause_if_not_operating[]"
-                                                        id="lb_cause_if_not_operating_<?php echo $report_type_id . "_" .$light_buoy__cause_if_not_operating[$i]->id  ?>"
-                                                        value="<?php echo$light_buoy__cause_if_not_operating[$i]->id  ?>"
-                                                        checked>
+                                                        id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
                                                     <label
-                                                        for="lb_cause_if_not_operating_<?php echo $report_type_id . "_" .$light_buoy__cause_if_not_operating[$i]->id  ?>"><?php echo$light_buoy__cause_if_not_operating[$i]->light_buoy__cause_if_not_operating ?></label>
+                                                        for="<?= $inputID ?>"><?= $row->light_buoy__cause_if_not_operating ?></label>
                                                 </div>
-                                                <?php $j++; else: ?>
-                                                <div class="checkbox checkbox-custom">
-                                                    <input type="checkbox" name="lb_cause_if_not_operating[]"
-                                                        id="lb_cause_if_not_operating_<?php echo $report_type_id . "_" .$light_buoy__cause_if_not_operating[$i]->id  ?>"
-                                                        value="<?php echo$light_buoy__cause_if_not_operating[$i]->id  ?>">
-                                                    <label
-                                                        for="lb_cause_if_not_operating_<?php echo $report_type_id . "_" .$light_buoy__cause_if_not_operating[$i]->id  ?>"><?php echo$light_buoy__cause_if_not_operating[$i]->light_buoy__cause_if_not_operating ?></label>
-                                                </div>
-                                                <?php endif ?>
-                                                <?php endfor ?>
+
+                                                <?php endforeach ?>
                                             </div>
                                         </div>
                                     </div>
@@ -1414,21 +1364,21 @@
                                         <p>Fill this section if you are conducting MCI</p>
                                     </div>
                                 </div>
-                                <?php if(!empty($marsaf_mci)): ?>
                                 <fieldset>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>EXACT LOCATION (COORDINATES)</label>
                                                 <input type="text" name="mci_exact_location"
-                                                    value="<?= $marsaf_mci->exact_location ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->exact_location ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>NAME OF VESSEL</label>
                                                 <input type="text" name="mci_vessel_name"
-                                                    value="<?= $marsaf_mci->vessel_name ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->vessel_name  ?? '' ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1437,21 +1387,23 @@
                                             <div class="form-group">
                                                 <label>FLAG OF REGISTRY</label>
                                                 <input type="text" name="mci_registry_flag"
-                                                    value="<?= $marsaf_mci->registry_flag ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->registry_flag ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>IMO NUMBER (FOREIGN)</label>
                                                 <input type="text" name="mci_foreign_imo_number"
-                                                    value="<?= $marsaf_mci->foreign_imo_number ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->foreign_imo_number ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>OFFICIAL NUMBER (DOMESTIC)</label>
                                                 <input type="text" name="mci_domestic_official_number"
-                                                    value="<?= $marsaf_mci->domestic_official_number ?>"
+                                                    value="<?= $marsaf_mci->domestic_official_number ?? '' ?>"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -1459,7 +1411,7 @@
                                             <div class="form-group">
                                                 <label>GT/NT</label>
                                                 <input type="text" name="mci_gt_nt" class="form-control"
-                                                    value="<?= $marsaf_mci->gt_nt ?>">
+                                                    value="<?= $marsaf_mci->gt_nt ?? '' ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -1469,14 +1421,15 @@
                                             <div class="form-group">
                                                 <label>NAME OF OWNER/COMPANY</label>
                                                 <input type="text" name="mci_company_name"
-                                                    value="<?= $marsaf_mci->company_name ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->company_name ?? '' ?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>OWNER/COMPANY ADDRESS</label>
                                                 <input type="text" name="mci_company_address"
-                                                    value="<?= $marsaf_mci->company_address ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->company_address ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1485,13 +1438,14 @@
                                             <div class="form-group">
                                                 <label>CAPTAINS NAME</label>
                                                 <input type="text" name="mci_captain_name"
-                                                    value="<?= $marsaf_mci->captain_name ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->captain_name ?? '' ?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>NUMBER OF CREW AND ITS NATIONALITY</label>
-                                                <input type="text" value="<?= $marsaf_mci->crew_nationality_number ?>"
+                                                <input type="text"
+                                                    value="<?= $marsaf_mci->crew_nationality_number ?? '' ?>"
                                                     name="mci_crew_nationality_number" class="form-control">
                                             </div>
                                         </div>
@@ -1502,21 +1456,23 @@
                                             <div class="form-group">
                                                 <label>NUMBER OF PASSENGER (IF ANY)</label>
                                                 <input type="text" name="mci_passenger_number"
-                                                    value="<?= $marsaf_mci->passenger_number ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->passenger_number ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>CARGOES ONBOARD (IF ANY)</label>
                                                 <input type="text" name="mci_cargoe_onboard"
-                                                    value="<?= $marsaf_mci->cargoe_onboard ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->cargoe_onboard ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>PORT OF ORIGIN</label>
                                                 <input type="text" name="mci_port_origin"
-                                                    value="<?= $marsaf_mci->port_origin ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->port_origin ?? '' ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1525,185 +1481,134 @@
                                             <div class="form-group">
                                                 <label>DATE OF DEPARTURE FROM PORT OF ORIGIN</label>
                                                 <input type="date" name="mci_departure_date_from_port_origin"
-                                                    value="<?= date('Y-m-d', strtotime($marsaf_mci->departure_date_from_port_origin)) ?>"
-                                                    class="form-control">
+                                                    class="form-control"
+                                                    value="<?= date('Y-m-d', strtotime($marsaf_mci->departure_date_from_port_origin ?? '')) ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="control-label">TIME OF DEPARTURED FROM PORT OF
-                                                    ORIGIN</label>
-                                                <div class="input-group ">
-                                                    <span class="input-group-btn">
-                                                        <select name="mci_departure_time_from_port_origin"
-                                                            class="form-control">
-                                                            <option value=""> </option>
-                                                            <?php 
-                                                                foreach(range(intval('00:00:00'),intval('23:00:00')) as $time) {
-                                                            ?>
-                                                            <option value="<?php echo date("H", mktime($time)) ?>"
-                                                                <?= date("H",strtotime($marsaf_mci->departure_time_from_port_origin ?? 0)) ==  date("H", mktime($time)) ? 'selected' : null ?>>
-                                                                <?php echo date("H", mktime($time)) ?></option>
-                                                            <?php  
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </span>
-                                                    <span class="input-group-btn">
-                                                        <select name="mci_departure_time_from_port_origin_2"
-                                                            class="form-control">
-                                                            <option value=""> </option>
-                                                            <?php 
-                                                                foreach(range(intval('00'),intval('59')) as $minute) { 
-                                                                    $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                            ?>
-                                                            <option value="<?php echo $minute ?>"
-                                                                <?= date("i",strtotime($marsaf_mci->departure_time_from_port_origin ?? 0))  ==  $minute ? 'selected' : null ?>>
-                                                                <?php echo $minute ?>
-                                                            </option>
-                                                            <?php  
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </span>
-                                                </div>
+                                                <label>TIME OF DEPARTURED FROM PORT OF ORIGIN</label>
+                                                <input type="time" name="mci_departure_time_from_port_origin"
+                                                    class="form-control"
+                                                    value="<?= date('H:i', strtotime($marsaf_mci->departure_date_from_port_origin ?? '')) ?>">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group">
-                                            <label>DATE AND TIME OF INCIDENT</label>
-                                            <input type="text" name="mci_incident_time"
-                                                value="<?= $marsaf_mci->incident_time ?>" class="form-control">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>DATE OF INCIDENT</label>
+                                                <input type="date" name="mci_incident_date" class="form-control"
+                                                    value="<?= date('Y-m-d',strtotime($marsaf_mci->incident_date ?? '')) ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>TIME OF INCIDENT</label>
+                                                <input type="time" name="mci_incident_time" class="form-control"
+                                                    value="<?= date('H:i',strtotime($marsaf_mci->incident_date ?? '')) ?>">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>NATURE OF MARITIME CASUALTY</label>
-                                            <?php $maritime_c = explode(",",$marsaf_mci->maritime_casualty_nature); $j=0;   ?>
-                                            <?php for($i=0; $i <count($maritime_casualty_nature); $i++): ?>
-                                            <?php if(isset($maritime_c[$j]) && $maritime_c[$j] == $maritime_casualty_nature[$i]->id):?>
+                                            <?php $maritime_c = explode(",",$marsaf_mci->maritime_casualty_nature ?? ''); ?>
+                                            <?php foreach($maritime_casualty_nature as $row): ?>
+
+                                            <?php
+                                                    $inputID = "mci_maritime_casualty_nature_{$row->id}";
+                                                    $checked = in_array($row->id, $maritime_c) ? 'checked' : '';
+                                            ?>
+
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_maritime_casualty_nature[]"
-                                                    id="maritime_casualty_nature_<?php echo $report_type_id . "_" . $maritime_casualty_nature[$i]->id  ?>"
-                                                    value="<?php echo $maritime_casualty_nature[$i]->id  ?>" checked>
+                                                    id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
                                                 <label
-                                                    for="maritime_casualty_nature_<?php echo $report_type_id . "_" . $maritime_casualty_nature[$i]->id  ?>"><?php echo $maritime_casualty_nature[$i]->maritime_casualty_nature ?></label>
+                                                    for="<?= $inputID ?>"><?= $row->maritime_casualty_nature ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_maritime_casualty_nature[]"
-                                                    id="maritime_casualty_nature_<?php echo $report_type_id . "_" . $maritime_casualty_nature[$i]->id  ?>"
-                                                    value="<?php echo $maritime_casualty_nature[$i]->id  ?>">
-                                                <label
-                                                    for="maritime_casualty_nature_<?php echo $report_type_id . "_" . $maritime_casualty_nature[$i]->id  ?>"><?php echo $maritime_casualty_nature[$i]->maritime_casualty_nature ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>CAUSE OF INCIDENT</label>
-                                            <?php $incide = explode(",",$marsaf_mci->incident_cause); $j=0;   ?>
-                                            <?php for($i=0; $i <count($incident_cause); $i++): ?>
-                                            <?php if(isset($incide[$j]) && $incide[$j] == $incident_cause[$i]->id):?>
+                                            <?php $incide = explode(",",$marsaf_mci->incident_cause ?? '');  ?>
+
+                                            <?php foreach($incident_cause as $row): ?>
+
+                                            <?php
+                                                    $inputID = "mci_incident_cause_{$row->id}";
+                                                    $checked = in_array($row->id, $incide) ? 'checked' : '';
+                                            ?>
+
                                             <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_incident_cause[]"
-                                                    id="incident_cause_<?php echo $report_type_id . "_" . $incident_cause[$i]->id  ?>"
-                                                    value="<?php echo $incident_cause[$i]->id  ?>" checked>
-                                                <label
-                                                    for="incident_cause_<?php echo $report_type_id . "_" . $incident_cause[$i]->id  ?>"><?php echo $incident_cause[$i]->incident_cause ?></label>
+                                                <input type="checkbox" name="mci_incident_cause[]" id="<?= $inputID ?>"
+                                                    value="<?= $row->id  ?>" <?= $checked ?>>
+                                                <label for="<?= $inputID ?>"><?= $row->incident_cause ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_incident_cause[]"
-                                                    id="incident_cause_<?php echo $report_type_id . "_" . $incident_cause[$i]->id  ?>"
-                                                    value="<?php echo $incident_cause[$i]->id  ?>">
-                                                <label
-                                                    for="incident_cause_<?php echo $report_type_id . "_" . $incident_cause[$i]->id  ?>"><?php echo $incident_cause[$i]->incident_cause ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>CONSEQUENCES OF INCIDENT</label>
-                                            <?php $incident_con = explode(",",$marsaf_mci->incident_consequences); $j=0;   ?>
-                                            <?php for($i=0; $i <count($incident_consequences); $i++): ?>
-                                            <?php if(isset($incident_con[$j]) && $incident_con[$j] == $incident_consequences[$i]->id):?>
+                                            <?php $incident_con = explode(",",$marsaf_mci->incident_consequences ?? ''); ?>
+                                            <?php foreach($incident_consequences as $row): ?>
+
+                                            <?php
+                                                    $inputID = "mci_incident_consequences_{$row->id}";
+                                                    $checked = in_array($row->id, $incident_con) ? 'checked' : '';
+                                            ?>
 
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_incident_consequences[]"
-                                                    id="incident_consequences_<?php echo $report_type_id . "_" . $incident_consequences[$i]->id  ?>"
-                                                    value="<?php echo $incident_consequences[$i]->id  ?>" checked>
-                                                <label
-                                                    for="incident_consequences_<?php echo $report_type_id . "_" . $incident_consequences[$i]->id  ?>"><?php echo $incident_consequences[$i]->incident_consequences ?></label>
+                                                    id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
+                                                <label for="<?= $inputID ?>"><?= $row->incident_consequences ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_incident_consequences[]"
-                                                    id="incident_consequences_<?php echo $report_type_id . "_" . $incident_consequences[$i]->id  ?>"
-                                                    value="<?php echo $incident_consequences[$i]->id  ?>">
-                                                <label
-                                                    for="incident_consequences_<?php echo $report_type_id . "_" . $incident_consequences[$i]->id  ?>"><?php echo $incident_consequences[$i]->incident_consequences ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group">
                                             <label>SEVERITY OF MARITIME CASUALTY/INCIDENT</label>
-                                            <?php $maritime_inci= explode(",",$marsaf_mci->maritime_incident_severity); $j=0;   ?>
-                                            <?php for($i=0; $i <count($maritime_incident_severity); $i++): ?>
-                                            <?php if(isset($maritime_inci[$j]) && $maritime_inci[$j] == $maritime_incident_severity[$i]->id):?>
+                                            <?php $maritime_inci= explode(",",$marsaf_mci->maritime_incident_severity ?? ''); ?>
+                                            <?php foreach($maritime_incident_severity as $row): ?>
+
+                                            <?php
+                                                        $inputID = "mci_maritime_incident_severity_{$row->id}";
+                                                        $checked = in_array($row->id, $maritime_inci) ? 'checked' : '';
+                                                ?>
 
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_maritime_incident_severity[]"
-                                                    id="maritime_incident_severity_<?php echo $report_type_id . "_" . $maritime_incident_severity[$i]->id  ?>"
-                                                    value="<?php echo $maritime_incident_severity[$i]->id  ?>" checked>
+                                                    id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
                                                 <label
-                                                    for="maritime_incident_severity_<?php echo $report_type_id . "_" . $maritime_incident_severity[$i]->id  ?>"><?php echo $maritime_incident_severity[$i]->maritime_incident_severity ?></label>
+                                                    for="<?= $inputID ?>"><?= $row->maritime_incident_severity ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_maritime_incident_severity[]"
-                                                    id="maritime_incident_severity_<?php echo $report_type_id . "_" . $maritime_incident_severity[$i]->id  ?>"
-                                                    value="<?php echo $maritime_incident_severity[$i]->id  ?>">
-                                                <label
-                                                    for="maritime_incident_severity_<?php echo $report_type_id . "_" . $maritime_incident_severity[$i]->id  ?>"><?php echo $maritime_incident_severity[$i]->maritime_incident_severity ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>IF VERY SERIOUS MC, WHAT IS THE CATEGORY?</label>
-                                            <?php $very_serio = explode(",",$marsaf_mci->very_serious_mc_category); $j=0;   ?>
-                                            <?php for($i=0; $i <count($very_serious_mc_category); $i++): ?>
-                                            <?php if(isset($very_serio[$j]) && $very_serio[$j] == $very_serious_mc_category[$i]->id):?>
+                                            <?php $very_serio = explode(",",$marsaf_mci->very_serious_mc_category ?? ''); ?>
+                                            <?php foreach($very_serious_mc_category as $row): ?>
+
+                                            <?php
+                                                    $inputID = "mci_very_serious_mc_category_{$row->id}";
+                                                    $checked = in_array($row->id, $very_serio) ? 'checked' : '';
+                                            ?>
 
                                             <div class="checkbox checkbox-custom">
                                                 <input type="checkbox" name="mci_very_serious_mc_category[]"
-                                                    id="very_serious_mc_category_<?php echo $report_type_id . "_" .$very_serious_mc_category[$i]->id  ?>"
-                                                    value="<?php echo$very_serious_mc_category[$i]->id  ?>" checked>
+                                                    id="<?= $inputID ?>" value="<?= $row->id  ?>" <?= $checked ?>>
                                                 <label
-                                                    for="very_serious_mc_category_<?php echo $report_type_id . "_" .$very_serious_mc_category[$i]->id  ?>"><?php echo$very_serious_mc_category[$i]->very_serious_mc_category ?></label>
+                                                    for="<?= $inputID ?>"><?= $row->very_serious_mc_category ?></label>
                                             </div>
-                                            <?php $j++; else: ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_very_serious_mc_category[]"
-                                                    id="very_serious_mc_category_<?php echo $report_type_id . "_" .$very_serious_mc_category[$i]->id  ?>"
-                                                    value="<?php echo$very_serious_mc_category[$i]->id  ?>">
-                                                <label
-                                                    for="very_serious_mc_category_<?php echo $report_type_id . "_" .$very_serious_mc_category[$i]->id  ?>"><?php echo$very_serious_mc_category[$i]->very_serious_mc_category ?></label>
-                                            </div>
-                                            <?php endif ?>
-                                            <?php endfor ?>
+
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
 
@@ -1712,14 +1617,16 @@
                                             <div class="form-group">
                                                 <label>NAME OF SHIPS INVOLVED (IF ANY)</label>
                                                 <input type="text" name="mci_ship_name_involved"
-                                                    value="<?= $marsaf_mci->ship_name_involved ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->ship_name_involved ?? ''?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>FLAG OF REGISTRY</label>
                                                 <input type="text" name="mci_registry_flag_2"
-                                                    value="<?= $marsaf_mci->registry_flag_2 ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->registry_flag_2 ?? ''?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1728,7 +1635,7 @@
                                             <div class="form-group">
                                                 <label>IMO NUMBER (FOREIGN)</label>
                                                 <input type="text" name="mci_foreign_imo_number_2"
-                                                    value="<?= $marsaf_mci->foreign_imo_number_2 ?>"
+                                                    value="<?= $marsaf_mci->foreign_imo_number_2 ?? ''?>"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -1736,7 +1643,7 @@
                                             <div class="form-group">
                                                 <label>OFFICIAL NUMBER (DOMESTIC)</label>
                                                 <input type="text" name="mci_domestic_official_number_2"
-                                                    value="<?= $marsaf_mci->domestic_official_number_2 ?>"
+                                                    value="<?= $marsaf_mci->domestic_official_number_2 ?? ''?>"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -1744,15 +1651,15 @@
                                             <div class="form-group">
                                                 <label>TYPE OF VESSEL</label>
                                                 <input type="text" name="mci_vessel_type" class="form-control"
-                                                    value="<?= $marsaf_mci->vessel_type ?>">
+                                                    value="<?= $marsaf_mci->vessel_type ?? ''?>">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
                                             <label>GT/NT</label>
-                                            <input type="text" name="mci_gt_nt_2" value="<?= $marsaf_mci->gt_nt_2 ?>"
-                                                class="form-control">
+                                            <input type="text" name="mci_gt_nt_2"
+                                                value="<?= $marsaf_mci->gt_nt_2 ?? ''?>" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -1760,14 +1667,16 @@
                                             <div class="form-group">
                                                 <label>NAME OF OWNER/COMPANY</label>
                                                 <input type="text" name="mci_company_name_2"
-                                                    value="<?= $marsaf_mci->company_name_2 ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->company_name_2 ?? ''?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>OWNER/COMPANY ADDRESS</label>
                                                 <input type="text" name="mci_company_address_2"
-                                                    value="<?= $marsaf_mci->company_address_2 ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->company_address_2 ?? ''?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1776,7 +1685,7 @@
                                         <div class="form-group">
                                             <label>CAPTAINS NAME</label>
                                             <input type="text" name="mci_captain_name_2"
-                                                value="<?= $marsaf_mci->captain_name_2 ?>" class="form-control">
+                                                value="<?= $marsaf_mci->captain_name_2?? '' ?>" class="form-control">
                                         </div>
                                     </div>
 
@@ -1784,7 +1693,7 @@
                                         <div class="form-group">
                                             <label>NUMBER OF CREW AND ITS NATIONALITY</label>
                                             <input type="text" name="mci_crew_nationality_number_2"
-                                                value="<?= $marsaf_mci->crew_nationality_number_2 ?>"
+                                                value="<?= $marsaf_mci->crew_nationality_number_2 ?? ''?>"
                                                 class="form-control">
                                         </div>
                                     </div>
@@ -1794,21 +1703,24 @@
                                             <div class="form-group">
                                                 <label>NUMBER OF PASSENGER (IF ANY)</label>
                                                 <input type="text" name="mci_passenger_number_2"
-                                                    value="<?= $marsaf_mci->passenger_number_2 ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->passenger_number_2 ?? ''?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>CARGOES ONBOARD (IF ANY)</label>
                                                 <input type="text" name="mci_cargoe_onboard_2"
-                                                    value="<?= $marsaf_mci->cargoe_onboard_2 ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->cargoe_onboard_2 ?? ''?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>PORT OF ORIGIN</label>
                                                 <input type="text" name="mci_port_origin_2"
-                                                    value="<?= $marsaf_mci->port_origin_2 ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->port_origin_2 ?? '' ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1817,49 +1729,19 @@
                                             <div class="form-group">
                                                 <label class="control-label">DATE OF DEPARTURE FROM PORT OF
                                                     ORIGIN</label>
-                                                <input type="date" name="mci_departure_date_from_port_origin_2"
-                                                    value="<?= date('Y-m-d', strtotime($marsaf_mci->departure_date_from_port_origin_2)) ?>"
-                                                    class="form-control">
+                                                <input type="date" name="mpramra_departure_date_from_origin_port"
+                                                    class="form-control"
+                                                    value="<?= date('Y-m-d', strtotime($marsaf_mci->departure_date_from_port_origin_2 ?? '')) ?>">
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">TIME OF DEPARTURE FROM PORT OF
                                                     ORIGIN</label>
-                                                <div class="input-group ">
-                                                    <span class="input-group-btn">
-                                                        <select name="mci_departure_hour_from_port_origin_2"
-                                                            class="form-control">
-                                                            <option value=""> </option>
-                                                            <?php 
-                                                                foreach(range(intval('00:00:00'),intval('23:00:00')) as $time) {
-                                                            ?>
-                                                            <option value="<?php echo date("H", mktime($time)) ?>"
-                                                                <?= $marsaf_mci->departure_hour_from_port_origin_2 ==  date("H", mktime($time)) ? 'selected' : null ?>>
-                                                                <?php echo date("H", mktime($time)) ?></option>
-                                                            <?php  
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </span>
-                                                    <span class="input-group-btn">
-                                                        <select name="mci_departure_minute_from_port_origin_2"
-                                                            class="form-control">
-                                                            <option value=""> </option>
-                                                            <?php 
-                                                                foreach(range(intval('00'),intval('59')) as $minute) { 
-                                                                    $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                            ?>
-                                                            <option value="<?php echo $minute ?>"
-                                                                <?= $marsaf_mci->departure_minute_from_port_origin_2 ==  $minute ? 'selected' : null ?>>
-                                                                <?php echo $minute ?>
-                                                            </option>
-                                                            <?php  
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </span>
-                                                </div>
+                                                <input type="time" name="mpramra_departure_time_from_origin_port"
+                                                    class="form-control"
+                                                    value="<?= date('H:i', strtotime($marsaf_mci->departure_date_from_port_origin_2 ?? '')) ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -1868,7 +1750,7 @@
                                             <div class="form-group">
                                                 <label>TOTAL NUMBER OF INJURED PERSON/S</label>
                                                 <input type="text" name="mci_total_injured_person"
-                                                    value="<?= $marsaf_mci->total_injured_person ?>"
+                                                    value="<?= $marsaf_mci->total_injured_person ?? ''?>"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -1876,7 +1758,7 @@
                                             <div class="form-group">
                                                 <label>TOTAL NUMBER OF DEATH/S</label>
                                                 <input type="text" name="mci_total_death"
-                                                    value="<?= $marsaf_mci->total_death ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->total_death ?? ''?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1885,7 +1767,7 @@
                                             <div class="form-group">
                                                 <label>TOTAL NUMBER OF MISSING PERSON/S</label>
                                                 <input type="text" name="mci_total_missing_person"
-                                                    value="<?= $marsaf_mci->total_missing_person ?>"
+                                                    value="<?= $marsaf_mci->total_missing_person ?? ''?>"
                                                     class="form-control">
                                             </div>
                                         </div>
@@ -1893,7 +1775,8 @@
                                             <div class="form-group">
                                                 <label>TOTAL NUMBER OF SURVIVOR/S</label>
                                                 <input type="text" name="mci_total_survivor"
-                                                    value="<?= $marsaf_mci->total_survivor ?>" class="form-control">
+                                                    value="<?= $marsaf_mci->total_survivor ?? ''?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -1903,396 +1786,11 @@
                                                 <label>SAFETY RECOMMENDATIONS</label>
                                                 <textarea name="mci_safety_recommendation" class="form-control" id=""
                                                     cols="30"
-                                                    rows="10"><?= $marsaf_mci->safety_recommendation ?></textarea>
+                                                    rows="10"><?= $marsaf_mci->safety_recommendation ?? ''?></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
-                                <?php else: ?>
-                                <fieldset>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>EXACT LOCATION (COORDINATES)</label>
-                                                <input type="text" name="mci_exact_location" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>NAME OF VESSEL</label>
-                                                <input type="text" name="mci_vessel_name" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>FLAG OF REGISTRY</label>
-                                                <input type="text" name="mci_registry_flag" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>IMO NUMBER (FOREIGN)</label>
-                                                <input type="text" name="mci_foreign_imo_number" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>OFFICIAL NUMBER (DOMESTIC)</label>
-                                                <input type="text" name="mci_domestic_official_number"
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>GT/NT</label>
-                                                <input type="text" name="mci_gt_nt" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>NAME OF OWNER/COMPANY</label>
-                                                <input type="text" name="mci_company_name" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>OWNER/COMPANY ADDRESS</label>
-                                                <input type="text" name="mci_company_address" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>CAPTAINS NAME</label>
-                                                <input type="text" name="mci_captain_name" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>NUMBER OF CREW AND ITS NATIONALITY</label>
-                                                <input type="text" name="mci_crew_nationality_number"
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>NUMBER OF PASSENGER (IF ANY)</label>
-                                                <input type="text" name="mci_passenger_number" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>CARGOES ONBOARD (IF ANY)</label>
-                                                <input type="text" name="mci_cargoe_onboard" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>PORT OF ORIGIN</label>
-                                                <input type="text" name="mci_port_origin" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>DATE OF DEPARTURE FROM PORT OF ORIGIN</label>
-                                                <input type="date" name="mci_departure_date_from_port_origin"
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>TIME OF DEPARTURED FROM PORT OF ORIGIN</label>
-                                                <input type="text" name="mci_departure_time_from_port_origin"
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>DATE AND TIME OF INCIDENT</label>
-                                            <input type="text" name="mci_incident_time" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>NATURE OF MARITIME CASUALTY</label>
-                                            <?php 
-                                                foreach($maritime_casualty_nature as $row){
-                                            ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_maritime_casualty_nature[]"
-                                                    id="maritime_casualty_nature_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label
-                                                    for="maritime_casualty_nature_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->maritime_casualty_nature ?></label>
-                                            </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>CAUSE OF INCIDENT</label>
-                                            <?php 
-                                                                        foreach($incident_cause as $row){ 
-                                                                    ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_incident_cause[]"
-                                                    id="incident_cause_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label
-                                                    for="incident_cause_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->incident_cause ?></label>
-                                            </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>CONSEQUENCES OF INCIDENT</label>
-                                            <?php 
-                                                                        foreach($incident_consequences as $row){
-                                                                    ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_incident_consequences[]"
-                                                    id="incident_consequences_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label
-                                                    for="incident_consequences_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->incident_consequences ?></label>
-                                            </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>SEVERITY OF MARITIME CASUALTY/INCIDENT</label>
-                                            <?php 
-                                                                        foreach($maritime_incident_severity as $row){
-                                                                    ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_maritime_incident_severity[]"
-                                                    id="maritime_incident_severity_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label
-                                                    for="maritime_incident_severity_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->maritime_incident_severity ?></label>
-                                            </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>IF VERY SERIOUS MC, WHAT IS THE CATEGORY?</label>
-                                            <?php 
-                                                                        foreach($very_serious_mc_category as $row){
-                                                                    ?>
-                                            <div class="checkbox checkbox-custom">
-                                                <input type="checkbox" name="mci_very_serious_mc_category[]"
-                                                    id="very_serious_mc_category_<?php echo $report_type_id . "_" . $row->id  ?>"
-                                                    value="<?php echo $row->id  ?>">
-                                                <label
-                                                    for="very_serious_mc_category_<?php echo $report_type_id . "_" . $row->id  ?>"><?php echo $row->very_serious_mc_category ?></label>
-                                            </div>
-                                            <?php
-                                                                        }
-                                                                    ?>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>NAME OF SHIPS INVOLVED (IF ANY)</label>
-                                                <input type="text" name="mci_ship_name_involved" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>FLAG OF REGISTRY</label>
-                                                <input type="text" name="mci_registry_flag_2" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>IMO NUMBER (FOREIGN)</label>
-                                                <input type="text" name="mci_foreign_imo_number_2" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>OFFICIAL NUMBER (DOMESTIC)</label>
-                                                <input type="text" name="mci_domestic_official_number_2"
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>TYPE OF VESSEL</label>
-                                                <input type="text" name="mci_vessel_type" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>GT/NT</label>
-                                            <input type="text" name="mci_gt_nt_2" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>NAME OF OWNER/COMPANY</label>
-                                                <input type="text" name="mci_company_name_2" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>OWNER/COMPANY ADDRESS</label>
-                                                <input type="text" name="mci_company_address_2" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>CAPTAINS NAME</label>
-                                            <input type="text" name="mci_captain_name_2" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>NUMBER OF CREW AND ITS NATIONALITY</label>
-                                            <input type="text" name="mci_crew_nationality_number_2"
-                                                class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>NUMBER OF PASSENGER (IF ANY)</label>
-                                                <input type="text" name="mci_passenger_number_2" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>CARGOES ONBOARD (IF ANY)</label>
-                                                <input type="text" name="mci_cargoe_onboard_2" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>PORT OF ORIGIN</label>
-                                                <input type="text" name="mci_port_origin_2" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">DATE OF DEPARTURE FROM PORT OF
-                                                    ORIGIN</label>
-                                                <input type="date" name="mci_departure_date_from_port_origin_2"
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label">TIME OF DEPARTURE FROM PORT OF
-                                                    ORIGIN</label>
-                                                <div class="input-group ">
-                                                    <span class="input-group-btn">
-                                                        <select name="mci_departure_hour_from_port_origin_2"
-                                                            class="form-control">
-                                                            <option value=""> </option>
-                                                            <?php 
-                                                                foreach(range(intval('00:00:00'),intval('23:00:00')) as $time) {
-                                                            ?>
-                                                            <option value="<?php echo date("H", mktime($time)) ?>">
-                                                                <?php echo date("H", mktime($time)) ?></option>
-                                                            <?php  
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </span>
-                                                    <span class="input-group-btn">
-                                                        <select name="mci_departure_minute_from_port_origin_2"
-                                                            class="form-control">
-                                                            <option value=""> </option>
-                                                            <?php 
-                                                                foreach(range(intval('00'),intval('59')) as $minute) { 
-                                                                    $minute = ($minute < 10)?  "0" .$minute :  $minute  ; 
-                                                            ?>
-                                                            <option value="<?php echo $minute ?>"><?php echo $minute ?>
-                                                            </option>
-                                                            <?php  
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>TOTAL NUMBER OF INJURED PERSON/S</label>
-                                                <input type="text" name="mci_total_injured_person" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>TOTAL NUMBER OF DEATH/S</label>
-                                                <input type="text" name="mci_total_death" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>TOTAL NUMBER OF MISSING PERSON/S</label>
-                                                <input type="text" name="mci_total_missing_person" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>TOTAL NUMBER OF SURVIVOR/S</label>
-                                                <input type="text" name="mci_total_survivor" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>SAFETY RECOMMENDATIONS</label>
-                                                <textarea name="mci_safety_recommendation" class="form-control" id=""
-                                                    cols="30" rows="10"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <?php endif ?>
 
                                 <?php
                                     }else if($report_type_id == 9){ // SALVAGE OPERATION 

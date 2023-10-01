@@ -703,10 +703,101 @@ class Marsaf extends CI_Controller {
                 
                 break;
             case 7: 
-                $data['marsaf_aton'] = $this->marsaf_aton_model->find($id);
+                $marsaf_aton = array(
+                    'lh_name'                   => $this->input->post('lh_name'),
+                    'lh_type'                   => implode(',',(array) $this->input->post('lh_type')),
+                    'lh_inspection_purpose'     => implode(',',(array) $this->input->post('lh_inspection_purpose')),
+                    'lh_vessel_name'            => $this->input->post('lh_vessel_name'),
+                    'lh_last_operation'         => $this->input->post('lh_last_operation'),
+                    'lh_status'                 => implode(',',(array) $this->input->post('lh_status')),
+                    'lh_cause_if_not_operating' => implode(',',(array) $this->input->post('lh_cause_if_not_operating')),
+                    'lh_operating'              => $this->input->post('lh_OPERATING'),
+                    'lh_not_operating'          => $this->input->post('lh_NOT_OPERATING'),
+                    'lb_name'                   => $this->input->post('lb_name'),
+                    'lb_type'                   => implode(',',(array) $this->input->post('lb_type')),
+                    'lb_location'               => $this->input->post('lb_location'),
+                    'lb_inspection_purpose'     => implode(',',(array) $this->input->post('lb_inspection_purpose')),
+                    'lb_repair'                 => $this->input->post('lb_repair'),
+                    'lb_last_operating'         => $this->input->post('lb_last_operating'),
+                    'lb_status'                 => implode(',',(array) $this->input->post('lb_status')),
+                    'lb_cause_if_not_operating' => implode(',',(array) $this->input->post('lb_cause_if_not_operating')),
+                    'lb_operating'              => $this->input->post('lb_OPERATING'),
+                    'lb_not_operating'          => $this->input->post('lb_NOT_OPERATING'),  
+                ); 
+    
+                
+                if(isset($_POST['lh_OPERATING'])){
+                    $marsaf_rsei_data['lh_operating'] = implode(',',(array) $_POST['lh_OPERATING']); 
+                }else{
+                    $marsaf_rsei_data['lh_operating'] = "";
+                }
+                
+                if(isset($_POST['lh_NOT_OPERATING'])){
+                    $marsaf_rsei_data['lh_not_operating'] =implode(',',(array) $_POST['lh_NOT_OPERATING']); 
+                }else{
+                    $marsaf_rsei_data['lh_not_operating'] = "";
+                }
+    
+                
+                if(isset($_POST['lb_OPERATING'])){
+                    $marsaf_rsei_data['lb_operating'] =implode(',',(array) $_POST['lb_OPERATING']); 
+                }else{
+                    $marsaf_rsei_data['lb_operating'] = "";
+                } 
+                if(isset($_POST['lb_NOT_OPERATING'])){
+                    $marsaf_rsei_data['lb_not_operating'] = implode(',',(array) $_POST['lb_NOT_OPERATING']); 
+                }else{
+                    $marsaf_rsei_data['lb_not_operating'] = "";
+                } 
+    
+                // insert
+                $this->marsaf_aton_model->update($marsaf_aton, $id);
                 break;
             case 8: 
-                $data['marsaf_mci'] = $this->marsaf_mci_model->find($id);
+                $marsaf_mci = array(
+                    'exact_location'                      => $this->input->post('mci_exact_location'),
+                    'vessel_name'                         => $this->input->post('mci_vessel_name'),
+                    'registry_flag'                       => $this->input->post('mci_registry_flag'),
+                    'foreign_imo_number'                  => $this->input->post('mci_foreign_imo_number'),
+                    'domestic_official_number'            => $this->input->post('mci_domestic_official_number'),
+                    'gt_nt'                               => $this->input->post('mci_gt_nt'),
+                    'company_name'                        => $this->input->post('mci_company_name'),
+                    'company_address'                     => $this->input->post('mci_company_address'),
+                    'captain_name'                        => $this->input->post('mci_captain_name'),
+                    'crew_nationality_number'             => $this->input->post('mci_crew_nationality_number'),
+                    'passenger_number'                    => $this->input->post('mci_passenger_number'),
+                    'cargoe_onboard'                      => $this->input->post('mci_cargoe_onboard'),
+                    'port_origin'                         => $this->input->post('mci_port_origin'),
+                    'departure_date_from_port_origin'     => $this->input->post('mci_departure_date_from_port_origin').' '.$this->input->post('mci_departure_time_from_port_origin'),
+                    'incident_date'                       => $this->input->post('mci_incident_date').' '.$this->input->post('mci_incident_time'),
+                    'maritime_casualty_nature'            => implode(',',(array) $this->input->post('mci_maritime_casualty_nature')), 
+                    'incident_cause'                      => implode(',',(array) $this->input->post('mci_incident_cause')), 
+                    'incident_consequences'               => implode(',',(array) $this->input->post('mci_incident_consequences')), 
+                    'maritime_incident_severity'          => implode(',',(array) $this->input->post('mci_maritime_incident_severity')), 
+                    'very_serious_mc_category'            => implode(',',(array) $this->input->post('mci_very_serious_mc_category')),
+                    'ship_name_involved'                  => $this->input->post('mci_ship_name_involved'),
+                    'registry_flag_2'                     => $this->input->post('mci_registry_flag_2'),
+                    'foreign_imo_number_2'                => $this->input->post('mci_foreign_imo_number_2'),
+                    'domestic_official_number_2'          => $this->input->post('mci_domestic_official_number_2'),
+                    'vessel_type'                         => $this->input->post('mci_vessel_type'),
+                    'gt_nt_2'                             => $this->input->post('mci_gt_nt_2'),
+                    'company_name_2'                      => $this->input->post('mci_company_name_2'),
+                    'company_address_2'                   => $this->input->post('mci_company_address_2'),
+                    'captain_name_2'                      => $this->input->post('mci_captain_name_2'),
+                    'crew_nationality_number_2'           => $this->input->post('mci_crew_nationality_number_2'),
+                    'passenger_number_2'                  => $this->input->post('mci_passenger_number_2'),
+                    'cargoe_onboard_2'                    => $this->input->post('mci_cargoe_onboard_2'),
+                    'port_origin_2'                       => $this->input->post('mci_port_origin_2'),
+                    'departure_date_from_port_origin_2'   => $this->input->post('mci_departure_date_from_port_origin_2') .' '.$this->input->post('mci_departure_time_from_port_origin_2'),
+                    'total_injured_person'                => $this->input->post('mci_total_injured_person'),
+                    'total_death'                         => $this->input->post('mci_total_death'),
+                    'total_missing_person'                => $this->input->post('mci_total_missing_person'),
+                    'total_survivor'                      => $this->input->post('mci_total_survivor'),
+                    'safety_recommendation'               => $this->input->post('mci_safety_recommendation'),
+                );  
+    
+                // // insert
+                $this->marsaf_mci_model->update($marsaf_mci, $id);
                 break;
             case 9: 
                
